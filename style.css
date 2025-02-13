@@ -1,0 +1,276 @@
+/*@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&display=swap');
+*/
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'Fredoka', sans-serif;
+}
+
+body{
+    height: 100vh;
+    background: url("cup.jpg");
+    background-position: center;
+    background-size: cover;
+}
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.7);
+    z-index: 100
+}
+
+.navbar{
+    display:flex;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    justify-content:space-between;
+    
+}
+.navbar .logo{
+    color:#003865;
+    font-size: 2.1rem;
+    font-weight: 600;
+    margin-right: 30px;
+}
+.navbar .logo span{
+    color:saddlebrown;
+}
+
+.navbar .menu-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-left: auto;
+}
+
+#search-box {
+    width: 0;
+    padding: 8px;
+    font-size: 16px;
+    border: 2px solid #003865;
+    border-radius: 10px;
+    outline: none;
+    transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    opacity: 0;
+    background: transparent;
+    color: #003865;
+    position: relative;
+    right: 0;
+
+}
+#search-box.active {
+    opacity: 1;
+    width: 140px;
+}
+#search-box::placeholder {
+    color: #003865;
+    opacity: 0.6;
+}
+
+#login-btn,
+#cart-btn,
+#search-btn {
+    font-size: 28px;
+    cursor: pointer;
+    color: #003865;
+    margin-left: 20px;
+    padding: 5px;
+    transition: color 0.3s ease;
+    position: relative; 
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#login-btn:hover, #cart-btn:hover, #search-btn:hover, #close-btn:hover, #menu-btn:hover{
+    color: saddlebrown;
+}
+
+#login-btn::after, #cart-btn::after {
+    content: ''; 
+    position: absolute;
+    top: 100%; 
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #003865;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 10px;
+    opacity: 0; 
+    visibility: hidden; 
+    transition: opacity 0.3s ease-in-out;
+    white-space: nowrap; 
+    text-transform: none;
+}
+
+/* Show tooltip on hover */
+#login-btn:hover::after {
+    content: 'Account'; 
+    opacity: 1;
+    visibility: visible;
+}
+
+#cart-btn:hover::after {
+    content: 'Cart';
+    opacity: 1;
+    visibility: visible;
+}
+
+
+.navbar a{
+    color:#003865;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+.navbar a:hover{
+    color:saddlebrown;
+}
+
+.hero-section{
+ height: 100vh;
+ display: flex;
+ align-items: center;
+ padding: 0 20px; 
+}
+
+.hero-section .content{
+    color: #003865;
+    max-width: 1200px;
+    width: 100%;
+    margin:0 auto;
+}
+
+.hero-section .content h1{
+    font-size: 3.5rem;
+    max-width: 600px;
+}
+.hero-section .content p{
+    font-size: 2rem;
+    font-weight: 300;
+    margin-top: 15px;
+    max-width: 600px;
+}
+.hero-section .content button{
+    background-color: transparent;
+    outline: none;
+    border: 2px solid #003865;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 30px;
+    padding: 16px 100px;
+    border-radius: 15px;
+    cursor: pointer;
+    color: #003865;
+}
+.hero-section .content button:hover{
+    color:saddlebrown;
+    border: 2px solid saddlebrown;
+}
+#menu-btn{
+    color:#003865;
+    cursor:pointer;
+    display: none;
+    position: relative;
+    left: -10px;
+}
+
+#close-btn{
+    color:#003865;
+    cursor:pointer;
+    position: absolute;
+    top: 20px;
+    right:20px;
+    display: none;
+}
+
+
+@media screen and (max-width:900px){
+    body {
+        background: url("cup22.jpg"); 
+        background-position: center;
+        background-size: cover;
+    }
+    .navbar .logo {
+        position: relative;
+        font-size: 30px;
+    }
+    #login-btn, #cart-btn , #search-btn{
+        font-size: 25px; 
+        margin-left: 10px; 
+    }
+    #search-box{
+        padding: 5px; 
+    }
+    #search-box.active{
+        width: 100px;
+    }
+    header{
+        padding: 10px 20px;
+    }
+    header .navbar{
+        justify-content:flex-start;
+    }
+    header.show-mobile-menu::before{
+        content:"";
+        position:fixed;
+        left: 0;
+        top:0;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(3px);
+        z-index: 1;
+    }
+
+    .navbar .menu-links {
+        position: fixed;
+        left: -260px;
+        top: 0;
+        flex-direction: column;
+        width: 260px;
+        height: 100vh;
+        background-color:rgba(255, 255, 255, 0.93);
+        padding: 70px 40px 0;
+        transition: left 0.15s ease;
+        z-index: 101;
+    }
+    header.show-mobile-menu .navbar .menu-links{
+        left: 0;
+    }
+    .navbar a{
+        color:#003865;
+    }
+    .hero-section .content{
+        text-align: center;
+        margin-top: -180px;
+    }
+    .hero-section .content :is(h1, p){
+        max-width: 100%;
+    }
+    .hero-section .content h1 {
+        font-size: 2.3rem;
+        line-height: 60px;
+    }
+    .hero-section .content button{
+        padding: 12px 60px;
+    }
+
+    #close-btn, #menu-btn {
+        display:block;
+    }
+
+}
