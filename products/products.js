@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     const products = [
-        { name: "Dark roast coffee", price: "12.99€", image: "../products/product_images/product1.png" },
-         {name: "Matcha green tea", price: "14.99€", image: "../products/product_images/product2.png" },
-         {name: "Cytrus energy drink", price: "2.99€", image: "../products/product_images/product3.png" }
+        { name: "Dark roast coffee", price: "12.99€", image: "products/product_images/product1.png" },
+         {name: "Matcha green tea", price: "14.99€", image: "products/product_images/product2.png" },
+         {name: "Cytrus energy drink", price: "2.99€", image: "products/product_images/product3.png" }
     ];
 
     const productsContainer = document.getElementById("products-container");
