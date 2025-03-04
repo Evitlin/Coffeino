@@ -164,7 +164,7 @@ header{
  width: 100%;
  min-height: 100vh;
  display: flex;
- background: url("cup.jpg");
+ background: url("main_images/cup.jpg");
  align-items: center;
  justify-content: center;
  padding: 0 20px; 
@@ -226,7 +226,7 @@ header{
 
 @media screen and (max-width:900px){
     .hero-section {
-    background: url("cup22.jpg");
+    background: url("main_images/cup22.jpg");
     background-size: cover; 
     background-position: center;
     }
