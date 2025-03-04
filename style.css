@@ -11,9 +11,7 @@
 
 body{
     height: 100vh;
-    background: url("cup.jpg");
-    background-position: center;
-    background-size: cover;
+    background-color: rgba(255, 255, 255, 1);
 }
 header{
     position:fixed;
@@ -23,6 +21,28 @@ header{
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.7);
     z-index: 100
+}
+.inbetween-section{
+    background-color: rgba(255, 255, 255, 1);
+    padding: 15px;
+    justify-content:space-evenly;
+    display:flex;
+}
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+}
+.feature p{
+    color:#003865;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin: 0;
+}
+.feature span{
+    font-size: 1.5rem;
+    color: rgb(75, 128, 94);
 }
 
 .navbar{
@@ -118,7 +138,6 @@ header{
     text-transform: none;
 }
 
-/* Show tooltip on hover */
 #login-btn:hover::after {
     content: 'Account'; 
     opacity: 1;
@@ -142,10 +161,16 @@ header{
 }
 
 .hero-section{
- height: 100vh;
+ width: 100%;
+ min-height: 100vh;
  display: flex;
+ background: url("cup.jpg");
  align-items: center;
+ justify-content: center;
  padding: 0 20px; 
+ background-position: center;
+ background-size: cover;
+ background-repeat: no-repeat;
 }
 
 .hero-section .content{
@@ -200,10 +225,10 @@ header{
 
 
 @media screen and (max-width:900px){
-    body {
-        background: url("cup22.jpg"); 
-        background-position: center;
-        background-size: cover;
+    .hero-section {
+    background: url("cup22.jpg");
+    background-size: cover; 
+    background-position: center;
     }
     .navbar .logo {
         position: relative;
@@ -271,6 +296,16 @@ header{
 
     #close-btn, #menu-btn {
         display:block;
+    }
+    .feature p{
+        color:#003865;
+        font-weight: 600;
+        font-size: 1rem;
+        margin: 0;
+    }
+    .feature span{
+        font-size: 1.2rem;
+        color: rgb(75, 128, 94);
     }
 
 }

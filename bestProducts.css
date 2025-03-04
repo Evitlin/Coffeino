@@ -1,0 +1,137 @@
+/* Best Sellers Section */
+.best-section {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: rgb(235, 239, 241);
+}
+
+.best-section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #003865;
+}
+
+.products-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+.product-card {
+    background-color: white;
+    padding: 50px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    flex: 1 1 250px;
+    display: none;
+
+}
+.product-card.active {
+    display: block; 
+}
+
+.product-card p{
+    color: #113048;
+    padding-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+.product-card img {
+    width: 100%;
+    border-radius: 6px;
+}
+
+.product-card h3 {
+    margin: 5px 0;
+    font-size: 1.1rem;
+    color:#113048;
+    font-weight: 500;
+}
+
+.product-card button {
+    background: #003865;
+    color: white;
+    padding: 13px 35px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight:600;
+    transition: all 0.3s ease;
+}
+
+.product-card button:hover {
+    background: saddlebrown;
+}
+.product-card:hover {
+    background: rgb(220, 238, 235);
+}
+.arrow-button {
+    display: none;
+}
+@media screen and (max-width:900px){
+    .products-container {
+        display: block;
+        position: relative;
+    }
+
+    .product-card {
+        max-width: 100%;
+        padding: 30px;
+        margin: 0 auto;
+        transform: scale(0.9); /* Scale down the card */
+    }
+    .product-card img {
+        width: 100%;
+        border-radius: 6px;
+    }
+    .best-section {
+        padding: 60px 50px;
+    }
+
+    .best-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .product-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .product-card p {
+        font-size: 1.2rem;
+    }
+
+    .product-card button {
+        font-size: 1.2rem;
+        padding: 13px 40px;
+    }
+
+    .arrow-button {
+        display: block;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #003865;
+        color: white;
+        padding: 11px;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1.5rem;
+    }
+
+    .arrow-left {
+        left: 10px;
+    }
+
+    .arrow-right {
+        right: 10px;
+    }
+}
