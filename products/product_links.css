@@ -1,0 +1,104 @@
+.dropdown-menu {
+    display: none;
+    position: fixed; 
+    left: 50%;
+    transform: translateX(-10%);
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    max-width: 550px; 
+    z-index: 1000;
+    width: 90%; 
+    left: 5%; 
+}
+
+.dropdown-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dropdown-section {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    flex: 1;
+    padding: 0 10px;
+    margin-bottom: 0; 
+    border-bottom: none;
+}
+.dropdown-section:last-child {
+    margin-bottom: 0;
+}
+
+.dropdown-menu.active {
+    display: block;
+}
+
+.dropdown-section h4 {
+    color: #003865;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+
+.dropdown-menu a {
+    display: block;
+    color: #003865;
+    text-decoration: none;
+    padding: 3px 0;
+    transition: 0.3s;
+}
+
+.dropdown-menu a:hover {
+    color: saddlebrown;
+}
+
+@media screen and (max-width:900px){
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%; 
+        left: 0;
+        right: 0;
+        background: transparent; 
+        border: none;
+        padding: 0;
+        z-index: 1000;
+    }
+    .navbar .menu-links {
+        overflow-y: auto;  
+    }
+    .dropdown-menu.active {
+        display: block;
+    }
+
+    .dropdown-menu.mobile .dropdown-row {
+        flex-direction: column;
+    }
+
+    .navbar .menu-links .dropdown-section {
+        display: flex;
+        flex-direction: column; /* Stack items vertically */
+        padding: 10px 0;
+    }
+
+    .navbar .menu-links .dropdown-section h4 {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .navbar .menu-links .dropdown-section a {
+        display: block;
+        padding: 5px 10px;
+        color: #003865;
+        text-decoration: none;
+    }
+
+    .navbar .menu-links .dropdown-section a:hover {
+        color: saddlebrown;
+    }
+    
+}
