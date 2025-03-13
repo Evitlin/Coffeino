@@ -9,98 +9,15 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 </head>
 <body style="background-color:#D0D9DA;">
-    <header>
-        <nav class="navbar">
-            <span id="menu-btn" class="material-symbols-outlined">menu</span>
-            <a href="index.html" class="logo">Coffeino<span>.</span></a>
-            <ul class="menu-links">
-                <span id="close-btn" class="material-symbols-outlined">close</span>
-                <li><a href="#">Home</a></li>
-
-                <!-- Products link and its dropdown menu -->
-                <li>
-                    <a href="#" id="products-link">Products</a>
-                    <div class="dropdown-menu" id="products-dropdown">
-                        <div class="dropdown-row">
-                            <div class="dropdown-section">
-                                <h4>Coffee</h4>
-                                <a href="#">Coffee beans</a>
-                                <a href="#">Specialty coffee</a>
-                                <a href="#">Ground coffee</a>
-                                <a href="#">Filter coffee</a>
-                                <a href="#">Instant coffee</a>
-                                <a href="#">Coffee pills</a>
-                            </div>
-                            <div class="dropdown-section">
-                                <h4>Tea</h4>
-                                <a href="#">Black tea</a>
-                                <a href="#">Green tea</a>
-                                <a href="#">Fruit-herbal tea</a>
-                                <a href="#">Oolong</a>
-                                <a href="#">Matcha</a>
-                            </div>
-                            <div class="dropdown-section">
-                                <h4>Energy Drinks</h4>
-                                <a href="#">Cans 0.25L</a>
-                                <a href="#">Cans 0.50L</a>
-                                <a href="#">Cans 0.75L</a>
-                                <a href="#">Cans 1.00L</a>
-                                <a href="#">Bottle 0.25L</a>
-                                <a href="#">Bottle 0.50L</a>
-                                <a href="#">Bottle 0.75L</a>
-                                <a href="#">Bottle 1.00L</a>
-                            </div>
-                        </div>
-                        <div class="dropdown-row">
-                            <div class="dropdown-section">
-                                <h4>Accessories</h4>
-                                <a href="#">Coffee grinders</a>
-                                <a href="#">Moka pots</a>
-                                <a href="#">Can lids</a>
-                                <a href="#">Matcha accessories</a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <!-- Products link end -->
-
-                <li><a href="about-us.html">About us</a></li>
-                <li><a href="contacts.html">Contacts</a></li>
-            </ul>
-            <div class="search-container">
-                <input type="text" id="search-box" placeholder="Search...">
-                <span id="search-btn" class="material-symbols-outlined">search</span>
-            </div>
-            <a href="login.html"><span id="login-btn" class="material-symbols-outlined">face</span></a>
-            <a href="cart.html"><span id="cart-btn" class="material-symbols-outlined">coffee</span></a>
-
-        </nav>
-    </header>
+    <div id="header-placeholder"></div>
     <main>
         <!-- Your page content -->
         
         
-        <script src="products/product_links.js"></script>
-        <link rel="stylesheet" href="products/product_links.css">
+
+        
     </main>
-    <script>
-        const searchBtn = document.querySelector("#search-btn");
-        const searchBox = document.querySelector("#search-box");
-        const header = document.querySelector("header");
-        const menuBtn = document.querySelector("#menu-btn");
-        const closeBtn = document.querySelector("#close-btn");
-        //Toggle menu button
-        menuBtn.addEventListener("click", ()=>{
-             header.classList.toggle("show-mobile-menu");
-        });
-        //Close mobile menu
-        closeBtn.addEventListener("click", ()=>{
-            menuBtn.click();
-        });
-        document.getElementById("search-btn").addEventListener("click", function() {
-            let searchBox = document.getElementById("search-box");
-            searchBox.classList.toggle("active");
-        });
-    </script>
+    <link rel="stylesheet" href="products/product_links.css">
+    <script src="scripts/main.js"></script>
 </body>
 </html>
