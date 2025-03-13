@@ -1,8 +1,8 @@
-document.addEventListener("DOMContentLoaded", function () {
     const productsLink = document.getElementById("products-link");
     const dropdownMenu = document.getElementById("products-dropdown");
     const offset = 20;
 
+    
     function updateDropdownPosition() {
         const rect = productsLink.getBoundingClientRect();
         dropdownMenu.style.top = `${rect.bottom + offset}px`;
@@ -47,4 +47,3 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
         dropdownMenu.classList.remove("mobile");
     }
-});
