@@ -1,7 +1,22 @@
-document.addEventListener('DOMContentLoaded', function() {
+/*document.addEventListener('DOMContentLoaded', function() {
     console.log("DOM fully loaded and parsed");
     // Load the header from header.html
     fetch('main_page/header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header-placeholder').innerHTML = data;
+            initializeEventListeners();
+            loadProductLinksScript();
+        })
+        .catch(error => console.error('Error loading header:', error));
+});*/
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM fully loaded and parsed");
+
+    // Dynamically adjust the path based on the current page location
+    let headerPath = window.location.pathname.includes('/products/') ? '../main_page/header.html' : 'main_page/header.html';
+
+    fetch(headerPath)
         .then(response => response.text())
         .then(data => {
             document.getElementById('header-placeholder').innerHTML = data;
