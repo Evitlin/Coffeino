@@ -68,6 +68,7 @@ header{
     display: flex;
     gap: 40px;
     list-style: none;
+    position: relative;
 }
 
 .search-container {
@@ -160,6 +161,7 @@ header{
     color:saddlebrown;
 }
 
+/* Hero Section ------------------------------*/
 .hero-section{
  width: 100%;
  min-height: 100vh;
@@ -307,5 +309,4 @@ header{
         font-size: 1.2rem;
         color: rgb(75, 128, 94);
     }
-
 }

@@ -3,34 +3,15 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title> Coffeino</title>
+        <title>Coffeino</title>
         <link rel="stylesheet" href="main_page/style.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     </head>
     <body>
-        <header>
-            <nav class="navbar">
-                <span id="menu-btn" class="material-symbols-outlined">menu</span>
-                <a href="#" class="logo">Coffeino<span>.</span></a>
-                <ul class="menu-links">
-                    <span id="close-btn" class="material-symbols-outlined">close</span>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Products</a></li>
-                    <li><a href="#">About us</a></li>
-                    <li><a href="#">Contacts</a></li>
-                </ul>
-
-                <div class="search-container">
-                    <input type="text" id="search-box" placeholder="Search...">
-                    <span id="search-btn" class="material-symbols-outlined">search</span>
-                </div>
-                <span id="login-btn" class="material-symbols-outlined">face</span>
-                <span id="cart-btn" class="material-symbols-outlined">coffee</span>
-            </nav>
-        </header>
-        <main>
-        <section class="hero-section">
+        <div id="header-placeholder"></div>
+        <main>  
+        <section class="hero-section"> 
             <div class="content">
                 <h1>coffee & energy drinks</h1>
                 <p>
@@ -65,7 +46,7 @@
         <div class="text-content">
             <h3>The secret to matcha</h3>
             <p>Café stops are no longer required. Browse everything from matcha, to indulgent barista-worthy accesories.</p>
-            <button>explore product</button>
+            <button>explore products</button>
             <div class="image-box2">
                 <img src="main_page//main_images/moka.png">
             </div>
@@ -74,29 +55,12 @@
                 <img src="main_page/main_images/matcha.png">
             </div>
         </div> 
-        </section>
+        </section>       
         <link rel="stylesheet" href="main_page/matcha.css">
         <script src="products/products.js"></script>
         <link rel="stylesheet" href="products/bestProducts.css">
+        <link rel="stylesheet" href="products/product_links.css">
+        <script src="scripts/main.js"></script>
         </main>
-        <script>
-            const searchBtn = document.querySelector("#search-btn");
-            const searchBox = document.querySelector("#search-box");
-            const header = document.querySelector("header");
-            const menuBtn = document.querySelector("#menu-btn");
-            const closeBtn = document.querySelector("#close-btn");
-            //Toggle menu button
-            menuBtn.addEventListener("click", ()=>{
-                header.classList.toggle("show-mobile-menu");
-            });
-            //Close mobile menu
-            closeBtn.addEventListener("click", ()=>{
-                menuBtn.click();
-            });
-            document.getElementById("search-btn").addEventListener("click", function() {
-                let searchBox = document.getElementById("search-box");
-                searchBox.classList.toggle("active");
-            });
-        </script>
     </body>
 </html>
