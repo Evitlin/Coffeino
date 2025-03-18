@@ -51,7 +51,10 @@ button:hover {
 
 /* Button Colors */
 #add-product {
-    background-color: #28a745;
+    background-color: rgb(75, 128, 94);
+}
+#save-changes {
+    background-color: #003865; 
 }
 
 .edit-btn {
@@ -77,7 +80,7 @@ th, td {
 }
 
 th {
-    background-color: #007bff;
+    background-color: #003865;
     color: white;
 }
 
