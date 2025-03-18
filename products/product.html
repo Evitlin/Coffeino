@@ -34,18 +34,17 @@
 
     document.addEventListener("DOMContentLoaded", function () {
         const productsContainer = document.getElementById("products-container");
-        const categoryFilter = document.getElementById("category-filter");
 
         // Function to fetch and display products
         function fetchProducts(category = null) {
             db.collection("products").get().then((querySnapshot) => {
-                productsContainer.innerHTML = ""; // Clear any existing content
+                productsContainer.innerHTML = ""; // Clear existing products
 
                 querySnapshot.forEach((doc) => {
                     const product = doc.data();
 
-                    // Filter by main category or subcategory
-                    if (category && !product.category.includes(category)) {
+                    // Filter by category if a category is selected
+                    if (category && product.category !== category && product.subcategory !== category) {
                         return;
                     }
 
@@ -69,17 +68,24 @@
             });
         }
 
-        // Fetch all products initially
-        fetchProducts();
+        // Get the category from the URL query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedCategory = urlParams.get("category");
 
-        // Add event listeners to category links
-        categoryFilter.addEventListener("click", (event) => {
-            if (event.target.tagName === "A") {
-                event.preventDefault();
-                const selectedCategory = event.target.getAttribute("data-category");
-                fetchProducts(selectedCategory);
-            }
-        });
+        // Fetch products based on the selected category
+        fetchProducts(selectedCategory);
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedCategory = urlParams.get("category");
+
+        if (selectedCategory) {
+            console.log("Selected Category:", selectedCategory);
+        } else {
+            console.log("No category selected.");
+        }
     });
 </script>
 </body>
