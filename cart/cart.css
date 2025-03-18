@@ -1,21 +1,22 @@
-/* Basic styles for cart modal */
 .cart-modal {
-    display: none; /* Hidden by default */
+    display: none; 
     position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%); /* Center the modal horizontally */
+    top: 30px;
+    right: 10%;
+    transform: translateX(-50%, -50%); 
     background: white;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     padding: 15px;
-    max-width: 450px;
+    max-width: 250px;
     width: 90%;
     z-index: 1000;
-    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 }
 
-/* Modal context content */
+.cart-modal.show{
+    display:block;
+}
+
 .modal-context {
     background-color: white;
     padding: 20px;
@@ -24,7 +25,8 @@
     position: relative;
 }
 
-/* Arrow indicator for the modal */
+
+
 .cart-arrow {
     position: absolute;
     top: -10px;
@@ -37,81 +39,70 @@
     border-bottom: 10px solid white;
 }
 
-/* Flex container for the content inside the modal */
+
 .cart-inner {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* Cart header styles */
+
 .cart-header {
     display: flex;
     justify-content: flex-end;
     width: 100%;
 }
 
-/* Mini image styling */
+.mini-images{
+    position: absolute;
+    top: 2px;
+    right: 7px;
+}
+
 .mini-image {
-    width: 15px;
-    height: 15px;
+    width: 50px;
+    height: 50px;
     object-fit: contain;
 }
 
-/* Cart icon styling */
+
 .cart-icon {
-    width: 20px;
-    height: 20px;
+    width: 80px;
+    height: 80px;
 }
 
-/* Empty cart text */
 .empty-text {
-    font-size: 1rem;
-    color: #333;
+    font-family: 'Fredoka', sans-serif; 
+    font-size: 1.2rem; 
+    font-weight: 'Fredoka'; 
+    color: #333; 
     text-align: center;
-    margin: 5px 0;
+    margin: 10px 0;
 }
 
-/* "Go Shopping" button */
+
 #go-shopping-btn {
     display: block;
-    width: 80%;
-    padding: 10px;
+    width: 100%;
+    padding: 12px;
     background-color: #003865;
     color: white;
     text-align: center;
-    border-radius: 5px;
+    border-radius: 10px;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: "Fredoka";
+    margin-top: 10px;
 }
 
 #go-shopping-btn:hover {
     background-color: saddlebrown;
 }
 
-/* Close button (X) at the top right */
+
 #close-btn {
     position: absolute;
     top: 10px;
     right: 20px;
     font-size: 30px;
     cursor: pointer;
-}
-
-/* Show the modal when active */
-.cart-modal.active {
-    display: block; /* Make the modal visible */
-    opacity: 1;
-    visibility: visible;
-}
-
-
-.cart-modal.full-screen {
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    transform: none; /* Remove centering transform */
-    border-radius: 0; /* Remove rounded corners for full screen */
-    padding: 30px;
 }

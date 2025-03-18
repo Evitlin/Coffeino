@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Cart | Coffeino</title>
+    
+  
     <link rel="stylesheet" href="/main_page/style.css">
+    <link rel="stylesheet" href="cart/cart.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-    <link rel="stylesheet" href="cart/cart.css">
-    <link rel="stylesheet" href="cart/empthy.js">
 </head>
 <body style="background-color:#D0D9DA;">
     <div id="header-placeholder"></div>
     <main>
         <!-- Your page content -->
         
-        <button id="cart-btn" class="cart-button"> Cart</button>
+        <a href="#" id="cart-btn" class="material-symbols-outlined">shopping_cart</a>
 
         <div class="cart-modal" id="cart-modal">
             <div class="modal-context">
@@ -28,7 +29,7 @@
                         </div>
                         <div class="cart-body">
                             <img src="cart/cart_images/shoping_bag.jpg" class="mini-image" alt="Cart Icon">
-                            <p class="empty-text"><strong>The cart is empty</strong>/p>
+                            <p class="empty-text"><strong>The cart is empty</strong></p>
                             <a href="products/product.html" id="go-shopping-btn">Shop Now</a>
                         </div>
                     </div>
@@ -38,6 +39,6 @@
 
     </main>
     <link rel="stylesheet" href="/products/product_links.css">
-    <script src="/scripts/main.js"></script>
+    <script src="/cart/empthy.js"></script>
 </body>
 </html>

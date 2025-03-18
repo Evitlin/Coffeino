@@ -3,38 +3,23 @@ document.addEventListener("DOMContentLoaded", function(){
     const cartModal = document.getElementById("cart-modal");
     const closeBtn = document.getElementById("close-btn");
 
-    let isFullScreen=false;
+    const cartButtons = document.querySelectorAll("#cart-btn, #header-cart-btn");
 
-    cartBtn.addEventListener("click", function () {
-        if(cartModal.classList.contains("active")){
-            if(isFullScreen){
-                cartModal.classList.remove("full-screen");
-                isFullScreen=false;
-            }else{
-                cartModal.classList.add("full-screen");
-                isFullScreen=true;
-            }
-        }else{
-            cartModalclassList.add("active");
-
-        }
-        //cartModal.style.display = "block";
+    cartBtn.addEventListener("click", function (event) {
+        event.preventDefault(); 
+        cartModal.style.display = "block";
     });
 
+    
     closeBtn.addEventListener("click", function () {
-        cartModal.classList.remove("active");
-        cartModal.classList.remove("full-screen");
-        isFullScreen = false;
-        
-        //cartModal.style.display = "none";
+        cartModal.style.display = "none";
+        //cartModal.classList.remove("show");
     });
 
     window.addEventListener("click", function (event) {
         if (event.target === cartModal) {
-            cartModal.classList.remove("active");
-            cartModal.classList.remove("full-screen");
-            isFullScreen = false;
-            //cartModal.style.display = "none";
+            cartModal.style.display = "none";
+            //cartModal.classList.remove("show");
         }
     });
 
