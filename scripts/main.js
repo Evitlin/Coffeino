@@ -1,7 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log("DOM fully loaded and parsed");
-    // Load the header from header.html
-    fetch('main_page/header.html')
+
+   // Absolute path to header.html (should work no matter where the script is loaded from)
+    const headerPath = '/main_page/header.html';
+
+    fetch(headerPath)
         .then(response => response.text())
         .then(data => {
             document.getElementById('header-placeholder').innerHTML = data;
@@ -44,7 +47,11 @@ function initializeEventListeners() {
 // otherwise, the script may not find the elements it's looking for :'(
 function loadProductLinksScript() {
     const script = document.createElement('script');
-    script.src = 'products/product_links.js';
+
+    // Absolute path to product_links.js 
+    const srcPath = '/products/product_links.js';
+    
+    script.src = srcPath;
     script.onload = function() {
         console.log("product_links.js script loaded and executed");
     };

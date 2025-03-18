@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <link rel="stylesheet" href="product_links.css">
+    <link rel="stylesheet" href="product_container.css">
+    <link rel="stylesheet" href="../main_page/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+  <h1>Our Products</h1>
+  <div id="products-container"></div>
+  <script src="../scripts/main.js"></script>
+<script>
+    // Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyCgJ-IOeq76OCzmlUbGntMKmn550enir68",
+        authDomain: "coffeino-3157b.firebaseapp.com",
+        projectId: "coffeino-3157b",
+        storageBucket: "coffeino-3157b.appspot.com",
+        messagingSenderId: "739495575410",
+        appId: "1:739495575410:web:07e74233accd8d6443a7eb"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const productsContainer = document.getElementById("products-container");
+        const categoryFilter = document.getElementById("category-filter");
+
+        // Function to fetch and display products
+        function fetchProducts(category = null) {
+            db.collection("products").get().then((querySnapshot) => {
+                productsContainer.innerHTML = ""; // Clear any existing content
+
+                querySnapshot.forEach((doc) => {
+                    const product = doc.data();
+
+                    // Filter by main category or subcategory
+                    if (category && !product.category.includes(category)) {
+                        return;
+                    }
+
+                    // Create a product card dynamically
+                    const productCard = document.createElement("div");
+                    productCard.classList.add("product-card");
+
+                    productCard.innerHTML = `
+                        <img src="${product.imageUrl}" alt="${product.title}">
+                        <h3>${product.title}</h3>
+                        <p>${product.price}€</p>
+                        <button onclick="window.location.href='product-details.html?id=${doc.id}'">
+                            View Details
+                        </button>
+                    `;
+
+                    productsContainer.appendChild(productCard);
+                });
+            }).catch((error) => {
+                console.error("Error fetching products:", error);
+            });
+        }
+
+        // Fetch all products initially
+        fetchProducts();
+
+        // Add event listeners to category links
+        categoryFilter.addEventListener("click", (event) => {
+            if (event.target.tagName === "A") {
+                event.preventDefault();
+                const selectedCategory = event.target.getAttribute("data-category");
+                fetchProducts(selectedCategory);
+            }
+        });
+    });
+</script>
+</body>
+</html>
