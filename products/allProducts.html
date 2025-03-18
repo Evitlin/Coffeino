@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products | Coffeino</title>
+
+    <link rel="stylesheet" href="main_page/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
+</head>
+
+<body style="background-color:#D0D9DA;">
+    <div id="header-placeholder"></div>
+
+    <main>
+
+        <section class = "name">
+            <h1>Products</h1>
+        </section>
+        
+        <div class="side-box">
+            <!-- Sidebar Filters -->
+            <aside id="filters">
+                <!-- Price Filter -->
+                <div id="filter-by-price">
+                    <label for="price">Price: <span id="price-value">500</span>€</label>
+                    <input type="range" id="price" name="price" min="0" max="500">>
+                </div>
+                
+                <!-- Category Filters (To be dynamically loaded) -->
+                <div id="filter-by-category">
+                    <!-- Categories will be dynamically populated from database or JavaScript -->
+                </div>
+            </aside>
+
+            <section class="products-selection">
+                <div class = "sort">
+                    <label for="sortBy">Sort by:</label>
+                    <select id = "sortBy">
+                        <option value = "price">Price: Low to High</option>
+                        <option value = "price">Price: High to Low</option>
+                        <option value = "price">By popularity</option>
+                    </select>
+                </div>
+                
+            <div id="products-grid">
+                <!-- products will be displayed here -->
+            </div>
+            
+            </section>
+        </div>
+        
+    </main>
+
+    <link rel="stylesheet" href="products/product_links.css">
+    <script src="scripts/main.js"></script>
+</body>
+</html>
