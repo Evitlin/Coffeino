@@ -1,0 +1,60 @@
+.products-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.product-card {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 20px;
+    cursor: pointer;
+    flex: 1 1 calc(25% - 20px); /* Each card takes 25% of the row width minus the gap */
+    max-width: calc(25% - 20px); /* Ensures cards don't exceed 25% width */
+    transition: transform 0.3s ease;
+    box-sizing: border-box; /* Includes padding and border in width calculation */
+}
+.product-card.active {
+    display: block; 
+}
+
+.product-card img {
+    max-width: 100%;
+    border-radius: 6px;
+}
+
+.product-card h3 {
+    margin: 5px 0;
+    font-size: 1.1rem;
+    color:#113048;
+    font-weight: 500;
+}
+
+.product-card p {
+    color: #113048;
+    padding-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+.product-card button {
+    background: #003865;
+    color: white;
+    padding: 13px 35px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight:600;
+    transition: all 0.3s ease;
+}
+
+.product-card button:hover {
+    background: saddlebrown;
+}
+.product-card:hover {
+    background: rgb(220, 238, 235);
+}
