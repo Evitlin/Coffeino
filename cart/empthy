@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function(){
    
     document.getElementById("go-shopping-btn").addEventListener("click", function () {
         
-        window.location.href = "shop.html"; 
+        window.location.href = "header.html"; 
     });
 
 });
