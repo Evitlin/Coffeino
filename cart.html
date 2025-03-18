@@ -15,16 +15,21 @@
         
         <button id="cart-btn" class="cart-button"> Cart</button>
 
-        <div id="cart-modal" class="modal">
+        <div class="cart-modal" id="cart-modal">
             <div class="modal-context">
-                <spam id="close-btn" class="close-btn">%times;</spam>
-                <div class="empty-cart">
-                    <div class="mini-images">
-                        <img src="coffe_cup.jpg" alt="Mini Image 1" class="mini-image">
-                        <img src="shoping_bag.jpg" alt="Mini Image 2" class="mini-image">
+                <span class="close-btn" id="close-btn">&times;</span>
+                <div class="cart-arrow"></div>
+                <div class="cart-inner">
+                    <div class="cart header">
+                        <div class="mini-images">
+                            <img src="cart/cart_images/coffe_cup.jpg" class="mini-image" alt="Cup Icon">
+                        </div>
+                        <div class="cart-body">
+                            <img src="cart/cart_images/shoping_bag.jpg" class="mini-image" alt="Cart Icon">
+                            <p class="empty-text"><strong>The cart is empty</strong>/p>
+                            <a href="index.html" id="go-shopping-btn">Shop Now</a>
+                        </div>
                     </div>
-                    <p>The cart is empty!<p>
-                    <button id="go-shopping-btn">Shop Now</button>
                 </div>
             </div>
         </div>
