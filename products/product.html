@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products | Product Page</title>
-
-    <link rel="stylesheet" href="../main_page/style.css">
+    <title>Product Page</title>
     <link rel="stylesheet" href="product_links.css">
+    <link rel="stylesheet" href="product_container.css">
+    <link rel="stylesheet" href="../main_page/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 
@@ -16,107 +16,40 @@
 
 <body style="background-color:#D0D9DA;">
     <div id="header-placeholder"></div>
-
-    <main>
-        <section class="name">
-            <h1>Products</h1>
-        </section>
-
-        <div class="side-box">
-            <!-- Sidebar Filters -->
-            <aside id="filters">
-                <!-- Price Filter -->
-                <div id="filter-by-price">
-                    <label for="price">Price: <span id="price-value">500</span>€</label>
-                    <input type="range" id="price" name="price" min="0" max="500">
-                </div>
-                
-                <!-- Category Filters -->
-                <div id="filter-by-category">
-                    <h3>Categories</h3>
-                </div>
-            </aside>
-
-            <section class="products-selection">
-                <div class="sort">
-                    <label for="sortBy">Sort by:</label>
-                    <select id="sortBy">
-                        <option value="price-low">Price: Low to High</option>
-                        <option value="price-high">Price: High to Low</option>
-                        <option value="popularity">By Popularity</option>
-                    </select>
-                </div>
-
-                <div id="products-grid">
-                    <!-- Products will be displayed here -->
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <script>
-        // Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyCgJ-IOeq76OCzmlUbGntMKmn550enir68",
-            authDomain: "coffeino-3157b.firebaseapp.com",
-            projectId: "coffeino-3157b",
-            storageBucket: "coffeino-3157b.appspot.com",
-            messagingSenderId: "739495575410",
-            appId: "1:739495575410:web:07e74233accd8d6443a7eb"
-        };
+  <h1>Our Products</h1>
+  <div id="products-container"></div>
+  <script src="../scripts/main.js"></script>
+<script>
+    // Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyCgJ-IOeq76OCzmlUbGntMKmn550enir68",
+        authDomain: "coffeino-3157b.firebaseapp.com",
+        projectId: "coffeino-3157b",
+        storageBucket: "coffeino-3157b.appspot.com",
+        messagingSenderId: "739495575410",
+        appId: "1:739495575410:web:07e74233accd8d6443a7eb"
+    };
 
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        document.addEventListener("DOMContentLoaded", function () {
-            const productsGrid = document.getElementById("products-grid");
-            const priceRange = document.getElementById("price");
-            const priceValue = document.getElementById("price-value");
-            const categoryContainer = document.getElementById("filter-by-category");
-            const sortBySelect = document.getElementById("sortBy");
+    document.addEventListener("DOMContentLoaded", function () {
+        const productsContainer = document.getElementById("products-container");
+        const categoryFilter = document.getElementById("category-filter");
 
-            // Predefined categories (can be fetched from Firestore if dynamic)
-            const categories = ["Coffee", "Tea", "Accessories"];
+        // Function to fetch and display products
+        function fetchProducts(category = null) {
+            db.collection("products").get().then((querySnapshot) => {
+                productsContainer.innerHTML = ""; // Clear any existing content
 
-            // Populate categories
-            categories.forEach(category => {
-                const label = document.createElement("label");
-                label.innerHTML = `<input type="checkbox" value="${category}"> ${category}`;
-                const wrapper = document.createElement("div");
-                categoryContainer.appendChild(label);
-                categoryContainer.appendChild(wrapper);
-            });
+                querySnapshot.forEach((doc) => {
+                    const product = doc.data();
 
-            // Update price label when slider moves
-            priceRange.addEventListener("input", function () {
-                priceValue.textContent = priceRange.value;
-                fetchProducts();
-            });
-
-            // Fetch and display products
-            function fetchProducts() {
-                const maxPrice = parseFloat(priceRange.value);
-                const selectedCategories = Array.from(categoryContainer.querySelectorAll("input:checked"))
-                    .map(checkbox => checkbox.value);
-                const sortBy = sortBySelect.value;
-
-                db.collection("products").get().then((querySnapshot) => {
-                    productsGrid.innerHTML = ""; // Clear previous content
-
-                    let products = [];
-
-                    querySnapshot.forEach((doc) => {
-                        const product = doc.data();
-                        
-                        // Filter by price
-                        if (product.price > maxPrice) return;
-
-                        // Filter by category
-                        if (selectedCategories.length > 0 && !selectedCategories.includes(product.category)) return;
-
-                        products.push({ id: doc.id, ...product });
-                    });
+                    // Filter by main category or subcategory
+                    if (category && !product.category.includes(category)) {
+                        return;
+                    }
 
                     // Sorting logic
                     if (sortBy === "price-low") {
@@ -148,15 +81,18 @@
                 });
             }
 
-            // Add event listeners for filters
-            categoryContainer.addEventListener("change", fetchProducts);
-            sortBySelect.addEventListener("change", fetchProducts);
+        // Fetch all products initially
+        fetchProducts();
 
-            // Initial product fetch
-            fetchProducts();
+        // Add event listeners to category links
+        categoryFilter.addEventListener("click", (event) => {
+            if (event.target.tagName === "A") {
+                event.preventDefault();
+                const selectedCategory = event.target.getAttribute("data-category");
+                fetchProducts(selectedCategory);
+            }
         });
-    </script>
-
-    <script src="../scripts/main.js"></script>
+    });
+</script>
 </body>
 </html>

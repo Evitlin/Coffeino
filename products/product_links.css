@@ -171,7 +171,15 @@ aside#filters h2 {
 .dropdown-section {
     flex: 1;
     padding: 0 10px;
-    margin-bottom: 10px;
+    margin-bottom: 0; 
+    border-bottom: none;
+}
+.dropdown-section:last-child {
+    margin-bottom: 0;
+}
+
+.dropdown-menu.active {
+    display: block;
 }
 
 .dropdown-section h4 {
@@ -219,15 +227,21 @@ aside#filters h2 {
     .dropdown-menu {
         display: none;
         position: absolute;
-        top: 100%;
+        top: 100%; 
         left: 0;
         right: 0;
-        background: transparent;
+        background: transparent; 
         border: none;
         padding: 0;
         z-index: 1000;
+        margin-top: 0px;
     }
-
+    .navbar .menu-links li {
+        position: relative;
+    }
+    .navbar .menu-links {
+        overflow-y: auto;  
+    }
     .dropdown-menu.active {
         display: block;
     }
@@ -258,4 +272,5 @@ aside#filters h2 {
     .navbar .menu-links .dropdown-section a:hover {
         color: saddlebrown;
     }
+    
 }
