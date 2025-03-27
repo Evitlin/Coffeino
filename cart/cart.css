@@ -1,3 +1,74 @@
+.cart-container {
+    position: relative;
+    display: inline-block;
+}
+
+.cart-dropdown {
+    display: none; /* Initially hidden */
+    position: absolute;
+    top: 150%; /* Position below the cart button */
+    right: 0; /* Align to the right of the container */
+    background-color: #f9f9f9;
+    min-width: 250px; /* Menu width */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+/* Dropdown menu <p> paragraph text*/
+.cart-dropdown p {
+    font-family: 'Fredoka', sans-serif; 
+    font-size: 1.2rem; 
+    font-weight: 'Fredoka'; 
+    color: #333; 
+    text-align: center;
+    margin: 10px 0;
+}
+
+#go-shopping-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #003865;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 25px;
+}
+
+#go-shopping-btn:hover {
+    background-color: saddlebrown;
+}
+
+.mini-images{
+    position: absolute;
+    top: 2px;
+    right: 7px;
+}
+
+.mini-image {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+
+.cart-icon {
+    width: 80px;
+    height: 80px;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+/*
+
 .cart-modal {
     display: none; 
     position: fixed;
@@ -25,8 +96,6 @@
     position: relative;
 }
 
-
-
 .cart-arrow {
     position: absolute;
     top: -10px;
@@ -46,63 +115,10 @@
     align-items: center;
 }
 
-
-.cart-header {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-}
-
-.mini-images{
-    position: absolute;
-    top: 2px;
-    right: 7px;
-}
-
-.mini-image {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
-}
-
-
-.cart-icon {
-    width: 80px;
-    height: 80px;
-}
-
-.empty-text {
-    font-family: 'Fredoka', sans-serif; 
-    font-size: 1.2rem; 
-    font-weight: 'Fredoka'; 
-    color: #333; 
-    text-align: center;
-    margin: 10px 0;
-}
-
-
-#go-shopping-btn {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    background-color: #003865;
-    color: white;
-    text-align: center;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: "Fredoka";
-    margin-top: 10px;
-}
-
-#go-shopping-btn:hover {
-    background-color: saddlebrown;
-}
-
-
 #close-btn {
     position: absolute;
     top: 10px;
     right: 20px;
     font-size: 30px;
     cursor: pointer;
-}
+} */
