@@ -1,6 +1,6 @@
 .cart-container {
     position: relative;
-    display: inline-block;
+    display: inline-block; 
 }
 
 .cart-dropdown {
@@ -50,11 +50,14 @@
 }
 
 .mini-image {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     object-fit: contain;
 }
 
+.cart-body {
+    text-align: center;
+}
 
 .cart-icon {
     width: 80px;
