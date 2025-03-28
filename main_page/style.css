@@ -310,3 +310,27 @@ header{
         color: rgb(75, 128, 94);
     }
 }
+
+/* V======== Footer style css =========V */
+
+footer {
+    background-color: #727775;
+    color: #dddcdc;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.footer-container a {
+    color: #dddcdc;
+    text-decoration: none;
+    position:sticky;
+}
+
+/* Λ======== Footer style end =========Λ */
