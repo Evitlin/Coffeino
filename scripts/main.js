@@ -1,9 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log("DOM fully loaded and parsed");
 
-   // Absolute path to header.html (should work no matter where the script is loaded from)
+   // Absolute path to header.html and footer.html
     const headerPath = '/main_page/header.html';
+    const footerPath = '/main_page/footer.html';
 
+    // Loads header 
     fetch(headerPath)
         .then(response => response.text())
         .then(data => {
@@ -13,6 +15,14 @@ document.addEventListener('DOMContentLoaded', function() {
             loadCartDropdown();
         })
         .catch(error => console.error('Error loading header:', error));
+
+    // Loads footer
+    fetch(footerPath)
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('footer-placeholder').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading footer:', error));
 });
 
 function initializeEventListeners() {
