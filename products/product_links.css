@@ -40,7 +40,7 @@ body {
     max-width: auto;
     margin-bottom: 10px auto;
     align-self: flex-start;
-    height: auto;
+    height: 4500px;
     
 }
 
@@ -50,12 +50,12 @@ body {
 
 #filter-by-category{
     color: #002244; /* Set the text color for categories */
-    font-size: 1rem; /* Adjust font size if needed */
+    font-size: 1.2rem; /* Adjust font size if needed */
     margin-bottom: 5px; /* Add spacing between categories */
     display: block; /* Ensure each category is on a new line */
 }
 aside#filters {
-    width: 250px;
+    width: 350px;
     background: white;
     padding: 20px;
     border-radius: 10px;
@@ -63,17 +63,26 @@ aside#filters {
 }
 
 aside#filters h2 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
+    font-size: 1.2px;
+    margin-bottom: 20px;
     color: #002244;
 }
 
 #filter-by-price {
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: column; /* Stack the label and slider vertically */
+    gap: 5px; /* Add spacing between the label and slider */
+   
+}
+#filter-by-price label {
+    font-size: 1.2rem; /* Adjust font size for the label */
+    color: #003865; /* Match the color with your theme */
 }
 
 #price {
     width: 100%;
+    margin-top: 5px;
 }
 
 /* ==========================
@@ -81,13 +90,14 @@ aside#filters h2 {
 ========================== */
 .sort {
     margin-bottom: 15px;
+    font-size: 1.2rem;
 }
 
 .sort select {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
-    font-size: 1rem;
+    font-size: 1.2rem;
 }
 
 /* ==========================
@@ -116,7 +126,7 @@ aside#filters h2 {
 }
 
 .product-card img {
-    width:75%;
+    width:60%;
     height: auto;
     border-radius: 5px;
 }
@@ -135,7 +145,8 @@ aside#filters h2 {
 .product-card button {
     background-color: #003865;
     color: white;
-    padding: 8px 12px;
+    padding: 12px 12px;
+    margin: 10px 0;
     border: none;
     border-radius: 5px;
     cursor: pointer;
