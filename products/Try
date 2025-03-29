@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products | Product Page</title>
 
-    <link rel="stylesheet" href="../main_page/style.css">
-    <link rel="stylesheet" href="product_links.css">
+    <link rel="stylesheet" href="main_page/style.css">
+    <link rel="stylesheet" href="products/product_links.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 
@@ -27,8 +27,8 @@
             <aside id="filters">
                 <!-- Price Filter -->
                 <div id="filter-by-price">
-                    <label for="price">Price: <span id="price-value">100</span>€</label>
-                    <input type="range" id="price" name="price" min="0" max="100">
+                    <label for="price">Price: <span id="price-value">500</span>€</label>
+                    <input type="range" id="price" name="price" min="0" max="500">
                 </div>
                 
                 <!-- Category Filters -->
@@ -54,22 +54,22 @@
         </div>
     </main>
 
-<script>
-    // Firebase configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyCgJ-IOeq76OCzmlUbGntMKmn550enir68",
-        authDomain: "coffeino-3157b.firebaseapp.com",
-        projectId: "coffeino-3157b",
-        storageBucket: "coffeino-3157b.appspot.com",
-        messagingSenderId: "739495575410",
-        appId: "1:739495575410:web:07e74233accd8d6443a7eb"
-    };
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCgJ-IOeq76OCzmlUbGntMKmn550enir68",
+            authDomain: "coffeino-3157b.firebaseapp.com",
+            projectId: "coffeino-3157b",
+            storageBucket: "coffeino-3157b.appspot.com",
+            messagingSenderId: "739495575410",
+            appId: "1:739495575410:web:07e74233accd8d6443a7eb"
+        };
 
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-    document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function () {
             const productsGrid = document.getElementById("products-grid");
             const priceRange = document.getElementById("price");
             const priceValue = document.getElementById("price-value");
@@ -83,9 +83,7 @@
             categories.forEach(category => {
                 const label = document.createElement("label");
                 label.innerHTML = `<input type="checkbox" value="${category}"> ${category}`;
-                const wrapper = document.createElement("div");
                 categoryContainer.appendChild(label);
-                categoryContainer.appendChild(wrapper);
             });
 
             // Update price label when slider moves
@@ -101,14 +99,14 @@
                     .map(checkbox => checkbox.value);
                 const sortBy = sortBySelect.value;
 
-            db.collection("products").get().then((querySnapshot) => {
+                db.collection("products").get().then((querySnapshot) => {
                     productsGrid.innerHTML = ""; // Clear previous content
 
                     let products = [];
 
-                querySnapshot.forEach((doc) => {
-                    const product = doc.data();
-
+                    querySnapshot.forEach((doc) => {
+                        const product = doc.data();
+                        
                         // Filter by price
                         if (product.price > maxPrice) return;
 
@@ -153,10 +151,10 @@
             sortBySelect.addEventListener("change", fetchProducts);
 
             // Initial product fetch
-        fetchProducts();
-    });
-</script>
+            fetchProducts();
+        });
+    </script>
 
-    <script src="../scripts/main.js"></script>
+    <script src="scripts/main.js"></script>
 </body>
 </html>
