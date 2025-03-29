@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('header-placeholder').innerHTML = data;
             initializeEventListeners();
             loadProductLinksScript();
+            loadCartDropdown();
         })
         .catch(error => console.error('Error loading header:', error));
 
@@ -67,6 +68,22 @@ function loadProductLinksScript() {
     };
     script.onerror = function() {
         console.error("Error loading product_links.js script");
+    };
+    document.body.appendChild(script);
+}
+
+// Loads the cart dropdown script
+function loadCartDropdown() {
+    const script = document.createElement('script');
+
+    const srcPath = '/scripts/empthy.js';
+    
+    script.src = srcPath;
+    script.onload = function() {
+        console.log("empthy.js script loaded and executed");
+    };
+    script.onerror = function() {
+        console.error("Error loading empthy.js script");
     };
     document.body.appendChild(script);
 }
