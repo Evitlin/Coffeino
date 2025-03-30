@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/main_page/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
 </head>
 <body style="background-color:#D0D9DA;">
     <div id="header-placeholder"></div>
@@ -19,18 +21,18 @@
                         <div class="sign-in-">
                             Sign In.
                         </div>
-                        <input type="email" class="rectangle-1" placeholder="Email">
-                        <input type="password" class="rectangle-1" placeholder="Password">
+                        <input type="email" id="email" class="rectangle-1" placeholder="Email">
+                        <input type="password" id="password" class="rectangle-1" placeholder="Password">
                         <div class="checkbox">
                             <input type="checkbox" id="remember-me">
                             <label for="remember-me">Remember Me</label>
                         </div>
                         <a href="#" class="button-link">
-                            <button class="button-1">
+                            <button id="login-button" class="button-1">
                                 Sign In
                             </button>
                         </a>
-                        <a href="#" class="link-1" >
+                        <a href="#" class="link-1">
                             Forgot Password?
                         </a>
                         <div class="divider"></div>
@@ -45,6 +47,6 @@
         </main>
     </main>
     <link rel="stylesheet" href="/products/product_links.css">
-    <script src="/scripts/main.js"></script>
+    <script src="/scripts/login.js"></script>
 </body>
 </html>
