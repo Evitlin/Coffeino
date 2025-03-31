@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sales Reports</title>
+</head>
+<body>
+    <h1>Sales Reports</h1>
+    <p>Total Sales: <span id="total-sales">0</span>€</p>
+
+    <script>
+        const firebaseConfig = { /* Your Firebase Config */ };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        db.collection("orders").get().then((querySnapshot) => {
+            let total = 0;
+            querySnapshot.forEach((doc) => {
+                total += doc.data().totalPrice;
+            });
+            document.getElementById("total-sales").textContent = total;
+        });
+    </script>
+</body>
+</html>
