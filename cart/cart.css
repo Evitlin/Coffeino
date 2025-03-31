@@ -55,6 +55,11 @@
     object-fit: contain;
 }
 
+#cup-icon-btn:hover{
+    background-color: saddlebrown;
+}
+
+
 .cart-body {
     text-align: center;
 }
