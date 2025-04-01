@@ -75,9 +75,9 @@ firebase.auth().onAuthStateChanged(user => {
             });
     } else {
         cartDropdownBody.innerHTML = `
-            <img src="/cart/cart_images/shoping_bag.jpg" class="mini-image" alt="Cart Icon">
-            <p class="empty-text">Please log in to view your cart.</p>
-            <a href="/login.html" id="login-btn">Log In</a>
+            <img src="/cart/cart_images/shoping_bag.png" class="mini-image" alt="Cart Icon">
+            <p class="empty-text">Login to see your cart</p>
+            <a href="/products/product.html" id="go-shopping-btn">Shop Now</a>
         `;
     }
 });
