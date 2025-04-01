@@ -29,8 +29,11 @@ firebase.auth().onAuthStateChanged(user => {
                 if (querySnapshot.empty) {
                     // Show empty cart message and keep the shopping bag image
                     cartContainer.innerHTML = `
-                        <img src="/cart/cart_images/shoping_bag.jpg" alt="Product Image" class="product-image">
-                        <p class='empty-text'><strong>Your cart is empty.</strong></p>
+                        <div class="form-content">
+                        <img src="/cart/cart_images/shoping_bag.png" alt="Product Image" class="product-image">
+                        <p class="empty-text">The cart is empty.</p>
+                        <a href="/products/product.html" id="shop_button">Go shopping</a>
+                        </div>
                     `;
                     cartSummary.style.display = "none";
                     checkoutButton.style.display = "none";

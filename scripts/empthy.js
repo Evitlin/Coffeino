@@ -28,9 +28,9 @@ firebase.auth().onAuthStateChanged(user => {
             .then(querySnapshot => {
                 if (querySnapshot.empty) {
                     cartDropdownBody.innerHTML = `
-                        <img src="/cart/cart_images/shoping_bag.jpg" class="mini-image" alt="Cart Icon">
+                        <img src="/cart/cart_images/shoping_bag.png" class="mini-image" alt="Cart Icon">
                         <p class="empty-text">The cart is empty.</p>
-                        <a href="/products/product.html" id="go-shopping-btn">Shop Now</a>
+                        <a href="/products/product.html" id="go-shopping-btn">Shop Now</a>                  
                     `;
                     return;
                 }
