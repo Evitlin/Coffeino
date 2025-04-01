@@ -178,7 +178,9 @@ aside#filters h2 {
     display: flex;
     justify-content: space-between;
 }
-
+ul.subcategories {
+    list-style: none;
+}
 .dropdown-section {
     flex: 1;
     padding: 0 10px;

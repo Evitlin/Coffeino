@@ -32,10 +32,10 @@ document.querySelector(".button-1").addEventListener("click", (event) => {
         return;
     }
 
-    // Validate email format with stricter regex
-    const emailRegex = /^[^\s@]+@[^\s@]+\.(com|org|net|edu|gov|io|info|co)$/i; // Add valid domains here
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.(com|org|net|edu|gov|io|info|co)$/i;
     if (!emailRegex.test(email)) {
-        alert("Please enter a valid email address with a valid domain (e.g., .com, .org).");
+        alert("Please enter a valid email address.");
         return;
     }
 
@@ -51,6 +51,12 @@ document.querySelector(".button-1").addEventListener("click", (event) => {
         return;
     }
 
+    // Validate password length
+    if (password.length > 20) {
+        alert("The password is too long. Please use a password with up to 20 characters.");
+        return;
+    }
+
     // Create user with Firebase Authentication
     auth.createUserWithEmailAndPassword(email, password)
         .then(userCredential => {
@@ -62,7 +68,8 @@ document.querySelector(".button-1").addEventListener("click", (event) => {
             // Send email verification
             user.sendEmailVerification()
                 .then(() => {
-                    alert("A verification email has been sent to your email address. Please verify your email before logging in.");
+                    alert("A verification email has been sent to your email address. Please verify your email to activate your account.");
+                    auth.signOut(); // Log the user out immediately after signup
                     window.location.href = "/login.html"; // Redirect to login page
                 })
                 .catch(error => {
@@ -79,12 +86,26 @@ document.querySelector(".button-1").addEventListener("click", (event) => {
         })
         .catch(error => {
             console.error("Error signing up:", error); // Debugging log
+            let errorMessage = "An error occurred. Please try again later."; // Default error message
 
-            // Handle errors (e.g., email already in use)
-            if (error.code === "auth/email-already-in-use") {
-                alert("This email is already registered. Please use a different email.");
-            } else {
-                alert(error.message);
+            // Handle specific Firebase errors
+            switch (error.code) {
+                case "auth/email-already-in-use":
+                    errorMessage = "This email is already registered. Please use a different email or log in.";
+                    break;
+                case "auth/invalid-email":
+                    errorMessage = "The email address is not valid. Please check and try again.";
+                    break;
+                case "auth/weak-password":
+                    errorMessage = "The password is too weak. Please use a stronger password (at least 6 characters).";
+                    break;
+                case "auth/operation-not-allowed":
+                    errorMessage = "Email/password accounts are not enabled. Please contact support.";
+                    break;
+                default:
+                    errorMessage = error.message; // Use Firebase's error message as a fallback
             }
+
+            alert(errorMessage); // Display the user-friendly error message
         });
 });
