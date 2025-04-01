@@ -322,7 +322,6 @@ footer {
     background-color: #727775;
     color: #dddcdc;
     padding: 20px 0;
-    text-align: center;
 }
 
 .footer-container {
@@ -330,6 +329,23 @@ footer {
     justify-content: space-around;
     flex-wrap: wrap;
     padding: 20px;
+}
+
+.footer-links {
+    display: block;
+    align-items: right;
+}
+
+.footer-links a {
+    color: #dddcdc;
+    text-decoration: none;
+    margin-right: 10px;
+    font-size: 14px;
+    transition: color 0.3s ease-in-out;
+}
+
+.footer-links a:hover {
+    color: #FF3B30;
 }
 
 .footer-container a {

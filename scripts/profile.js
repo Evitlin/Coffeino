@@ -34,7 +34,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // ! Insert logout logic here !
             // (Firebase auth sign out)
-            
+            window.location.href = '/account/pages/logout.html'; // temp
+
         } else {
             fetch(`/account/pages/${currentPage}.html`)
                 .then(response => {
