@@ -16,29 +16,24 @@
     <main>
         <div id="rectangle-container">
             <div class="rectangle-B">
-                <div class="side-menu" id="side-menu"></div>
-                <a href="#" class="linker-A"> MY PROFILE </a>
+                <a href="#" class="linker-B" data-page="profile"> MY PROFILE </a>
                 <div class="vertical-divider"></div>
-                <a href="#" class="linker-B"> EDIT ACCOUNT </a>
+                <a href="#" class="linker-B" data-page="edit-account"> EDIT ACCOUNT </a>
                 <div class="vertical-divider"></div>
-                <a href="#" class="linker-B"> ORDERS </a>
+                <a href="#" class="linker-B" data-page="orders"> ORDERS </a>
                 <div class="vertical-divider"></div>
-                <a href="#" class="linker-B"> WISHLIST </a>
+                <a href="#" class="linker-B" data-page="wishlist"> WISHLIST </a>
                 <div class="vertical-divider"></div>
-                <a href="#" class="linker-B"> LOG OUT </a>
+                <a href="#" class="linker-B" id="logout-link" data-page="logout"> LOG OUT </a>
             </div>
             <div class="rectangle-A">
-                <div class="form-content">
-                    <div class="profile-text">
-                        My Profile
-                    </div>
-                    
-                </div>
+                <div class="form-content" id="content-placeholder"></div>
             </div>
         </div>
     </main>
     <div id="footer-placeholder"></div>
     <link rel="stylesheet" href="/products/product_links.css">
     <script src="/scripts/main.js"></script>
+    <script src="/scripts/profile.js"></script>
 </body>
 </html>
