@@ -15,16 +15,16 @@
 .box-info {
     border: none;
     background-color: rgba(145, 145, 145, 0.027);
-    width: 500px;
+    width: 450px;
     height: auto;
     margin-top: 80px;
-    margin-right: 180px;
+    margin-right: 120px;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     float: right;
 }
 #product-title {
-    font-size: 1,8rem;
+    font-size: 1.5rem;
     color: #003865;
     margin-top: 20px;
     margin-left: 20px;
@@ -40,7 +40,7 @@
     margin-right: 20px; /* Add spacing to the right */
 }
 .price-info {
-    font-size: 1.8rem;
+    font-size: 1.3rem;
     color: #003865;
     font-weight: normal;
 }
@@ -49,43 +49,43 @@
     font-weight:bold;
 }
 #product-price {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     margin-left: 10px;
     color: #003865;
     font-weight:nolmal;
     
 }
 .index{
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     color: #003865;
     font-weight:normal;
     
 }
 
 .stock {
-    font-size: 1.8rem;
+    font-size: 1.3rem;
     color: #003865;
     font-weight: bold;
     margin-right: 20px;
 
 }
 #product-stock {
-    font-size: 1.6rem;
+    font-size: 1.3rem;
     color: #003865;
     font-weight: normal;
     margin-left: 10px;
 }
 .what {
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: #003865c0;
     font-weight: normal;
     margin-top: 20px;
     margin-left: 20px;
 }
 #quantity {
-    width: 80px;
-    height: 40px;
-    font-size: 1.1rem;
+    width: 70px;
+    height: 30px;
+    font-size: 0.9rem;
     color: #003865;
     border: 2px solid #003865;
     border-radius: 10px;
@@ -99,11 +99,11 @@
     box-shadow: 0 0 5px rgba(139, 69, 19, 0.5);
 }
 #add-to-cart {
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     font-weight: bold;
     background-color: #003865;
-    width: 200px;
-    height: 50px;
+    width: 130px;
+    height: 40px;
     color: white;
     border-radius: 15px;
     float: right;
@@ -121,11 +121,11 @@
 }
 .line {
     margin-top: 20px;
-    border: 2px solid #002244bb;
+    border: 1.5px solid #002244bb;
 }
 .description {
 
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: #003865;
     margin-top: 20px;
     margin-left: 20px;
@@ -136,10 +136,10 @@
 
 }
 #product-image {
-    width: 400px;
-    height: 400px;
+    width: 300px;
+    height: 300px;
     margin-top: 80px;
-    margin-left: 150px;
+    margin-left: 120px;
     float: left;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Add shadow */
     border-radius: 15px;
@@ -150,7 +150,7 @@
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
 }
 #product-description {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     color: #003865;
     margin-top: 20px;
     margin-left: 20px;
