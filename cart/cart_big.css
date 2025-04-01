@@ -1,60 +1,42 @@
-/* General body styling */
-body {
-    font-family: 'Fredoka', sans-serif;
-    background-color: #D0D9DA;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-}
 
-/* Header placeholder styling */
-#header-placeholder {
-    width: 100%;
-    height: 80px; /* Adjust height as needed */
-    background-color: #003865; /* Placeholder background color */
-}
-
-/* Main container styling */
 main {
+    padding-bottom: 30px;
+}
+
+
+#oval-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
+
+.square {
+    width: 90%;
+    max-width: 700px;
+    height: 80%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background: #FFFFFFDB;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 200px;
+    margin-bottom: 200px;
     justify-content: center;
-    padding: 20px;
+    box-sizing: border-box;
 }
 
-/* Oval container styling */
-#oval-container {
-    background-color: #FFFFFF;
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    max-width: 600px;
-    width: 90%;
-    text-align: center;
-}
 
-/* Square container inside the oval */
-.square {
-    background-color: #F5F5F5;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* Cart title styling */
 .cart-big {
     font-size: 2rem;
     font-weight: 700;
     color: #003865;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
-/* Cart item styling */
+
 .cart-item {
     display: flex;
     justify-content: center;
@@ -66,11 +48,10 @@ main {
     width: 150px;
     height: 150px;
     object-fit: contain;
-    border-radius: 10px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* "Go shopping" button styling */
+
+
 #shop_button {
     display: inline-block;
     padding: 12px 20px;
@@ -81,9 +62,10 @@ main {
     text-decoration: none;
     font-weight: 700;
     margin-top: 20px;
+    margin-bottom: 30px;
     transition: background-color 0.3s ease;
 }
 
 #shop_button:hover {
-    background-color: #00509E;
+    background-color: saddlebrown;
 }
