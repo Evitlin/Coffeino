@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Cart | Coffeino</title>
-    
-  
     <link rel="stylesheet" href="/main_page/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
@@ -13,23 +11,58 @@
 <body style="background-color:#D0D9DA;">
     <div id="header-placeholder"></div>
     <main>
-        <!-- Your page content -->
-         <main>
-            <div id="oval-container">
-                <div class="square">
-                    <div class="form-content">
-                        <div class="cart-big">
-                            Your Cart.
-                        </div>
-                        <div class="cart-item">
-                            <img src="/cart/cart_images/shoping_bag.jpg" alt="Product Image" class="product-image">
-                        </div>
-                        <!-- Add more cart items as needed -->
-                        <a href="/products/product.html" id="shop_button">Go shopping</a>
+        <div id="oval-container">
+            <div class="square">
+                <div class="form-content">
+                    <div class="cart-big">
+                        Your Cart.
                     </div>
-         </main>
+                    <div class="cart-item">
+                        <img src="/cart/cart_images/shoping_bag.jpg" alt="Product Image" class="product-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3 id="cart-summary" style="display: none;">
+            Cost of the products: <span id="product-cost">0</span>€<br>
+            Packing fee: <span id="packing-fee">0.50</span>€<br>
+            <strong>Total: <span id="total-cost">0</span>€</strong>
+        </h3>
+        <button id="checkout-button" style="display: none;">Checkout</button>
+        <a href="/products/product.html" id="shop-button">Go shopping</a>
     </main>
+
+    <!-- Include Firebase Libraries -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+
+    <!-- Initialize Firebase -->
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCgJ-IOeq76OCzmlUbGntMKmn550enir68",
+            authDomain: "coffeino-3157b.firebaseapp.com",
+            projectId: "coffeino-3157b",
+            storageBucket: "coffeino-3157b.appspot.com",
+            messagingSenderId: "739495575410",
+            appId: "1:739495575410:web:07e74233accd8d6443a7eb"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Set authentication persistence
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+            .then(() => {
+                console.log("Authentication persistence set to LOCAL.");
+            })
+            .catch((error) => {
+                console.error("Error setting authentication persistence:", error);
+            });
+    </script>
+
+    <!-- Include Your Scripts -->
     <link rel="stylesheet" href="/products/product_links.css">
     <script src="/scripts/main.js"></script>
+    <script src="/scripts/cart.js"></script>
 </body>
 </html>
