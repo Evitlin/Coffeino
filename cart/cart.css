@@ -1,0 +1,127 @@
+.cart-container {
+    position: relative;
+    display: inline-block; 
+}
+
+.cart-dropdown {
+    display: none; /* Initially hidden */
+    position: absolute;
+    top: 150%; /* Position below the cart button */
+    right: -30px; /* Align to the right of the container */
+    background-color: #f9f9f9;
+    min-width: 250px; /* Menu width */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+/* Dropdown menu <p> paragraph text*/
+.cart-dropdown p {
+    font-family: 'Fredoka', sans-serif; 
+    font-size: 1.2rem; 
+    font-weight: 'Fredoka'; 
+    color: #333; 
+    text-align: center;
+    margin: 10px 0;
+}
+
+#go-shopping-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #003865;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 25px;
+}
+
+#go-shopping-btn:hover {
+    background-color: saddlebrown;
+}
+
+.mini-images{
+    position: absolute;
+    top: 2px;
+    right: 7px;
+}
+
+.mini-image {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.cart-body {
+    text-align: center;
+}
+
+.cart-icon {
+    width: 80px;
+    height: 80px;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+/*
+
+.cart-modal {
+    display: none; 
+    position: fixed;
+    top: 30px;
+    right: 10%;
+    transform: translateX(-50%, -50%); 
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    max-width: 250px;
+    width: 90%;
+    z-index: 1000;
+}
+
+.cart-modal.show{
+    display:block;
+}
+
+.modal-context {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+}
+
+.cart-arrow {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid white;
+}
+
+
+.cart-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+} */

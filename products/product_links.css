@@ -1,26 +1,187 @@
+/* ==========================
+   GLOBAL STYLES
+========================== */
+body {
+    font-family: 'Fredoka', sans-serif;
+    background-color: #CFD9D8;
+    margin: 0;
+    padding: 0;
+}
+
+/* ==========================
+   HEADER & PAGE TITLE
+========================== */
+.name {
+    display: block; /* Ensure the section is visible */
+}
+.name h1 {
+    font-size: 60px;
+    color: #003865;
+    padding: 10px;
+    margin-left: 20px;
+    margin-top: 70px;
+    border-bottom: 3px solid #002244;
+   
+}
+
+/* ==========================
+   MAIN CONTENT LAYOUT
+========================== */
+.side-box {
+    display: flex;
+    /*max-width: 1600px;*/
+    /*max-height: 1000px;*/
+    /*background: #F1F4F3;*/
+    margin: left;
+    padding: 10px;
+    padding-top: 20px;
+    gap: 60px;
+    border-radius: 28px;
+    max-width: auto;
+    margin-bottom: 10px auto;
+    align-self: flex-start;
+    height: 4500px;
+    
+}
+
+/* ==========================
+   SIDEBAR (FILTERS)
+========================== */
+
+#filter-by-category{
+    color: #002244; /* Set the text color for categories */
+    font-size: 1.2rem; /* Adjust font size if needed */
+    margin-bottom: 5px; /* Add spacing between categories */
+    display: block; /* Ensure each category is on a new line */
+}
+aside#filters {
+    width: 350px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+aside#filters h2 {
+    font-size: 1.2px;
+    margin-bottom: 20px;
+    color: #002244;
+}
+
+#filter-by-price {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column; /* Stack the label and slider vertically */
+    gap: 5px; /* Add spacing between the label and slider */
+   
+}
+#filter-by-price label {
+    font-size: 1.2rem; /* Adjust font size for the label */
+    color: #003865; /* Match the color with your theme */
+}
+
+#price {
+    width: 100%;
+    margin-top: 5px;
+}
+
+/* ==========================
+   SORT DROPDOWN
+========================== */
+.sort {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.sort select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1.2rem;
+}
+
+/* ==========================
+   PRODUCTS GRID
+========================== */
+#products-grid {
+    display: grid;
+    grid-template-columns: repeat(3,  1fr);
+    gap: 50px;
+}
+
+/* ==========================
+   PRODUCT CARD
+========================== */
+.product-card {
+    background: white;
+    padding: 10px;
+    border-radius: 47px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-card img {
+    width:60%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.product-card h3 {
+    font-size: 1.2rem;
+    margin: 10px 0;
+    color: #00203a;
+}
+
+.product-card p {
+    font-size: 1rem;
+    color: #555;
+}
+
+.product-card button {
+    background-color: #003865;
+    color: white;
+    padding: 12px 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.product-card button:hover {
+    background-color: #8B4513;
+}
+
+/* ==========================
+   DROPDOWN MENU
+========================== */
 .dropdown-menu {
     display: none;
-    position: fixed; 
+    position: fixed;
     left: 50%;
     transform: translateX(-10%);
     background: white;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     padding: 15px;
-    max-width: 550px; 
+    max-width: 550px;
     z-index: 1000;
-    width: 90%; 
-    left: 5%; 
+    width: 90%;
 }
 
 .dropdown-row {
     display: flex;
     justify-content: space-between;
 }
-
+ul.subcategories {
+    list-style: none;
+}
 .dropdown-section {
-    margin-bottom: 10px;
-    border-bottom: 1px solid #ddd;
     flex: 1;
     padding: 0 10px;
     margin-bottom: 0; 
@@ -55,7 +216,27 @@
     color: saddlebrown;
 }
 
-@media screen and (max-width:900px){
+.dropdown-menu.active {
+    display: block;
+}
+
+/* ==========================
+   RESPONSIVE DESIGN
+========================== */
+@media (max-width: 900px) {
+    .side-box {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    aside#filters {
+        width: 100%;
+    }
+
+    #products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+
     .dropdown-menu {
         display: none;
         position: absolute;
@@ -66,6 +247,10 @@
         border: none;
         padding: 0;
         z-index: 1000;
+        margin-top: 0px;
+    }
+    .navbar .menu-links li {
+        position: relative;
     }
     .navbar .menu-links {
         overflow-y: auto;  
@@ -80,7 +265,7 @@
 
     .navbar .menu-links .dropdown-section {
         display: flex;
-        flex-direction: column; /* Stack items vertically */
+        flex-direction: column;
         padding: 10px 0;
     }
 

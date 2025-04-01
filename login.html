@@ -4,20 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log In | Coffeino</title>
-    <link rel="stylesheet" href="main_page/style.css">
+    <link rel="stylesheet" href="/account/accountstyle.css">
+    <link rel="stylesheet" href="/main_page/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
 </head>
 <body style="background-color:#D0D9DA;">
     <div id="header-placeholder"></div>
     <main>
-        <!-- Your page content -->
-        
-        
-
-        
+        <main>
+            <div id="rectangle-container">
+                <div class="rectangle">
+                    <div class="form-content">
+                        <div class="sign-in-">
+                            Sign In.
+                        </div>
+                        <input type="email" id="email" class="rectangle-1" placeholder="Email">
+                        <input type="password" id="password" class="rectangle-1" placeholder="Password">
+                        <a href="#" class="button-link">
+                            <button id="login-button" class="button-1">
+                                Sign In
+                            </button>
+                        </a>
+                        <a href="#" id="forgot-password-link" class="link-1">
+                            Forgot Password?
+                        </a>
+                        <div class="divider"></div>
+                        <a href="/signup.html" class="button-link">
+                            <button class="button-2">
+                                Create Account
+                            </button>
+                        </a>
+                        <button id="resend-verification-button" class="button-2">
+                            Resend Verification Email
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
     </main>
-    <link rel="stylesheet" href="products/product_links.css">
-    <script src="scripts/main.js"></script>
+    <link rel="stylesheet" href="/products/product_links.css">
+    <script src="/scripts/main.js"></script>
+    <script src="/scripts/login.js"></script>
 </body>
 </html>
