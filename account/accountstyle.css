@@ -117,6 +117,10 @@ main {
     text-decoration: none;
 }
 
+.rectangle-B a:hover {
+    color: #033076; /* Darker color on hover */
+}
+
   .vertical-divider {
     width: 0px;
     height: auto;
