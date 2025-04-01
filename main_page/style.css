@@ -309,4 +309,58 @@ header{
         font-size: 1.2rem;
         color: rgb(75, 128, 94);
     }
+    
+ /* About Section */
+.about {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    gap: 30px;
+}
+
+.image-container {
+    width: 45%;
+}
+
+.image-container img {
+    width: 100%;
+    border-radius: 20px;
+}
+
+.text-container {
+    width: 45%;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.text-container h3 {
+    color: #003865;
+    font-size: 300px;
+    font-weight: 600;
+}
+
+.text-container h1 {
+    font-size: 32px;
+    color: #003865;
+}
+
+.text-container h1 span {
+    color: #FF3B30;
+}
+
+.text-container p {
+    margin-top: 10px;
+    color: #003865;
+    width: 688px;
+    height: 396px;
+    font-family:'Fredoka', sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 1.3;
+    text-align: justify;
+}
 }
