@@ -12,6 +12,16 @@ main {
     margin: 40px ; 
 }
 
+.profile-text {
+
+    color: #12456F;
+    font-family: "Fredoka";
+    font-weight: bold;
+    font-size: 32px;
+    text-align: left;
+    margin: 10px ; 
+}
+
 .rectangle-container {
     display: flex;
     justify-content: center; 
@@ -59,6 +69,62 @@ main {
     margin: 15px 0; 
     box-sizing: border-box; 
 }
+
+.rectangle-A {
+	width: 90%;
+    min-height: 800px;
+	height: auto;
+	padding: 8px 8px 8px 8px;
+	opacity: 80%;
+	background: #FFFFFFAB;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rectangle-B {
+    margin: 0 auto;
+    display: flex;
+    justify-content: left;
+    margin-top: 100px;
+	width: 90%;
+	height: auto;
+	padding: 8px 8px 8px 8px;
+	background: #FFFFFF;
+    z-index: -1;
+}
+
+.linker-A {
+    margin: 15px 10px 10px 10px;
+    height: auto;
+    
+    color: #033076;
+    font-family: "Arial";
+    font-weight: bold;
+    font-size: 14px;
+    text-align: left;
+  }
+
+  .linker-B {
+    margin: 15px 10px 10px 10px;
+	height: 23px;
+	color: #636989;
+	font-family: "Arial";
+	font-weight: bold;
+	font-size: 14px;
+	text-align: left;
+    text-decoration: none;
+}
+
+  .vertical-divider {
+    width: 0px;
+    height: auto;
+    margin: 10px ;
+    border-color: #B4C1C1;
+    border-width: 1px;
+    border-style: solid;
+  }
 
 .button-1, .button-2 {
     width: 157px;
@@ -131,4 +197,52 @@ a.button-link {
 .inline-container p {
     margin: 0;
     margin-right: 5px; 
+}
+
+/* ===================MOBILE OPT======================= */
+/* Default styles for the side menu (hidden by default) */
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -100%; /* Hidden off-screen */
+    width: 250px;
+    height: 100%;
+    background-color: #727775;
+    color: #dddcdc;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    transition: left 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+.side-menu a {
+    color: #dddcdc;
+    text-decoration: none;
+    margin: 10px 0;
+}
+
+.side-menu .vertical-divider {
+    display: none; /* Hide dividers in side menu */
+}
+
+/* Toggle button for the menu */
+.menu-toggle {
+    display: none; /* Hidden by default */
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+/* Show the toggle button and adjust layout for mobile */
+@media screen and (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .side-menu.open {
+        left: 0; /* Slide the menu into view */
+    }
 }
