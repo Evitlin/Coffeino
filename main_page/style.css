@@ -325,6 +325,7 @@ header{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 100px;
 
 }
 
@@ -371,7 +372,6 @@ header{
     width: 570px;
     height: 396px;
     font-family:'Fredoka', sans-serif;
-    font-weight: bold;
     font-size: 25px;
     line-height: 1.5;
     text-align: justify;
