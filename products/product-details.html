@@ -1,20 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Details</title>
+
+    <link rel="stylesheet" href="../main_page/style.css">
+    <link rel="stylesheet" href="product-details.css">
+    <link rel="stylesheet" href="product_links.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
 </head>
-<body>
-    <h1 id="product-title"></h1>
-    <img id="product-image" src="" alt="">
-    <p id="product-description"></p>
-    <p>Price: <span id="product-price"></span>€</p>
-    <p>Stock left: <span id="product-stock"></span></p>
-    <input type="number" id="quantity" min="1" value="1">
-    <button id="add-to-cart">Add to Cart</button>
+<body style="background-color:#D0D9DA;">
+    <div id="header-placeholder"></div>
+    <div class="outline">
+        <div class="box-info">
+            <h1 id="product-title"></h1>
+                    <div class="info-row">
+                        <div class="price-info">
+                            <span class="price">Price:</span>
+                            <span id="product-price"></span>
+                            <span class="index">€</span>
+                        </div>
+                        <div class="stock">
+                            Stock: <span id="product-stock"></span>
+                        </div>
+                    </div>
+    
+    
+        <p class="what">Quantity:</p>
+        <input type="number" id="quantity" min="1" value="1">
+        <button id="add-to-cart">Add to Cart</button>
+        <div class="line"></div>
+        <p class="description">Description:</p>
+        <p id="product-description"></p>
+        </div>
+        <img id="product-image" src="" alt="">
+    </div>
 
-    <script>
+    <script >
         const firebaseConfig = {
             apiKey: "AIzaSyCgJ-IOeq76OCzmlUbGntMKmn550enir68",
             authDomain: "coffeino-3157b.firebaseapp.com",
@@ -25,6 +53,7 @@
         };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
+        const auth = firebase.auth();
 
         // Get product ID from URL
         const params = new URLSearchParams(window.location.search);
@@ -43,12 +72,56 @@
                     // Add to Cart functionality
                     document.getElementById("add-to-cart").addEventListener("click", () => {
                         const quantity = parseInt(document.getElementById("quantity").value);
+
                         if (quantity > 0 && quantity <= data.stock) {
-                            db.collection("products").doc(productId).update({
-                                stock: data.stock - quantity  // Reduce stock by the specified quantity
-                            }).then(() => {
-                                alert("Added to cart!");
-                                location.reload(); // Refresh to update stock count
+                            firebase.auth().onAuthStateChanged(user => {
+                                if (user) {
+                                    // User is logged in, save to Firestore
+                                    const cartItem = {
+                                        productId,
+                                        productName: data.title,
+                                        productPrice: data.price,
+                                        productImage: data.imageUrl, // Add the product image
+                                        quantity
+                                    };
+
+                                    db.collection("users").doc(user.uid).collection("cart").doc(productId).set(cartItem, { merge: true })
+                                        .then(() => {
+                                            alert("Item added to cart!");
+                                            // Optionally, update stock in Firestore
+                                            db.collection("products").doc(productId).update({
+                                                stock: data.stock - quantity
+                                            });
+                                            location.reload(); // Refresh to update stock count
+                                        })
+                                        .catch(error => {
+                                            console.error("Error adding to cart:", error);
+                                        });
+                                } else {
+                                    // User is not logged in, save to localStorage
+                                    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+                                    // Check if the product is already in the cart
+                                    const existingProductIndex = cart.findIndex(item => item.productId === productId);
+
+                                    if (existingProductIndex !== -1) {
+                                        // Update the quantity of the existing product
+                                        cart[existingProductIndex].quantity += quantity;
+                                    } else {
+                                        // Add the new product to the cart
+                                        cart.push({
+                                            productId,
+                                            productName: data.title,
+                                            productPrice: data.price,
+                                            productImage: data.imageUrl, // Add the product image
+                                            quantity
+                                        });
+                                    }
+
+                                    // Save the updated cart back to localStorage
+                                    localStorage.setItem("cart", JSON.stringify(cart));
+                                    alert("Item added to cart!");
+                                }
                             });
                         } else {
                             alert("Invalid quantity or out of stock!");
@@ -62,5 +135,6 @@
             });
         }
     </script>
+    <script src="../scripts/main.js"></script>
 </body>
 </html>
