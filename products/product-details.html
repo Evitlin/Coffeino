@@ -13,6 +13,7 @@
     
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
 </head>
 <body style="background-color:#D0D9DA;">
     <div id="header-placeholder"></div>
@@ -52,6 +53,7 @@
         };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
+        const auth = firebase.auth();
 
         // Get product ID from URL
         const params = new URLSearchParams(window.location.search);
@@ -70,12 +72,56 @@
                     // Add to Cart functionality
                     document.getElementById("add-to-cart").addEventListener("click", () => {
                         const quantity = parseInt(document.getElementById("quantity").value);
+
                         if (quantity > 0 && quantity <= data.stock) {
-                            db.collection("products").doc(productId).update({
-                                stock: data.stock - quantity  // Reduce stock by the specified quantity
-                            }).then(() => {
-                                alert("Added to cart!");
-                                location.reload(); // Refresh to update stock count
+                            firebase.auth().onAuthStateChanged(user => {
+                                if (user) {
+                                    // User is logged in, save to Firestore
+                                    const cartItem = {
+                                        productId,
+                                        productName: data.title,
+                                        productPrice: data.price,
+                                        productImage: data.imageUrl, // Add the product image
+                                        quantity
+                                    };
+
+                                    db.collection("users").doc(user.uid).collection("cart").doc(productId).set(cartItem, { merge: true })
+                                        .then(() => {
+                                            alert("Item added to cart!");
+                                            // Optionally, update stock in Firestore
+                                            db.collection("products").doc(productId).update({
+                                                stock: data.stock - quantity
+                                            });
+                                            location.reload(); // Refresh to update stock count
+                                        })
+                                        .catch(error => {
+                                            console.error("Error adding to cart:", error);
+                                        });
+                                } else {
+                                    // User is not logged in, save to localStorage
+                                    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+                                    // Check if the product is already in the cart
+                                    const existingProductIndex = cart.findIndex(item => item.productId === productId);
+
+                                    if (existingProductIndex !== -1) {
+                                        // Update the quantity of the existing product
+                                        cart[existingProductIndex].quantity += quantity;
+                                    } else {
+                                        // Add the new product to the cart
+                                        cart.push({
+                                            productId,
+                                            productName: data.title,
+                                            productPrice: data.price,
+                                            productImage: data.imageUrl, // Add the product image
+                                            quantity
+                                        });
+                                    }
+
+                                    // Save the updated cart back to localStorage
+                                    localStorage.setItem("cart", JSON.stringify(cart));
+                                    alert("Item added to cart!");
+                                }
                             });
                         } else {
                             alert("Invalid quantity or out of stock!");

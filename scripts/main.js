@@ -1,7 +1,6 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     console.log("DOM fully loaded and parsed");
 
-   // Absolute path to header.html (should work no matter where the script is loaded from)
     const headerPath = '/main_page/header.html';
 
     fetch(headerPath)
@@ -9,10 +8,14 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             document.getElementById('header-placeholder').innerHTML = data;
             initializeEventListeners();
-            loadProductLinksScript();
-            loadCartDropdown();
+            return loadFirebaseInit(); // Ensure Firebase is initialized first
         })
-        .catch(error => console.error('Error loading header:', error));
+        .then(() => {
+            console.log("Firebase initialized");
+            loadProductLinksScript(); // Load product_links.js
+            loadCartDropdown(); // Load empthy.js
+        })
+        .catch(error => console.error("Error initializing Firebase:", error));
 });
 
 function initializeEventListeners() {
@@ -76,4 +79,45 @@ function loadCartDropdown() {
         console.error("Error loading empthy.js script");
     };
     document.body.appendChild(script);
+}
+
+function loadFirebaseInit() {
+    return new Promise((resolve, reject) => {
+        if (typeof firebase === "undefined" || !firebase.apps.length) {
+            const firebaseAppScript = document.createElement('script');
+            firebaseAppScript.src = "https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js";
+            firebaseAppScript.onload = () => {
+                const firebaseAuthScript = document.createElement('script');
+                firebaseAuthScript.src = "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js";
+                firebaseAuthScript.onload = () => {
+                    const firebaseFirestoreScript = document.createElement('script');
+                    firebaseFirestoreScript.src = "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js";
+                    firebaseFirestoreScript.onload = () => {
+                        const firebaseConfig = {
+                            apiKey: "AIzaSyCgJ-IOeq76OCzmlUbGntMKmn550enir68",
+                            authDomain: "coffeino-3157b.firebaseapp.com",
+                            projectId: "coffeino-3157b",
+                            storageBucket: "coffeino-3157b.appspot.com",
+                            messagingSenderId: "739495575410",
+                            appId: "1:739495575410:web:07e74233accd8d6443a7eb"
+                        };
+                        if (!firebase.apps.length) {
+                            firebase.initializeApp(firebaseConfig);
+                            window.db = firebase.firestore(); // Make Firestore globally accessible
+                        }
+                        resolve();
+                    };
+                    firebaseFirestoreScript.onerror = reject;
+                    document.head.appendChild(firebaseFirestoreScript);
+                };
+                firebaseAuthScript.onerror = reject;
+                document.head.appendChild(firebaseAuthScript);
+            };
+            firebaseAppScript.onerror = reject;
+            document.head.appendChild(firebaseAppScript);
+        } else {
+            console.warn("Firebase is already initialized.");
+            resolve();
+        }
+    });
 }
