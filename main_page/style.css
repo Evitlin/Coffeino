@@ -12,6 +12,11 @@
 body{
     height: 100vh;
     background-color: rgba(255, 255, 255, 1);
+    display: flex;
+    flex-direction: column;
+}
+main {
+    flex: 1;
 }
 header{
     position:fixed;
@@ -310,6 +315,47 @@ header{
         color: rgb(75, 128, 94);
     }
 }
+
+/* V======== Footer style css =========V */
+
+footer {
+    background-color: #727775;
+    color: #dddcdc;
+    padding: 20px 0;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.footer-links {
+    display: block;
+    align-items: right;
+}
+
+.footer-links a {
+    color: #dddcdc;
+    text-decoration: none;
+    margin-right: 10px;
+    font-size: 14px;
+    transition: color 0.3s ease-in-out;
+}
+
+.footer-links a:hover {
+    color: #FF3B30;
+}
+
+.footer-container a {
+    color: #dddcdc;
+    text-decoration: none;
+    position:sticky;
+}
+
+/* Λ======== Footer style end =========Λ */
+
  /* About Section */
 .about {
     display: flex;
