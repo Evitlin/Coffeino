@@ -1,8 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
     console.log("DOM fully loaded and parsed");
 
+   // Absolute path to header.html and footer.html
     const headerPath = '/main_page/header.html';
+    const footerPath = '/main_page/footer.html';
 
+    // Loads header 
     fetch(headerPath)
         .then(response => response.text())
         .then(data => {
@@ -15,7 +18,15 @@ document.addEventListener('DOMContentLoaded', function () {
             loadProductLinksScript(); // Load product_links.js
             loadCartDropdown(); // Load empthy.js
         })
-        .catch(error => console.error("Error initializing Firebase:", error));
+        .catch(error => console.error('Error loading header:', error));
+
+    // Loads footer
+    fetch(footerPath)
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('footer-placeholder').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading footer:', error));
 });
 
 function initializeEventListeners() {
