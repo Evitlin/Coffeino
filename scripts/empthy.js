@@ -57,8 +57,9 @@ firebase.auth().onAuthStateChanged(user => {
                             <img src="${itemImage}" alt="${item.productName}" class="mini-image">
                             <div class="cart-item-details">
                                 <p>${item.productName}</p>
-                                <p>Quantity: ${item.quantity}</p>
+                                 <input type="number" value="${item.quantity}" min="1" class="quantity-input" data-id="${doc.id}" style="width: 50px;">
                                 <p>${itemTotal.toFixed(2)}€</p>
+                                <button class="remove-item" data-id="${doc.id}">🗑️</button>
                             </div>
                         </div>
                     `;
@@ -69,6 +70,41 @@ firebase.auth().onAuthStateChanged(user => {
                         <strong>Total: ${total.toFixed(2)}€</strong>
                     </div>
                 `;
+
+                document.querySelectorAll(".remove-item").forEach(button => {
+                    button.addEventListener("click", (event) => {
+                        const productId = event.target.getAttribute("data-id");
+                        db.collection("users").doc(user.uid).collection("cart").doc(productId).delete()
+                            .then(() => {
+                                alert("Item removed from cart!");
+                                location.reload(); // Refresh the cart
+                            })
+                            .catch(error => {
+                                console.error("Error removing item:", error);
+                            });
+                    });
+                });
+
+                // Add event listeners to quantity inputs
+                document.querySelectorAll(".quantity-input").forEach(input => {
+                    input.addEventListener("change", (event) => {
+                        const productId = event.target.getAttribute("data-id");
+                        const newQuantity = parseInt(event.target.value);
+                        if (newQuantity > 0) {
+                            db.collection("users").doc(user.uid).collection("cart").doc(productId).update({
+                                quantity: newQuantity
+                            }).then(() => {
+                                alert("Quantity updated!");
+                                location.reload(); // Refresh the cart
+                            }).catch(error => {
+                                console.error("Error updating quantity:", error);
+                            });
+                        } else {
+                            alert("Invalid quantity!");
+                        }
+                    });
+                });
+
             })
             .catch(error => {
                 console.error("Error fetching cart data:", error);

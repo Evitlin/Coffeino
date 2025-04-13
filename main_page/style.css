@@ -424,7 +424,92 @@ footer {
     
   
 }
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .about {
+        flex-direction: column;
+        padding: 30px;
+        gap: 20px;
+    }
 
+    .image-container {
+        width: 80%;
+        height: auto;
+        margin-top: 50px;
+    }
+
+    .text-container {
+        width: 80%;
+        margin-top: 50px;
+        padding: 30px;
+    }
+
+    .text-container p {
+        width: 100%;
+        height: auto;
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 768px) {
+    .about {
+        padding: 20px;
+    }
+
+    .image-container {
+        width: 100%;
+        margin-top: 30px;
+    }
+
+    .text-container {
+        width: 100%;
+        margin-top: 30px;
+        padding: 20px;
+    }
+
+    .text-container h3 {
+        font-size: 24px;
+    }
+
+    .text-container h1 {
+        font-size: 28px;
+    }
+
+    .text-container p {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .about {
+        padding: 15px;
+        gap: 10px;
+    }
+
+    .image-container {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .text-container {
+        width: 100%;
+        margin-top: 20px;
+        padding: 15px;
+    }
+
+    .text-container h3 {
+        font-size: 20px;
+    }
+
+    .text-container h1 {
+        font-size: 24px;
+    }
+
+    .text-container p {
+        font-size: 18px;
+    }
+}
+/*Contacts */
 .contact-section {
     display: flex;
     justify-content: center;
@@ -476,3 +561,131 @@ footer {
     bottom: 20px;
     right: 20px;
 }
+/* Responsive Design for Contact Section */
+
+@media (max-width: 1200px) {
+    .contact-card {
+        width: 90%;
+        height: auto;
+        padding: 25px;
+        margin-top: 80px;
+    }
+
+    .coffee-icon {
+        width: 300px;
+        height: auto;
+        position: static;
+        display: block;
+        margin: 30px auto 0 auto;
+    }
+
+    .contact-item {
+        padding-left: 20px;
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-card h2 {
+        font-size: 26px;
+        margin-bottom: 30px;
+    }
+
+    .contact-item {
+        font-size: 20px;
+        gap: 8px;
+        padding-left: 15px;
+        margin-bottom: 15px;
+    }
+
+    .contact-item img {
+        width: 25px;
+        height: 25px;
+    }
+
+    .coffee-icon {
+        width: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-card {
+        padding: 20px;
+        margin-top: 50px;
+    }
+
+    .contact-card h2 {
+        font-size: 22px;
+    }
+
+    .contact-item {
+        font-size: 18px;
+        padding-left: 10px;
+        margin-bottom: 10px;
+    }
+
+    .contact-item img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .coffee-icon {
+        width: 200px;
+    }
+}
+
+/* Cart with produts */
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.remove-item {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.quantity-input {
+    width: 50px;
+    padding: 5px;
+}
+
+.mini-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.cart-item-details {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    flex: 1;
+}
+
+/* Style for product name: first <p> in .cart-item-details */
+.cart-item-details p:nth-of-type(1) {
+    font-size: 1rem;
+    color: #333;
+    min-width: 120px;
+}
+
+/* Style for price: second <p> in .cart-item-details */
+.cart-item-details p:nth-of-type(2) {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #003865;
+    margin-left: auto; /* pushes price to far right */
+}
+
+
