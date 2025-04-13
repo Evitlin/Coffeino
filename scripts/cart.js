@@ -67,6 +67,7 @@ firebase.auth().onAuthStateChanged(user => {
                 });
 
                 // Update cart summary
+                
                 const packingFeeValue = 0.50;
                 const grandTotal = total + packingFeeValue;
                 productCost.textContent = total.toFixed(2);
