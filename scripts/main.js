@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const headerPath = '/main_page/header.html';
     const footerPath = '/main_page/footer.html';
 
+
     // Loads header 
     fetch(headerPath)
         .then(response => response.text())

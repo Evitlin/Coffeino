@@ -7,6 +7,7 @@
     
     <link rel="stylesheet" href="/cart/cart_big.css">
     <link rel="stylesheet" href="/main_page/style.css">
+    <link rel="stylesheet" href="/cart/cart_withP.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 </head>
@@ -25,18 +26,22 @@
                 </div>
             </div>
         </div>
+        <div class="cart-summary-box">
         <h3 id="cart-summary" style="display: none;">
             Cost of the products: <span id="product-cost">0</span>€<br>
             Packing fee: <span id="packing-fee">0.50</span>€<br>
             <strong>Total: <span id="total-cost">0</span>€</strong>
         </h3>
-        <button id="checkout-button" style="display: none;">Checkout</button>
+        <a href="/cart/Payment.html" id="checkout-button" style="display: none;">Checkout</a>
+        </div>
     </main>
 
     <!-- Include Firebase Libraries -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+
+
 
     <!-- Initialize Firebase -->
     <script>

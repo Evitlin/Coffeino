@@ -52,23 +52,22 @@ firebase.auth().onAuthStateChanged(user => {
                     const cartItem = document.createElement("div");
                     cartItem.classList.add("cart-item-row");
                     cartItem.innerHTML = `
-                        <div class="cart-item-row">
-                            <img src="${item.productImage}" alt="${item.productName}" class="product-image" style="width: 100px; height: 100px;">
-                            <div class="cart-item-details">
-                                <h3>${item.productName}</h3>
-                                <p>Price: ${item.productPrice}€</p>
-                                <p>Total: <span class="item-total">${itemTotal.toFixed(2)}€</span></p>
-                            </div>
-                            <div class="cart-item-actions">
-                                <input type="number" value="${item.quantity}" min="1" class="quantity-input" data-id="${doc.id}" style="width: 50px;">
-                                <button class="remove-item" data-id="${doc.id}">🗑️</button>
-                            </div>
+                         <img src="${item.productImage}" alt="${item.productName}" class="product-image" style="width: 100px; height: 100px;">
+                        <div class="cart-item-details">
+                            <h3>${item.productName}</h3>
+                            <p>Price: ${item.productPrice}€</p>
+                            <p>Total: <span class="item-total">${itemTotal.toFixed(2)}€</span></p>
+                        </div>
+                        <div class="cart-item-actions">
+                            <input type="number" value="${item.quantity}" min="1" class="quantity-input" data-id="${doc.id}" style="width: 50px;">
+                            <button class="remove-item" data-id="${doc.id}">🗑️</button>
                         </div>
                     `;
                     cartContainer.appendChild(cartItem);
                 });
 
                 // Update cart summary
+                
                 const packingFeeValue = 0.50;
                 const grandTotal = total + packingFeeValue;
                 productCost.textContent = total.toFixed(2);
