@@ -73,7 +73,6 @@ main {
 
 .rectangle-A {
 	width: 90%;
-    min-height: 400px;
 	height: auto;
 	padding: 8px 45px 45px 45px;
 	opacity: 80%;
@@ -415,6 +414,40 @@ a.button-link {
 
 .save-button:hover {
     background-color: #002a5c;
+}
+
+/* Change password */
+
+.password-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-field input {
+    flex: 1;
+    padding-right: 40px; /* Add space for the eye icon */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    color: #003865;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle-password:hover {
+    color: #002a5c;
+}
+
+.material-symbols-outlined {
+    font-size: 1.5rem;
 }
 
 /* Forgot Password Link */
