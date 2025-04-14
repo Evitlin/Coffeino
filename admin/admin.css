@@ -314,4 +314,57 @@ header{
         font-size: 1.2rem;
         color: rgb(75, 128, 94);
     }
+    body {
+    font-family: 'Fredoka', sans-serif;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#orders-table th, #orders-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+#orders-table th {
+    background-color: #f4f4f4;
+}
+
+#orders-table td {
+    background-color: #fff;
+}
+
+button {
+    padding: 5px 10px;
+    margin: 5px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+button:active {
+    background-color: #387c39;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
 }

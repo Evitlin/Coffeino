@@ -9,15 +9,137 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
-    <script defer src="/order.js"></script>
-</head>
-<body style="background-color:#D0D9DA;">
-    <div id="header-placeholder"></div>
-<body>
-    <h1>Order Management</h1>
-    <div id="orders-list"></div>
+    <style>
+        body {
+            font-family: 'Fredoka', sans-serif;
+            background-color: #D0D9DA;
+            padding: 1rem 2rem;
+        }
 
-<link rel="stylesheet" href="/products/product_links.css">
+        h1 {
+            color: #003865;
+            margin-top:100px ;
+        }
+
+        .filters {
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1rem;
+        }
+
+        select, input {
+            margin-top: 0.5rem;
+            padding: 0.4rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        .orders-section {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .order-item {
+            border-bottom: 1px solid #ddd;
+            padding: 1rem 0;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+        }
+
+        .order-details {
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .order-status {
+            color: red;
+            font-weight: bold;
+        }
+
+        .tag {
+            background-color: #eef;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <h1>Order Management</h1>
+
+    <div class="filters">
+        <label for="status-filter">All Orders</label>
+        <select id="status-filter">
+            <option>All Orders</option>
+            <option>Awaiting Confirmation</option>
+            <option>Awaiting Payment</option>
+            <option>Awaiting Payment or Postponed</option>
+            <option>Unfinished, Paid</option>
+            <option>Preparing Orders</option>
+            <option>Ready for Shipment</option>
+            <option>Completed Orders</option>
+            <option>All Paid Orders</option>
+            <option>All Cancelled Orders</option>
+        </select>
+
+        <label for="sort-order">Sort By</label>
+        <select id="sort-order">
+            <option>Newest First</option>
+            <option>Oldest First</option>
+            <option>Recently Updated</option>
+            <option>Least Recently Updated</option>
+        </select>
+    </div>
+
+    <div class="orders-section" id="orders-list">
+        <!-- Example order -->
+        <div class="order-item">
+            <div class="order-header">
+                <div><a href="#">ORD 248</a> - <span>77.25€</span></div>
+                <div>2022-06-07 15:52</div>
+            </div>
+            <div class="order-details">
+                <p><strong>Test Test</strong><br>
+                +37068686864<br>
+                test@none.lt<br>
+                Verkių g. 123, Vilnius, <br>
+                LT-08405 Vilnius, Lithuania</p>
+
+                <p><strong>Payment Method:</strong> Bank Transfer<br>
+                   <strong>Delivery Method:</strong> DPD Pickup Point (Allparcels.com - DomusPro Locker, Bielianų g. 1)</p>
+
+                <p><strong>Status:</strong> <span class="order-status">Cancelled</span></p>
+
+                <p>
+                    <strong>Documents:</strong><br>
+                    Invoice: <a href="#">ELP 1001</a> |
+                    Shipment: <a href="#">SHP 4</a> |
+                    Package: <a href="#">PK 9</a> |
+                    Payment Request: <a href="#">PR 17</a> |
+                    Prepayment Invoice: <a href="#">PRE 241</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Repeat .order-item for more orders -->
+    </div>
+
+    <link rel="stylesheet" href="/products/product_links.css">
     <script src="/scripts/admin.js"></script>
 </body>
 </html>
