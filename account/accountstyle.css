@@ -334,6 +334,15 @@ a.button-link {
     text-decoration: underline;
 }
 
+.table-container {
+    width: 100%; /* Ensure the container takes the full width of its parent */
+    overflow-x: auto; /* Add horizontal scrolling if content overflows */
+    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on mobile devices */
+    border: 1px solid #ccc; /* Optional: Add a border around the table container */
+    border-radius: 5px;
+
+}
+
 .orders-table {
     width: 100%;
     border-collapse: collapse;
