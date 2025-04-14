@@ -7,6 +7,9 @@ body {
     margin: 0;
     padding: 0;
 }
+html, body {
+    overflow-x: hidden;
+}
 
 /* ==========================
    HEADER & PAGE TITLE
@@ -60,6 +63,7 @@ aside#filters {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
 }
 
 aside#filters h2 {
@@ -223,7 +227,7 @@ ul.subcategories {
 /* ==========================
    RESPONSIVE DESIGN
 ========================== */
-@media (max-width: 900px) {
+/*@media (max-width: 900px) {
     .side-box {
         flex-direction: column;
         align-items: center;
@@ -286,4 +290,84 @@ ul.subcategories {
         color: saddlebrown;
     }
     
+}*/
+/* ==========================
+   RESPONSIVE DESIGN
+========================== */
+@media (max-width: 1200px) {
+    #products-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 produktai per eilutę */
+        gap: 30px;
+    }
+
+    .side-box {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+    }
+
+    aside#filters {
+        width: 90%;
+    }
 }
+
+@media (max-width: 768px) {
+    #products-grid {
+        grid-template-columns: repeat(1, 1fr); /* 1 produktas per eilutę */
+    }
+
+    .name h1 {
+        font-size: 36px;
+        text-align: center;
+        margin-left: 0;
+    }
+
+    .sort {
+        font-size: 1rem;
+    }
+
+    .sort select {
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    .product-card {
+        border-radius: 20px;
+    }
+
+    .dropdown-menu {
+        max-width: 95%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .dropdown-row {
+        flex-direction: column;
+    }
+
+    .dropdown-section {
+        padding: 10px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-card h3 {
+        font-size: 1rem;
+    }
+
+    .product-card p {
+        font-size: 0.9rem;
+    }
+
+    .product-card button {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+
+    aside#filters h2,
+    #filter-by-category,
+    #filter-by-price label {
+        font-size: 1rem;
+    }
+}
+
