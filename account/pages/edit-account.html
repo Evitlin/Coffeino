@@ -23,14 +23,28 @@
     <h1 class="section-title">Change Password</h1>
     <form class="edit-form">
         <label for="current-password">Enter current password</label>
-        <input type="password" id="current-password" name="current-password" placeholder="Enter current password">
+        <div class="password-field">
+            <input type="password" id="current-password" name="current-password" placeholder="Enter current password">
+            <button type="button" class="toggle-password" data-target="current-password">
+                <span class="material-symbols-outlined">visibility</span>
+            </button>
+        </div>
 
         <label for="new-password">Enter new password</label>
-        <input type="password" id="new-password" name="new-password" placeholder="Enter new password">
+        <div class="password-field">
+            <input type="password" id="new-password" name="new-password" placeholder="Enter new password">
+            <button type="button" class="toggle-password" data-target="new-password">
+                <span class="material-symbols-outlined">visibility</span>
+            </button>
+        </div>
 
         <label for="confirm-password">Re-enter password</label>
-        <input type="password" id="confirm-password" name="confirm-password" placeholder="Re-enter password">
-
+        <div class="password-field">
+            <input type="password" id="confirm-password" name="confirm-password" placeholder="Re-enter password">
+            <button type="button" class="toggle-password" data-target="confirm-password">
+                <span class="material-symbols-outlined">visibility</span>
+            </button>
+        </div>
         <a href="#" class="forgot-password">Forgot password?</a>
         <button type="submit" class="save-button">SAVE CHANGES</button>
     </form>
