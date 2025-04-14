@@ -226,7 +226,7 @@ a.button-link {
     border-top: 1px solid #ccc;
     margin: 20px 0;
 }
-
+/* ============== MY PROFILE =============== */
 /* User Info Section */
 .user-info {
     display: flex;
@@ -367,7 +367,89 @@ a.button-link {
     text-decoration: underline;
 }
 
-/* ===================MOBILE OPT======================= */
+/* ================== EDIT ACCOUNT ====================== */
+.section-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.horizontal-divider {
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+/* Form Styles */
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.edit-form label {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.edit-form input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.save-button {
+    background-color: #003865;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    max-width: 250px;
+}
+
+.save-button:hover {
+    background-color: #002a5c;
+}
+
+/* Forgot Password Link */
+.forgot-password {
+    font-size: 0.9rem;
+    color: #003865;
+    text-decoration: none;
+
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* Delete Account Button */
+.delete-account-button {
+    background-color: transparent;
+    color: #FF3B30;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px;
+    border: 2px solid #FF3B30;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    max-width: 200px;
+    margin: 20px;
+}
+
+.delete-account-button:hover {
+    background-color: #FF3B30;
+    color: #fff;
+}
+
+/* =================== MOBILE OPT ======================= */
 /* Default styles for the side menu (hidden by default) */
 .side-menu {
     position: fixed;
