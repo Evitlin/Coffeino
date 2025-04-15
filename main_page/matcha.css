@@ -11,7 +11,6 @@
     padding: 50px 100px 50px 100px;
     color: #FFFFFF;
     display: flex;
-    flex-direction: row;
     width: 100%;
     box-shadow: 50px 12px 20px rgba(0, 0, 0, 0.3);
     }
@@ -63,4 +62,60 @@
         max-width: 400px;
         min-width: 300px;
         border-radius: 20px;
+    }
+    @media screen and (max-width:900px){
+        .blue-box {
+            padding: 30px;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        .blue-box h3 {
+            font-size: 1.8rem; /* Reduce the heading size for smaller screens */
+            padding-top: 20px;
+            text-align: center;
+        }
+    
+        .blue-box p {
+            font-size: 1.2rem;
+            text-align: center;
+        }
+    
+        .image-box {
+            max-width: 100%;
+            min-width: 400px; 
+            order: -1;
+            justify-content: center;
+            display: flex;
+        }
+        .image-box2 { 
+            display: none;
+        }
+    
+        .blue-box button {
+        padding: 14px 30px; /* Adjust padding for mobile */
+        margin-top: 20px;
+        background-color: #FFFFFF;
+        color: #003865;
+        border-radius: 15px;
+        border: none;
+        text-align: center; /* Ensure text is centered inside the button */
+        max-width: 200px; /* Ensure the button doesn't stretch too wide */
+        width: 100%; /* Make button flexible and take available space */
+        box-sizing: border-box;
+        }
+    
+        .image-box img {
+            max-width: 80%; /* Make image fit better on small screens */
+            min-width: 100px;
+        }
+        .text-content {
+            display: flex; /* Enable flexbox */
+            flex-direction: column; /* Stack items vertically */
+            align-items: center; /* Horizontally center content */
+            text-align: center; /* Make sure text is centered */
+            justify-content: center; /* Center content vertically */
+            width: 100%;
+        }
+        
     }
