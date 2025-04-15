@@ -227,7 +227,7 @@ ul.subcategories {
 /* ==========================
    RESPONSIVE DESIGN
 ========================== */
-/*@media (max-width: 900px) {
+@media (max-width: 900px) {
     .side-box {
         flex-direction: column;
         align-items: center;
@@ -290,7 +290,7 @@ ul.subcategories {
         color: saddlebrown;
     }
     
-}*/
+}
 /* ==========================
    RESPONSIVE DESIGN
 ========================== */
