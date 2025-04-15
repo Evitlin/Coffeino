@@ -2,9 +2,8 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log("DOM fully loaded and parsed");
 
    // Absolute path to header.html and footer.html
-    const headerPath = '/main_page/header.html';
+    const headerPath = '/admin/admin-header.html';
     const footerPath = '/main_page/footer.html';
-
 
     // Loads header 
     fetch(headerPath)

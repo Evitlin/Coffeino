@@ -1,24 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sales Reports</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+    <style>
+        body {
+            font-family: 'Fredoka', sans-serif;
+            margin: 0;
+            padding: 2rem;
+            background-color: #f4f7fc;
+            color: #003865;
+        }
+
+        h1 {
+            margin-top: 100px;
+        }
+
+        .filters {
+            margin-top: 20px;
+           
+        }
+
+        .filters label {
+            margin-top: 20px;
+            margin-right: 1rem;
+        }
+
+        .dashboard {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            flex: 1 1 200px;
+            background-color: white;
+            border: 2px solid #d5e3f3;
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+        }
+
+        .card span {
+            display: block;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-top: 0.5rem;
+        }
+
+        .empty-data {
+            text-align: center;
+            margin-top: 2rem;
+            font-weight: 500;
+            font-size: 1.1rem;
+            color: #777;
+        }
+
+        img#illustration {
+            width: 500px;
+            margin: 2rem auto 1rem;
+            display: block;
+        }
+
+        input[type="date"] {
+            padding: 0.4rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 0.5rem 1rem;
+            margin-left: 1rem;
+            border: none;
+            background-color: #4a90e2;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #3a7bd5;
+        }
+    </style>
 </head>
 <body>
+    <div id="header-placeholder"></div>
     <h1>Sales Reports</h1>
-    <p>Total Sales: <span id="total-sales">0</span>€</p>
+
+    <div class="filters">
+        <label>Start Date: <input type="date" id="start-date"></label>
+        <label>End Date: <input type="date" id="end-date"></label>
+        <button onclick="loadStats()">Show</button>
+    </div>
+
+    <div><strong></strong> <span id="date-range">Please select a date range</span></div>
+
+    <div class="dashboard">
+        <div class="card">
+            Number of Orders
+            <span id="order-count">0</span>
+        </div>
+        <div class="card">
+            Order Value
+            <span id="order-value">0€</span>
+        </div>
+        <div class="card">
+            Avg. Order Value / Day
+            <span id="avg-order-value">0€</span>
+        </div>
+        <div class="card">
+            Avg. Items / Day
+            <span id="avg-items">0 pcs</span>
+        </div>
+        <div class="card">
+            Top Products
+            <span id="top-products">0 pcs</span>
+        </div>
+    </div>
+
+    
+    <img id="illustration" src="/admin/noData.png" alt="No data illustration" />
+
+    <div class="empty-data" id="no-data-message">
+        No statistics available for the selected period
+    </div>
+
+    <!-- Firebase (adjust version if needed) -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
 
     <script>
-        const firebaseConfig = { /* Your Firebase Config */ };
+        const firebaseConfig = {
+            // Your Firebase config here
+        };
+
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        db.collection("orders").get().then((querySnapshot) => {
-            let total = 0;
-            querySnapshot.forEach((doc) => {
-                total += doc.data().totalPrice;
-            });
-            document.getElementById("total-sales").textContent = total;
-        });
+        function loadStats() {
+            const startDate = document.getElementById('start-date').value;
+            const endDate = document.getElementById('end-date').value;
+            const rangeDisplay = document.getElementById('date-range');
+            const noDataMsg = document.getElementById('no-data-message');
+
+            if (!startDate || !endDate) {
+                alert("Please select both start and end dates.");
+                return;
+            }
+
+            rangeDisplay.textContent = `${startDate} to ${endDate}`;
+
+            // Reset UI
+            document.getElementById("order-count").textContent = "0";
+            document.getElementById("order-value").textContent = "0€";
+            document.getElementById("avg-order-value").textContent = "0€";
+            document.getElementById("avg-items").textContent = "0 pcs";
+            document.getElementById("top-products").textContent = "0 pcs";
+
+            db.collection("orders")
+                .where("date", ">=", new Date(startDate))
+                .where("date", "<=", new Date(endDate))
+                .get()
+                .then((querySnapshot) => {
+                    let total = 0;
+                    let count = 0;
+                    let totalItems = 0;
+
+                    querySnapshot.forEach((doc) => {
+                        const data = doc.data();
+                        total += data.totalPrice;
+                        totalItems += data.totalItems || 0;
+                        count++;
+                    });
+
+                    if (count === 0) {
+                        noDataMsg.style.display = "block";
+                        return;
+                    } else {
+                        noDataMsg.style.display = "none";
+                    }
+
+                    document.getElementById("order-count").textContent = count;
+                    document.getElementById("order-value").textContent = total.toFixed(2) + "€";
+                    document.getElementById("avg-order-value").textContent = (total / count).toFixed(2) + "€";
+                    document.getElementById("avg-items").textContent = (totalItems / count).toFixed(1) + " pcs";
+                    // You can add top product logic here too
+                });
+        }
     </script>
+    <link rel="stylesheet" href="/products/product_links.css">
+    <script src="/scripts/admin.js"></script>
 </body>
 </html>
