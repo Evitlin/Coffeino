@@ -267,7 +267,11 @@ header{
         backdrop-filter: blur(3px);
         z-index: 1;
     }
-
+    .navbar .menu-links li {
+        position: relative;
+      }
+      .navbar .menu-links li:nth-child(3) { order: 2; } /* Products */
+    
     .navbar .menu-links {
         position: fixed;
         left: -260px;
@@ -279,10 +283,13 @@ header{
         padding: 70px 40px 0;
         transition: left 0.15s ease;
         z-index: 101;
+        display: flex;
     }
+    
     header.show-mobile-menu .navbar .menu-links{
         left: 0;
     }
+    /*other*/
     .navbar a{
         color:#003865;
     }
