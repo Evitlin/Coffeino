@@ -76,18 +76,15 @@
         const sortBySelect = document.getElementById("sortBy");
 
         // Predefined categories (can be fetched from Firestore if dynamic)
-        const categories = ["Coffee", "Tea", "Accessories"];
-
-        // Variable to store the selected category from the URL
-        let selectedCategoryFromURL = null;
+        const categories = ["Coffee", "Tea", "Accessories", "Energy Drinks"];
 
         // Populate categories
         categories.forEach(category => {
-            const label = document.createElement("label");
-            label.innerHTML = `<input type="checkbox" value="${category}"> ${category}`;
-            const wrapper = document.createElement("div");
-            categoryContainer.appendChild(label);
-            categoryContainer.appendChild(wrapper);
+        const label = document.createElement("label");
+        label.innerHTML = `<input type="checkbox" value="${category}"> ${category}`;
+        const wrapper = document.createElement("div");
+        categoryContainer.appendChild(label);
+        categoryContainer.appendChild(wrapper);
         });
 
         // Update price label when slider moves
@@ -173,5 +170,6 @@
 </script>
 
     <script src="../scripts/main.js"></script>
+    <div id="footer-placeholder"></div> 
 </body>
 </html>
