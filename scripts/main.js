@@ -139,7 +139,6 @@ function loadFirebaseInit() {
                             firebase.initializeApp(firebaseConfig);
                             window.db = firebase.firestore(); // Make Firestore globally accessible
                             window.auth = firebase.auth(); // Make Auth globally accessible
-                            console.log("Firebase initialized successfully.");
                         }
                         // Dispatch the firebase-ready event
                         window.dispatchEvent(new Event('firebase-ready'));
