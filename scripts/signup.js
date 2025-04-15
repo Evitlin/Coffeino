@@ -1,17 +1,3 @@
-// Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyCgJ-IOeq76OCzmlUbGntMKmn550enir68",
-    authDomain: "coffeino-3157b.firebaseapp.com",
-    projectId: "coffeino-3157b",
-    storageBucket: "coffeino-3157b.appspot.com",
-    messagingSenderId: "739495575410",
-    appId: "1:739495575410:web:07e74233accd8d6443a7eb"
-};
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-
-console.log("Firebase initialized:", firebase.apps.length > 0); // Should log true if Firebase is initialized
-
 // Handle Signup
 document.querySelector(".button-1").addEventListener("click", (event) => {
     event.preventDefault(); // Prevent default behavior

@@ -32,8 +32,15 @@ document.addEventListener('DOMContentLoaded', function () {
         const confirmLogout = confirm('Are you sure you want to log out?'); // Show confirmation dialog
         if (confirmLogout) {
 
-            // ! Insert logout logic here !
-            // (Firebase auth sign out)
+            auth.signOut() // Firebase sign-out
+            .then(() => {
+                alert('You have been logged out.');
+                window.location.href = '/login.html'; // Redirect to login page
+            })
+            .catch(error => {
+                console.error('Error during logout:', error);
+                alert('Failed to log out. Please try again.');
+            });
             window.location.href = '/account/pages/logout.html'; // temp
 
         } else {
