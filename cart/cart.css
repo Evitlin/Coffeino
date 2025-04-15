@@ -1,6 +1,7 @@
 .cart-container {
     position: relative;
-    display: inline-block; 
+    display: inline-block;
+
 }
 
 .cart-dropdown {
@@ -18,6 +19,7 @@
     max-height: 600px; /* Maximum height of the dropdown */
     overflow-y: auto;
 }
+
 
 /* Dropdown menu <p> paragraph text*/
 .cart-dropdown p {

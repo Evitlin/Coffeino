@@ -3,12 +3,47 @@
     const offset = 20;
 
     
-    function updateDropdownPosition() {
-        const rect = productsLink.getBoundingClientRect();
-        dropdownMenu.style.top = `${rect.bottom + offset}px`;
-        dropdownMenu.style.left = `${rect.left}px`;
-        dropdownMenu.style.right = `${window.innerWidth - rect.right}px`;
+    function updateDropdownPosition() { 
+        if (window.innerWidth > 900) {
+            const rect = productsLink.getBoundingClientRect();
+            dropdownMenu.style.top = `${rect.bottom + offset}px`;
+            dropdownMenu.style.left = `${rect.left}px`;
+            dropdownMenu.style.right = `${window.innerWidth - rect.right}px`;
+        } else {
+            dropdownMenu.style.position = "relative";
+            dropdownMenu.style.top = "15px";
+            dropdownMenu.style.left = "unset";
+            dropdownMenu.style.right = "unset";
+        }
     }
+
+    let isMobile = window.innerWidth <= 900;
+
+    function updateDeviceType() {
+        const nowMobile = window.innerWidth <= 900;
+        if (nowMobile !== isMobile) {
+            isMobile = nowMobile;
+    
+            // Reset dropdown styles and state when switching layouts
+            dropdownMenu.classList.remove("active");
+            dropdownMenu.classList.remove("mobile");
+            dropdownMenu.style.top = "";
+            dropdownMenu.style.left = "";
+            dropdownMenu.style.right = "";
+            dropdownMenu.style.position = ""; // <--- THIS FIXES YOUR ISSUE
+        }
+    
+        // Apply mobile-specific class
+        if (isMobile) {
+            dropdownMenu.classList.add("mobile");
+        }
+    }
+
+// Initial check
+updateDeviceType();
+
+// Watch for resize
+window.addEventListener("resize", updateDeviceType);
 
     productsLink.addEventListener("click", function (event) {
         event.preventDefault();
@@ -31,16 +66,6 @@
             updateDropdownPosition();
         }
     });
-
-    // Adjust dropdown layout based on screen width
-    window.addEventListener("resize", function () {
-        if (window.innerWidth <= 900) {
-            dropdownMenu.classList.add("mobile");
-        } else {
-            dropdownMenu.classList.remove("mobile");
-        }
-    });
-
     // Initial check
     if (window.innerWidth <= 900) {
         dropdownMenu.classList.add("mobile");

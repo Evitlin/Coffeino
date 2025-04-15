@@ -3,6 +3,7 @@
   flex-direction: column;
   gap: 20px;
   padding: 20px;
+  
 }
 
 /* Product row */
@@ -16,6 +17,7 @@
   border-radius: 5px;
   padding: 10px;
   background-color: #fff;
+  
 }
 
 .cart-item {
@@ -79,7 +81,7 @@
 .cart-summary-box {
   min-width: 250px;
   background-color: #ffffff;
-  padding: 20px;
+  padding: 10px;
   border-radius: 15px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   font-family: 'Fredoka', sans-serif;
