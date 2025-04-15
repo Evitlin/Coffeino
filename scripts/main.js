@@ -139,7 +139,10 @@ function loadFirebaseInit() {
                             firebase.initializeApp(firebaseConfig);
                             window.db = firebase.firestore(); // Make Firestore globally accessible
                             window.auth = firebase.auth(); // Make Auth globally accessible
+                            console.log("Firebase initialized successfully.");
                         }
+                        // Dispatch the firebase-ready event
+                        window.dispatchEvent(new Event('firebase-ready'));
                         resolve();
                     };
                     firebaseFirestoreScript.onerror = reject;
@@ -152,6 +155,7 @@ function loadFirebaseInit() {
             document.head.appendChild(firebaseAppScript);
         } else {
             console.warn("Firebase is already initialized.");
+            window.dispatchEvent(new Event('firebase-ready'));
             resolve();
         }
     });
