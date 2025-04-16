@@ -19,7 +19,7 @@ main {
     font-weight: bold;
     font-size: 32px;
     margin: 10px;
-    
+    position: relative;
     
 }
 
@@ -73,12 +73,12 @@ main {
 
 .rectangle-A {
 	width: 90%;
-    min-height: 800px;
 	height: auto;
-	padding: 8px 8px 8px 8px;
+	padding: 8px 45px 45px 45px;
 	opacity: 80%;
 	background: #FFFFFFAB;
     margin: 0 auto;
+    display:block;
 }
 
 .rectangle-B {
@@ -209,7 +209,289 @@ a.button-link {
     margin-right: 5px; 
 }
 
-/* ===================MOBILE OPT======================= */
+.profile-container {
+    font-family: 'Fredoka', sans-serif;
+    color: #003865;
+    width: 100%;
+}
+
+.profile-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.horizontal-divider {
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+}
+/* ============== MY PROFILE =============== */
+/* User Info Section */
+.user-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.user-details {
+    display: flex;
+    align-items: center;
+}
+
+.user-avatar {
+    font-size: 2rem;
+    color: #003865;
+    margin-right: 15px;
+}
+
+.user-text {
+    font-size: 1rem;
+}
+
+.user-name {
+    font-weight: bold;
+    margin: 0;
+}
+
+.user-email {
+    margin: 0;
+    color: #666;
+}
+
+.edit-icon {
+    font-size: 1.5rem;
+    color: #003865;
+    cursor: pointer;
+}
+
+/* Address Section */
+.address-section {
+    margin-bottom: 20px;
+}
+
+#addresses-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+    gap: 20px; /* Space between address cards */
+}
+
+.address-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.add-address {
+    display: inline-block;
+    margin-top: 10px;
+    color: #003865;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.add-address:hover {
+    text-decoration: underline;
+}
+
+.no-addresses {
+    font-size: 1.2rem;
+    color: #666;
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Recent Orders Section */
+.recent-orders {
+    margin-top: 20px;
+}
+
+.orders-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.orders-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.view-all {
+    color: #003865;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.view-all:hover {
+    text-decoration: underline;
+}
+
+.table-container {
+    width: 100%; /* Ensure the container takes the full width of its parent */
+    overflow-x: auto; /* Add horizontal scrolling if content overflows */
+    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on mobile devices */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+}
+
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+}
+
+.orders-table th,
+.orders-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+.orders-table th {
+    font-weight: bold;
+    color: #003865;
+}
+
+.orders-table td {
+    color: #666;
+}
+
+.view-details {
+    color: #003865;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.view-details:hover {
+    text-decoration: underline;
+}
+
+/* ================== EDIT ACCOUNT ====================== */
+.section-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.horizontal-divider {
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+/* Form Styles */
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.edit-form label {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.edit-form input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.save-button {
+    background-color: #003865;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    max-width: 250px;
+}
+
+.save-button:hover {
+    background-color: #002a5c;
+}
+
+/* Change password */
+
+.password-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-field input {
+    flex: 1;
+    padding-right: 40px; /* Add space for the eye icon */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    color: #003865;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle-password:hover {
+    color: #002a5c;
+}
+
+.material-symbols-outlined {
+    font-size: 1.5rem;
+}
+
+/* Forgot Password Link */
+.forgot-password {
+    font-size: 0.9rem;
+    color: #003865;
+    text-decoration: none;
+
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* Delete Account Button */
+.delete-account-button {
+    background-color: transparent;
+    color: #FF3B30;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px;
+    border: 2px solid #FF3B30;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    max-width: 200px;
+    margin: 20px;
+}
+
+.delete-account-button:hover {
+    background-color: #FF3B30;
+    color: #fff;
+}
+
+/* =================== MOBILE OPT ======================= */
 /* Default styles for the side menu (hidden by default) */
 .side-menu {
     position: fixed;

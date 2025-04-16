@@ -1,17 +1,9 @@
 /* terms.css */
 
-body {
-    font-family: 'Fredoka', sans-serif;
-    background-color: #F5F5F5;
-    color: #333;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-}
 
 main {
     max-width: 900px;
-    margin: 50px auto;
+    margin: 150px auto;
     padding: 30px;
     background-color: #fff;
     border-radius: 16px;
@@ -34,15 +26,6 @@ h2 {
 p {
     font-size: 1rem;
     margin-bottom: 15px;
-}
-
-ul {
-    padding-left: 20px;
-    margin-bottom: 20px;
-}
-
-ul li {
-    margin-bottom: 8px;
 }
 
 a {

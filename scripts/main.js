@@ -18,6 +18,26 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log("Firebase initialized");
             loadProductLinksScript(); // Load product_links.js
             loadCartDropdown(); // Load empthy.js
+
+            auth.onAuthStateChanged(user => {
+                console.log("Auth state changed:", user);
+                const accountButton = document.getElementById('login-btn');
+                if (user) {
+                    console.log("User is logged in:", user.email);
+                    // User is logged in
+                    accountButton.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        window.location.href = '/account/my-profile.html';
+                    });
+                } else {
+                    console.log("User is not logged in.");
+                    // User is logged out
+                    accountButton.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        window.location.href = '/login.html'; 
+                    });
+                }
+            });
         })
         .catch(error => console.error('Error loading header:', error));
 
@@ -28,6 +48,8 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('footer-placeholder').innerHTML = data;
         })
         .catch(error => console.error('Error loading footer:', error));
+
+    
 });
 
 function initializeEventListeners() {
@@ -116,7 +138,10 @@ function loadFirebaseInit() {
                         if (!firebase.apps.length) {
                             firebase.initializeApp(firebaseConfig);
                             window.db = firebase.firestore(); // Make Firestore globally accessible
+                            window.auth = firebase.auth(); // Make Auth globally accessible
                         }
+                        // Dispatch the firebase-ready event
+                        window.dispatchEvent(new Event('firebase-ready'));
                         resolve();
                     };
                     firebaseFirestoreScript.onerror = reject;
@@ -129,6 +154,7 @@ function loadFirebaseInit() {
             document.head.appendChild(firebaseAppScript);
         } else {
             console.warn("Firebase is already initialized.");
+            window.dispatchEvent(new Event('firebase-ready'));
             resolve();
         }
     });

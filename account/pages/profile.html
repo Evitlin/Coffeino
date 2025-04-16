@@ -1,4 +1,79 @@
-<div class="profile-text">
-    My profile
+<!DOCTYPE html>
+<html lang="en">
+<div class="profile-container">
+    <h1 class="profile-title">My profile</h1>
+    <div class="horizontal-divider"></div>
+
+    <!-- User Info Section -->
+    <div class="user-info">
+        <div class="user-details">
+            <div class="user-avatar">
+                <span class="material-symbols-outlined">account_circle</span>
+            </div>
+            <div class="user-text">
+                <p class="user-name">Name Lastname</p>
+                <p class="user-email">Email: placeholder@ktu.edu, Phone: +37012345678</p>
+            </div>
+            <div class="edit-icon">
+                <span class="material-symbols-outlined">edit</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Address Section -->
+    <div class="address-section">
+        <div class="addresses-container">
+            <div class="address-card">
+                <span class="material-symbols-outlined">location_on</span>
+                <p>Lithuania, Kauno r., Studentų g. 50, 51368</p>
+            </div>
+            <div class="address-card">
+                <span class="material-symbols-outlined">location_on</span>
+                <p>Studentų g. 67, Kaunas, 51392 Kauno m. sav.</p>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="add-address">ADD NEW ADDRESS</a>
+
+    <div class="horizontal-divider"></div>
+
+    <!-- Recent Orders Section -->
+    <div class="recent-orders">
+        <div class="orders-header">
+            <h2>Recent orders</h2>
+            <a href="#" class="view-all">View all</a>
+        </div>
+        <div class="table-container">
+            <table class="orders-table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Order date</th>
+                        <th>Bill-to-name</th>
+                        <th>Total</th>
+                        <th>Shipping status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>000799</td>
+                        <td>2025/03/02</td>
+                        <td>Name Lastname</td>
+                        <td>23,78 €</td>
+                        <td>Pending</td>
+                        <td><a href="#" class="view-details">> View details</a></td>
+                    </tr>
+                    <tr>
+                        <td>000798</td>
+                        <td>2025/02/27</td>
+                        <td>Name Lastname</td>
+                        <td>43,78 €</td>
+                        <td>Shipped</td>
+                        <td><a href="#" class="view-details">> View details</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
-<p>Welcome to your profile page!</p>
