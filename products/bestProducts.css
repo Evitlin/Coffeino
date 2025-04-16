@@ -70,9 +70,6 @@
 .product-card button:hover {
     background: saddlebrown;
 }
-.product-card:hover {
-    background: rgb(220, 238, 235);
-}
 .arrow-button {
     display: none;
 }
