@@ -1,164 +1,193 @@
 /* ==========================
    GLOBAL STYLES
 ========================== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+    background-color: #f2f2f2;
+}
+
+/* -------------------------- */
+/* Pagrindinis konteineris */
 .outline {
     background-color: rgba(255, 255, 255, 0.322);
-    border-radius: 15px;
+    border-radius: 0.9375rem;
     width: auto;
-    height: 1000px;
-    padding: 20px;
-    margin-top: 120px;
-    margin-left: 80px;
-    margin-right: 80px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    height: auto;
+    padding: 1.25rem;
+    margin: 7.5rem 5rem 2.5rem 5rem;
+    box-shadow: 0 1.25rem 2.5rem rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    
 }
+
+/* Informacijos blokas */
 .box-info {
     border: none;
     background-color: rgba(145, 145, 145, 0.027);
-    width: 450px;
+    width: 37.5rem;
     height: auto;
-    margin-top: 80px;
-    margin-right: 120px;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    margin-top: 7rem;
+    margin-right: 12.5rem;
+    border-radius: 0.9375rem;
+    box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.3);
     float: right;
 }
+
+/* Produkto pavadinimas */
 #product-title {
-    font-size: 1.5rem;
+    font-size: 2.2rem;
     color: #003865;
-    margin-top: 20px;
-    margin-left: 20px;
+    margin-top: 1.25rem;
+    margin-left: 1.25rem;
     font-weight: bold;
     text-align: justify;
 }
+
+/* Kaina ir likutis */
 .info-row {
-    display: flex; /* Use Flexbox to align items in a row */
-    justify-content: space-between; /* Add space between price and stock */
-    align-items: center; /* Align items vertically in the center */
-    margin-top: 20px; /* Add spacing above the row */
-    margin-left: 20px; /* Add spacing to the left */
-    margin-right: 20px; /* Add spacing to the right */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1.25rem;
 }
 .price-info {
-    font-size: 1.3rem;
+    font-size: 1.8rem;
     color: #003865;
     font-weight: normal;
 }
 .price {
     color: #003865;
-    font-weight:bold;
+    font-weight: bold;
 }
 #product-price {
-    font-size: 1.2rem;
-    margin-left: 10px;
+    font-size: 1.5rem;
+    margin-left: 0.625rem;
     color: #003865;
-    font-weight:nolmal;
-    
+    font-weight: normal;
 }
-.index{
-    font-size: 1.2rem;
+.index {
+    font-size: 1.4rem;
     color: #003865;
-    font-weight:normal;
-    
+    font-weight: normal;
 }
-
 .stock {
-    font-size: 1.3rem;
+    font-size: 1.8rem;
     color: #003865;
     font-weight: bold;
-    margin-right: 20px;
-
+    margin-right: 1.25rem;
 }
 #product-stock {
-    font-size: 1.3rem;
+    font-size: 1.6rem;
     color: #003865;
     font-weight: normal;
-    margin-left: 10px;
+    margin-left: 0.625rem;
 }
+
+/* Papildoma informacija */
 .what {
-    font-size: 0.8rem;
+    font-size: 1rem;
     color: #003865c0;
     font-weight: normal;
-    margin-top: 20px;
-    margin-left: 20px;
+    margin-top: 1.25rem;
+    margin-left: 1.25rem;
 }
+
+/* Kiekio įvedimas */
 #quantity {
-    width: 70px;
-    height: 30px;
-    font-size: 0.9rem;
+    width: 5rem;
+    height: 2.5rem;
+    font-size: 1.1rem;
     color: #003865;
-    border: 2px solid #003865;
-    border-radius: 10px;
-    padding: 5px;
-    margin-left: 20px;
-    margin-top: 5px;
+    border: 0.125rem solid #003865;
+    border-radius: 0.625rem;
+    padding: 0.3125rem;
+    margin-left: 1.25rem;
+    margin-top: 0.3125rem;
 }
 #quantity:focus {
     outline: none;
     border-color: #8B4513;
-    box-shadow: 0 0 5px rgba(139, 69, 19, 0.5);
+    box-shadow: 0 0 0.3125rem rgba(139, 69, 19, 0.5);
 }
+
+/* Mygtukas */
 #add-to-cart {
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     font-weight: bold;
     background-color: #003865;
-    width: 130px;
-    height: 40px;
+    width: 12.5rem;
+    height: 3.125rem;
     color: white;
-    border-radius: 15px;
+    border-radius: 0.9375rem;
     float: right;
-    cursor:  pointer;
+    cursor: pointer;
     border: none;
-    margin-bottom: 10px;
-    margin-right: 30px;
+    margin-bottom: 0.625rem;
+    margin-right: 1.875rem;
 }
 #add-to-cart:hover {
     background-color: #8B4513;
-    color: white;
-    cursor:  pointer;
-    transform: translateY(-1px);
+    transform: translateY(-0.0625rem);
     border: none;
 }
+
+/* Linija */
 .line {
-    margin-top: 20px;
-    border: 1.5px solid #002244bb;
+    margin-top: 1.25rem;
+    border: 0.125rem solid #002244bb;
 }
+
+/* Aprašymas */
 .description {
-
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     color: #003865;
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
-    text-align: justify; /* Justify text for better readability */
-    margin-top: 10px;
+    margin: 1.25rem;
+    text-align: justify;
     font-weight: bold;
-
-}
-#product-image {
-    width: 300px;
-    height: 300px;
-    margin-top: 80px;
-    margin-left: 120px;
-    float: left;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Add shadow */
-    border-radius: 15px;
-}
-#product-image:hover {
-    transform: scale(1.05); /* Scale up the image on hover */
-    transition: transform 0.3s ease; /* Smooth transition */
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
 }
 #product-description {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     color: #003865;
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-right: 50px;margin-bottom: 20px;
-    text-align:left; /* Justify text for better readability */
-    white-space: pre-line
-    margin-top 20px;
+    margin: 1.25rem 3.125rem 1.25rem 1.25rem;
+    text-align: left;
+    white-space: pre-line;
 }
+
+/* Nuotrauka */
+#product-image {
+    width: 31.25rem;
+    height: 31.25rem;
+    margin-top: 7rem;
+    margin-left: 12.5rem;
+    float: left;
+    box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.3);
+    border-radius: 0.9375rem;
+    margin-bottom: 5rem;
+}
+#product-image:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+    box-shadow: 0 0.75rem 1.875rem rgba(0, 0, 0, 0.3);
+}
+
+/* Footer */
+.footer {
+    width: 100%;
+    padding: 1rem;
+    background-color: #003865;
+    color: white;
+    text-align: center;
+    font-size: 1rem;
+    margin-top: 2rem;
+    border-top: 2px solid #8B4513;
+}
+
 /* ==========================
    RESPONSIVE STYLES
 ========================== */
