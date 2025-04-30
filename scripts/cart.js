@@ -52,7 +52,7 @@ firebase.auth().onAuthStateChanged(user => {
                     const cartItem = document.createElement("div");
                     cartItem.classList.add("cart-item-row");
                     cartItem.innerHTML = `
-                         <img src="${item.productImage}" alt="${item.productName}" class="product-image" style="width: 100px; height: 100px;">
+                         <img src="/products/${item.productImage}" alt="${item.productName}" class="product-image" style="width: 100px; height: 100px;">
                         <div class="cart-item-details">
                             <h3>${item.productName}</h3>
                             <p>Price: ${item.productPrice}€</p>

@@ -54,7 +54,7 @@ firebase.auth().onAuthStateChanged(user => {
 
                     cartDropdownBody.innerHTML += `
                         <div class="cart-item">
-                            <img src="${itemImage}" alt="${item.productName}" class="mini-image">
+                            <img src="/products/${itemImage}" alt="${item.productName}" class="mini-image">
                             <div class="cart-item-details">
                                 <p>${item.productName}</p>
                                  <input type="number" value="${item.quantity}" min="1" class="quantity-input" data-id="${doc.id}" style="width: 50px;">
