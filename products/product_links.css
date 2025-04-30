@@ -335,12 +335,6 @@ ul.subcategories {
         border-radius: 20px;
     }
 
-    .dropdown-menu {
-        max-width: 95%;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
     .dropdown-row {
         flex-direction: column;
     }
