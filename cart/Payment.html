@@ -9,10 +9,7 @@
   <link rel="stylesheet" href="/cart/payment.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-  <style>
-    .hidden{display: none;}
-    .delivery-logos button.selected{border: 2px solid blue;}
-  </style>
+  
 </head>
 
 <body style ="background-color:#D0D9DA;">
@@ -31,10 +28,10 @@
       <label><input type="radio" name="delivery" id="parcel"> Delivery to parcel locker</label>
       <div class="postbox-form hidden" id="parcelForm">
         <div class="delivery-logos" id="lockerCompanies">
-          <button data-company="venipak"><img src="/cart/cart_images/venipak.jpg" alt="Venipak" /></button>
-          <button data-company="omniva"><img src="/cart/cart_images/omniva.jpg" alt="Omniva" /></button>
-          <button data-company="dpd"><img src="/cart/cart_images/dpd.jpg" alt="DPD" /></button>
-          <button data-company="lpex"><img src="/cart/cart_images/lpex.jpg" alt="LP Express" /></button>
+          <button type="button" data-company="venipak"><img src="/cart/cart_images/venipak.jpg" alt="Venipak" /></button>
+          <button type="button" data-company="omniva"><img src="/cart/cart_images/omniva.jpg" alt="Omniva" /></button>
+          <button type="button" data-company="dpd"><img src="/cart/cart_images/dpd.jpg" alt="DPD" /></button>
+          <button type="button" data-company="lpex"><img src="/cart/cart_images/lpex.jpg" alt="LP Express" /></button>
         </div>
         <div class="locker-selection hidden" id="lockerSelect">
         <select>
@@ -115,7 +112,10 @@
 
     // Company button selection
     lockerCompanies.querySelectorAll('button').forEach(button => {
-      button.addEventListener('click', () => {
+      button.addEventListener('click', (event) => {
+        event.preventDefault();  // Prevent form submission
+        event.stopPropagation(); // Stop event bubbling
+        
         // Highlight selected
         lockerCompanies.querySelectorAll('button').forEach(btn => btn.classList.remove('selected'));
         button.classList.add('selected');
