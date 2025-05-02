@@ -8,7 +8,7 @@
     display: none; /* Initially hidden */
     position: absolute;
     top: 150%; /* Position below the cart button */
-    right: -30px; /* Align to the right of the container */
+    right: -13px; /* Align to the right of the container */
     background-color: #f9f9f9;
     min-width: 250px; /* Menu width */
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
