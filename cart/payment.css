@@ -1,3 +1,8 @@
+
+    .hidden{display: none;}
+    .delivery-logos button.selected{border: 2px solid blue;}
+
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #B8C5C6;  /* Slightly darker for better contrast */
