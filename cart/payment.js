@@ -20,8 +20,19 @@ async function submitOrder(event) {
         const phone = document.getElementById("phone").value.trim();
         if (!address || !phone) return alert("Fill in address and phone number.");
         deliveryInfo = { type: "courier", address, phone };
-    } else {
-        deliveryInfo = { type: "parcel", company: "Omniva", locker: "Some Locker" };
+    } else if (deliveryMethod.id === "parcel") {
+        const selects = document.querySelectorAll("#lockerSelect select");
+        const city = selects[0].value.trim();
+        const locker = selects[1].value.trim();
+    
+        const selectedCompanyButton = document.querySelector('#lockerCompanies .selected');
+        const company = selectedCompanyButton ? selectedCompanyButton.getAttribute("data-company") : "";
+    
+        if (!company || city === "City" || locker === "Select parcel locker") {
+            return alert("Please fill in all parcel locker information.");
+        }
+    
+        deliveryInfo = { type: "parcel", company, locker, city };
     }
 
     firebase.auth().onAuthStateChanged(async user => {
@@ -67,7 +78,7 @@ async function submitOrder(event) {
             await batch.commit();
 
             alert("Order placed successfully!");
-            window.location.href = "cart.html"; // Redirect to cart page or any other page
+            window.location.href = "/cart.html"; // Redirect to cart page or any other page
         } catch (err) {
             console.error("Error placing order:", err);
             alert("Failed to place order.");
@@ -85,8 +96,8 @@ paymentButtons.forEach(button => {
     selectedPaymentMethod = button.querySelector("img").alt;
     console.log("Selected payment method:", selectedPaymentMethod);
   });
-});
+});/*
 const phonePattern = /^[0-9]{10}$/; // Example phone pattern (modify as needed)
 if (!address || !phone || !phonePattern.test(phone)) {
     return alert("Fill in address and a valid phone number.");
-}
+}*/
