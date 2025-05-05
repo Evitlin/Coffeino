@@ -141,26 +141,6 @@
         lockerSelect.classList.remove('hidden');
       });
     });
-
-    function handleSubmit(event) {
-      event.preventDefault();
-      const deliveryMethod = document.querySelector('input[name="delivery"]:checked');
-      if (!deliveryMethod) {
-        alert('Please select a delivery method.');
-        return;
-      }
-
-      if (deliveryMethod.id === 'courier') {
-        const address = document.getElementById('address').value;
-        const phone = document.getElementById('phone').value;
-        if (!address || !phone) {
-          alert('Please fill in all required fields for courier delivery.');
-          return;
-        }
-      }
-
-      alert('Form submitted successfully!');
-    }
   </script>
   <script src="/cart/payment.js"></script>
 </body>
