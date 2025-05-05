@@ -1,10 +1,4 @@
-.cart-container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 20px;
-  
-}
+
 
 /* Product row */
 .cart-item-row {
@@ -24,7 +18,7 @@
 .cart-item {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* spacing between items */
+  gap: 15px; /* spacing between items */
 }
 
 /* Product image */
