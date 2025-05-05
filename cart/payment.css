@@ -87,6 +87,15 @@ body {
     max-width: 80px;
     display: block;
   }
+  .payment-logos button.selected {
+    outline: 2px solid #007BFF; 
+    border-radius: 8px;
+    background-color: #eef5ff; 
+  }
+  
+  .payment-logos button img {
+    pointer-events: none; 
+  }
   
   p {
     font-weight: bold;

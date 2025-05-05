@@ -21,8 +21,8 @@
 
       <label><input type="radio" name="delivery" id="courier" required> Courier delivery</label>
       <div class="courier-form hidden" id="courierForm">
-        <input type="text" placeholder="Enter full address" />
-        <input type="text" placeholder="Phone number to contact" />
+        <input type="text" id="address" placeholder="Enter full address" />
+      <input type="text" id="phone" placeholder="Phone number to contact" />
       </div>
 
       <label><input type="radio" name="delivery" id="parcel"> Delivery to parcel locker</label>
@@ -51,32 +51,33 @@
     </div>
     </div>
 
-
     <div class="section">
       <h2>Payment method:</h2>
       <p>Online Banking</p>
       <div class="payment-logos">
-        <button><img src="/cart/cart_images/seb.jpg" alt="SEB" /></button>
-        <button><img src="/cart/cart_images/swed.jpg" alt="Swedbank" /></button>
-        <button><img src="/cart/cart_images/luminor.jpg" alt="Luminor" /></button>
-        <button><img src="/cart/cart_images/revolut.jpg" alt="Revolut" /></button>
-        <button><img src="/cart/cart_images/citadele.jpg" alt="Citadele" /></button>
-        <button><img src="/cart/cart_images/paysera.jpg" alt="Paysera" /></button>
+        <button type="button"><img src="/cart/cart_images/seb.jpg" alt="SEB" /></button>
+        <button type="button"><img src="/cart/cart_images/swed.jpg" alt="Swedbank" /></button>
+        <button type="button"><img src="/cart/cart_images/luminor.jpg" alt="Luminor" /></button>
+        <button type="button"><img src="/cart/cart_images/revolut.jpg" alt="Revolut" /></button>
+        <button type="button"><img src="/cart/cart_images/citadele.jpg" alt="Citadele" /></button>
+        <button type="button"><img src="/cart/cart_images/paysera.jpg" alt="Paysera" /></button>
       </div>
 
       <p>Other methods:</p>
       <div class="payment-logos">
-        <button><img src="/cart/cart_images/kortele.jpg" alt="Visa / Mastercard" width="120" height="60" /></button>
-        <button><img src="/cart/cart_images/googlr pay.jpg" alt="Google Pay" width="120" height="60" /></button>
+        <button type="button"><img src="/cart/cart_images/kortele.jpg" alt="Visa / Mastercard" width="120" height="60" /></button>
+        <button type="button"><img src="/cart/cart_images/googlr pay.jpg" alt="Google Pay" width="120" height="60" /></button>
       </div>
     </div>
+    <div class="section">
+    <button type="submit" onclick="submitOrder(event)">Place Order</button></div>
   </form>
   </main>
   <link rel="stylesheet" href="/products/product_links.css">
   <script src="/scripts/main.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <!--<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>!-->
 
   <script>
     const courierRadio = document.getElementById('courier');
@@ -110,6 +111,22 @@
       }
     });
 
+    document.querySelectorAll(".payment-logos button").forEach(button => {
+  button.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    // Remove previous selection
+    document.querySelectorAll(".payment-logos button").forEach(btn =>
+      btn.classList.remove("selected")
+    );
+
+    // Add new selection
+    button.classList.add("selected");
+
+    // Save selected method (use image alt or a data attribute)
+    selectedPaymentMethod = button.querySelector("img").alt; // or data-method if you prefer
+  });
+});
     // Company button selection
     lockerCompanies.querySelectorAll('button').forEach(button => {
       button.addEventListener('click', (event) => {
@@ -145,8 +162,6 @@
       alert('Form submitted successfully!');
     }
   </script>
-
-
-
+  <script src="/cart/payment.js"></script>
 </body>
 </html>
