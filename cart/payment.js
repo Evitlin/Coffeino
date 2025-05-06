@@ -70,7 +70,7 @@ async function submitOrder(event) {
                 delivery: deliveryInfo,
                 paymentMethod: selectedPaymentMethod,  // Fixed here
                 totalAmount: total + 0.50,
-                status: "Awaiting Payment",
+                status: "Pending",
                 timestamp: Date.now()
             };
 
