@@ -18,6 +18,7 @@ function initializeProfilePage() {
         const links = document.querySelectorAll('.rectangle-B a');
         const contentPlaceholder = document.getElementById('content-placeholder');
         const logoutLink = document.getElementById('logout-link');
+
         let currentPage = 'profile';
 
         
@@ -176,7 +177,6 @@ function loadRecentOrders(uid) {
                             <td>${order.email}</td>
                             <td>€${order.totalAmount.toFixed(2)}</td>
                             <td>${order.status}</td>
-                            <td><a href="/account/pages/orders.html?orderId=${doc.id}" class="view-details">> View details</a></td>
                         </tr>
                     `;
                     recentOrdersTableBody.innerHTML += row;
