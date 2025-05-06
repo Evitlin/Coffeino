@@ -92,7 +92,7 @@ firebase.auth().onAuthStateChanged(user => {
                     });
                 });
 
-                // Add event listeners to quantity inputs
+// Add event listeners to quantity inputs
                 document.querySelectorAll(".quantity-input").forEach(input => {
                     input.addEventListener("change", (event) => {
                         const productId = event.target.getAttribute("data-id");

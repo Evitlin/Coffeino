@@ -397,8 +397,9 @@ footer {
     border-radius: 20px;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
-    margin-top: 100px;
+    margin-top: 100px; 
 }
+
 
 .text-container h3 {
     color: #003865;
@@ -419,17 +420,17 @@ footer {
     margin-top: 20px;
 }
 
+
 .text-container p {
     margin-top: 30px;
     color: #003865;
-    width: 570px;
-    height: 396px;
-    font-family:'Fredoka', sans-serif;
+    font-family: 'Fredoka', sans-serif;
     font-size: 25px;
     line-height: 1.5;
     text-align: justify;
-    
-  
+    max-width: 100%; /* Prevent overflow */
+    height: auto;     /* Let it grow naturally */
+    overflow-wrap: break-word;
 }
 /* Responsive Design */
 @media (max-width: 1200px) {

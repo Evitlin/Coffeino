@@ -128,7 +128,7 @@ document.getElementById("forgot-password-link").addEventListener("click", (event
     }
 
     const now = Date.now();
-    if (lastResetRequestTime && now - lastResetRequestTime < 600000) { // 10 minutes
+    if (lastResetRequestTime && now - lastResetRequestTime < 0) { // 10 minutes
         alert("You can only request a password reset once every 10 minutes. Please try again later.");
         return;
     }
@@ -137,24 +137,19 @@ document.getElementById("forgot-password-link").addEventListener("click", (event
     lastResetRequestTime = now;
 
     auth.sendPasswordResetEmail(email)
-        .then(() => {
-            alert("A password reset email has been sent to your email address. Please check your inbox.");
-        })
-        .catch((error) => {
-            console.error("Error sending password reset email:", error);
+  .then(() => {
+    alert("If this email is registered, a password reset link has been sent. Please check your inbox.");
+  })
+  .catch((error) => {
+    console.error("Error sending password reset email:", error);
+    let errorMessage = "An error occurred. Please try again later.";
+    
+    if (error.code === "auth/invalid-email") {
+      errorMessage = "The email address is not valid. Please check and try again.";
+    }
 
-            let errorMessage = "Failed to send password reset email. Please try again later.";
-            switch (error.code) {
-                case "auth/invalid-email":
-                    errorMessage = "The email address is not valid. Please check and try again.";
-                    break;
-                case "auth/user-not-found":
-                    errorMessage = "This email is not registered. Please check your email address or sign up.";
-                    break;
-                default:
-                    errorMessage = error.message; // Use Firebase's error message as a fallback
-            }
-
-            alert(errorMessage);
-        });
+    // Don't expose "user-not-found" to the user
+    alert(errorMessage);
+  });
+       
 });

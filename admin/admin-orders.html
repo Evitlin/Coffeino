@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -24,6 +24,7 @@
             display: flex;
             flex-direction: column;
             margin-bottom: 1rem;
+            color: #003865;
         }
 
         select, input {
@@ -32,18 +33,23 @@
             border-radius: 5px;
             border: 1px solid #ccc;
             font-size: 1rem;
+            color: #003865;
         }
 
         .orders-section {
             background: white;
             padding: 1rem;
-            border-radius: 8px;
+            
+            border-radius: 10px;
+            border-color:#003865;;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            color: #003865;
         }
 
         .order-item {
             border-bottom: 1px solid #ddd;
             padding: 1rem 0;
+            border-color:#003865;;
         }
 
         .order-item:last-child {
@@ -54,6 +60,7 @@
             display: flex;
             justify-content: space-between;
             font-weight: bold;
+            color:#003865;;
         }
 
         .order-details {
@@ -73,6 +80,36 @@
             font-size: 0.8rem;
             margin-left: 0.5rem;
         }
+
+        /* Modal styling */
+        #shipping-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: #003865;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+        }
+
+        #shipping-modal .modal-content {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+        }
+
+        #shipping-modal .modal-content button.close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        #shipping-content p {
+            margin: 0.5rem 0;
+        }
     </style>
 </head>
 <body>
@@ -84,55 +121,24 @@
         <label for="status-filter">All Orders</label>
         <select id="status-filter">
             <option>All Orders</option>
-            <option>Unfinished, Paid</option>
-            <option>Preparing Orders</option>
-            <option>Ready for Shipment</option>
-            <option>Completed Orders</option>
-            <option>All Paid Orders</option>
-            <option>All Cancelled Orders</option>
         </select>
 
         <label for="sort-order">Sort By</label>
         <select id="sort-order">
             <option>Newest First</option>
             <option>Oldest First</option>
-            <option>Recently Updated</option>
-            <option>Least Recently Updated</option>
         </select>
     </div>
     
-      
-    <div class="orders-section" id="orders-list">
-        <!-- Example order -->
-        <!--<div class="order-item">
-            <div class="order-header">
-                <div><a href="#">ORD 248</a> - <span>77.25€</span></div>
-                <div>2022-06-07 15:52</div>
-            </div>
-            <div class="order-details">
-                <p><strong>Test Test</strong><br>
-                +37068686864<br>
-                test@none.lt<br>
-                Verkių g. 123, Vilnius, <br>
-                LT-08405 Vilnius, Lithuania</p>
+    <div class="orders-section" id="orders-list"></div>
 
-                <p><strong>Payment Method:</strong> Bank Transfer<br>
-                   <strong>Delivery Method:</strong> DPD Pickup Point (Allparcels.com - DomusPro Locker, Bielianų g. 1)</p>
-
-                <p><strong>Status:</strong> <span class="order-status">Cancelled</span></p>
-
-                <p>
-                    <strong>Documents:</strong><br>
-                    Invoice: <a href="#">ELP 1001</a> |
-                    Shipment: <a href="#">SHP 4</a> |
-                    Package: <a href="#">PK 9</a> |
-                    Payment Request: <a href="#">PR 17</a> |
-                    Prepayment Invoice: <a href="#">PRE 241</a>
-                </p>
-            </div>
-        </div>-->
-
-        <!-- Repeat .order-item for more orders -->
+    <!-- Shipping Info Modal -->
+    <div id="shipping-modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="document.getElementById('shipping-modal').style.display='none'">X</button>
+            <div id="shipping-content"></div>
+            <button onclick="window.print()">Print</button>
+        </div>
     </div>
 
     <link rel="stylesheet" href="/products/product_links.css">
