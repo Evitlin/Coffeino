@@ -538,3 +538,73 @@ a.button-link {
         left: 0; /* Slide the menu into view */
     }
 }
+
+/* Orders Card Styles */
+.order-item {
+    border: 1px solid #B4C1C1; /* Outline for the card */
+    border-radius: 10px; /* Rounded corners */
+    background-color: #F7F9FA; /* Light background color */
+    padding: 20px; /* Internal spacing */
+    margin-bottom: 20px; /* Space between cards */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    font-family: 'Fredoka', sans-serif;
+    color: #003865;
+}
+.order-item .order-items ul li .product-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.order-item h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #003865;
+}
+
+.order-item p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: #636989;
+}
+
+.order-item .order-items {
+    margin-top: 15px;
+}
+
+.order-item .order-items h4 {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #003865;
+}
+
+.order-item .order-items ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.order-item .order-items ul li {
+    display: flex;
+    font-size: 0.9rem;
+    color: #636989;
+    margin-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.order-status {
+    font-weight: bold;
+    color: #D9534F; /* "Awaiting Payment" */
+}
+
+.order-status.completed {
+    color: #5CB85C; /* "Completed" */
+}
+
+.order-status.shipped {
+    color: #F0AD4E; /* "Shipped" */
+}
