@@ -86,18 +86,37 @@
                                         quantity
                                     };
 
-                                    db.collection("users").doc(user.uid).collection("cart").doc(productId).set(cartItem, { merge: true })
-                                        .then(() => {
-                                            alert("Item added to cart!");
-                                            // Optionally, update stock in Firestore
-                                            db.collection("products").doc(productId).update({
-                                                stock: data.stock - quantity
-                                            });
-                                            location.reload(); // Refresh to update stock count
-                                        })
-                                        .catch(error => {
-                                            console.error("Error adding to cart:", error);
+                                    db.collection("users").doc(user.uid).collection("cart").doc(productId).get()
+                                    .then((docSnapshot) => {
+                                        if (docSnapshot.exists) {
+                                            // Item exists, update quantity
+                                            const existingItem = docSnapshot.data();
+                                            return db.collection("users").doc(user.uid).collection("cart")
+                                                .doc(productId)
+                                                .update({
+                                                    quantity: existingItem.quantity + quantity
+                                                });
+                                        } else {
+                                            // New item, create it
+                                            return db.collection("users").doc(user.uid).collection("cart")
+                                                .doc(productId)
+                                                .set(cartItem);
+                                        }
+                                    })
+                                    .then(() => {
+                                        alert("Item added to cart!");
+                                        // Update stock in Firestore
+                                        return db.collection("products").doc(productId).update({
+                                            stock: data.stock - quantity
                                         });
+                                    })
+                                    .then(() => {
+                                        location.reload(); // Refresh to update stock count
+                                    })
+                                    .catch(error => {
+                                        console.error("Error adding to cart:", error);
+                                        alert("Error adding to cart");
+                                    });
                                 } else {
                                     // User is not logged in, save to localStorage
                                     let cart = JSON.parse(localStorage.getItem("cart")) || [];
