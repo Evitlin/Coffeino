@@ -190,6 +190,7 @@ firebase.auth().onAuthStateChanged(user => {
                         }
                     });
                 });
+                });
 
             })
             .catch(error => {
