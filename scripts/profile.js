@@ -20,12 +20,12 @@ function initializeProfilePage() {
         const logoutLink = document.getElementById('logout-link');
         let currentPage = 'profile';
 
+        
         links.forEach(link => {
             link.addEventListener('click', function (event) {
                 event.preventDefault();
                 const page = this.getAttribute('data-page'); // Get the page from the data-page attribute
 
-                // Dynamically fetch page content
                 fetch(`/account/pages/${page}.html`)
                     .then(response => {
                         if (!response.ok) {
@@ -36,10 +36,13 @@ function initializeProfilePage() {
                     .then(data => {
                         contentPlaceholder.innerHTML = data; // Update content
                         currentPage = page;
+                        
+                        if (currentPage === 'profile') {
+                            loadRecentOrders(user.uid);
+                        }
 
-                        // Call orders fetching function if it's the orders page
                         if (currentPage === "orders") {
-                            loadOrders(user.uid); // Load orders for the logged-in user
+                            loadOrders(user.uid);
                         }
                     })
                     .catch(error => {
@@ -75,6 +78,9 @@ function initializeProfilePage() {
             })
             .then(data => {
                 contentPlaceholder.innerHTML = data;
+                if (currentPage === 'profile') {
+                    loadRecentOrders(user.uid);
+                }
             })
             .catch(error => {
                 contentPlaceholder.innerHTML = `<h2>Error Loading Default Page</h2><p>${error.message}</p>`;
@@ -139,4 +145,53 @@ function loadOrders(uid) {
         });
 }
 
+function loadRecentOrders(uid) {
+    const recentOrdersTableBody = document.querySelector(".orders-table tbody");
 
+    if (!recentOrdersTableBody) {
+        console.error("Error: .orders-table tbody element not found in the DOM.");
+        return;
+    }
+    // Fetch recent orders from Firebase Firestore
+    db.collection("orders")
+        .where("userId", "==", uid)
+        .limit(5) // Limit to the 5 most recent orders
+        .get()
+        .then(ordersSnapshot => {
+            if (!ordersSnapshot.empty) {
+                recentOrdersTableBody.innerHTML = ""; // Clear existing rows
+                ordersSnapshot.forEach(doc => {
+                    const order = doc.data();
+                    const orderDate = new Date(order.timestamp).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "2-digit",
+                        day: "2-digit",
+                    });
+
+                    // Create a table row for each order
+                    const row = `
+                        <tr>
+                            <td>${doc.id}</td>
+                            <td>${orderDate}</td>
+                            <td>${order.email}</td>
+                            <td>€${order.totalAmount.toFixed(2)}</td>
+                            <td>${order.status}</td>
+                            <td><a href="/account/pages/orders.html?orderId=${doc.id}" class="view-details">> View details</a></td>
+                        </tr>
+                    `;
+                    recentOrdersTableBody.innerHTML += row;
+                });
+            } else {
+                // If no orders, display a message
+                recentOrdersTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align: center;">No recent orders found.</td>
+                    </tr>
+                `;
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching recent orders:", error);
+            alert("There was an error fetching your recent orders.");
+        });
+}
