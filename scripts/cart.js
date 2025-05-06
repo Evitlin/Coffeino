@@ -1,10 +1,15 @@
-firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-        console.log("User is logged in:", user.uid);
-    } else {
-        console.log("No user is logged in.");
-    }
-});
+// Add debounce function at the top
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
 
 firebase.auth().onAuthStateChanged(user => {
     const cartContainer = document.querySelector(".cart-item"); // Keep the existing div for the shopping bag
@@ -41,7 +46,7 @@ firebase.auth().onAuthStateChanged(user => {
                 }
 
                 // Clear the shopping bag image if the cart is not empty
-                cartContainer.innerHTML = ""; 
+                cartContainer.innerHTML = "";
 
                 // Show cart items
                 querySnapshot.forEach(doc => {
@@ -59,7 +64,7 @@ firebase.auth().onAuthStateChanged(user => {
                             <p>Total: <span class="item-total">${itemTotal.toFixed(2)}€</span></p>
                         </div>
                         <div class="cart-item-actions">
-                            <p>Quantity: ${item.quantity}</p>
+                            <input type="number" value="${item.quantity}" min="1" class="quantity-input" data-id="${doc.id}" data-productid="${item.productId}">
                             <button class="remove-item" data-id="${doc.id}">🗑️</button>
                         </div>
                     `;
@@ -67,7 +72,6 @@ firebase.auth().onAuthStateChanged(user => {
                 });
 
                 // Update cart summary
-                
                 const packingFeeValue = 0.50;
                 const grandTotal = total + packingFeeValue;
                 productCost.textContent = total.toFixed(2);
@@ -79,38 +83,138 @@ firebase.auth().onAuthStateChanged(user => {
 
                 // Add event listeners to remove buttons
                 document.querySelectorAll(".remove-item").forEach(button => {
-                    button.addEventListener("click", (event) => {
-                        const productId = event.target.getAttribute("data-id");
-                        db.collection("users").doc(user.uid).collection("cart").doc(productId).delete()
-                            .then(() => {
+                    // Remove existing listeners by cloning
+                    const newButton = button.cloneNode(true);
+                    button.parentNode.replaceChild(newButton, button);
+
+                    newButton.addEventListener("click", async (event) => {
+                        if (event.target.hasAttribute('processing')) return;
+                        event.target.setAttribute('processing', 'true');
+                        
+                        try {
+                            const productId = event.target.getAttribute("data-id");
+                            const cartItemRef = db.collection("users").doc(user.uid).collection("cart").doc(productId);
+                            const doc = await cartItemRef.get();
+                            
+                            if (doc.exists) {
+                                const item = doc.data();
+                                const productRef = db.collection("products").doc(item.productId);
+                                
+                                // Use batch to ensure atomic updates
+                                const batch = db.batch();
+                                
+                                // First restore the stock
+                                batch.update(productRef, {
+                                    stock: firebase.firestore.FieldValue.increment(item.quantity)
+                                });
+                                
+                                // Then remove from cart
+                                batch.delete(cartItemRef);
+                                
+                                // Commit both operations
+                                await batch.commit();
                                 alert("Item removed from cart!");
-                                location.reload(); // Refresh the cart
-                            })
-                            .catch(error => {
-                                console.error("Error removing item:", error);
-                            });
+                                location.reload();
+                            }
+                        } catch (error) {
+                            console.error("Error removing item:", error);
+                            alert("Error removing item. Please try again.");
+                        } finally {
+                            event.target.removeAttribute('processing');
+                        }
                     });
                 });
 
-/*// Add event listeners to quantity inputs
+                // Add event listeners to quantity inputs
                 document.querySelectorAll(".quantity-input").forEach(input => {
-                    input.addEventListener("change", (event) => {
+                    // Remove any existing event listeners by cloning
+                    const newInput = input.cloneNode(true);
+                    input.parentNode.replaceChild(newInput, input);
+
+                    newInput.addEventListener("change", async (event) => {
+                        if (event.target.hasAttribute('processing')) {
+                            return;
+                        }
+                        event.target.setAttribute('processing', 'true');
+                        
                         const productId = event.target.getAttribute("data-id");
+                        const actualProductId = event.target.getAttribute("data-productid");
                         const newQuantity = parseInt(event.target.value);
-                        if (newQuantity > 0) {
-                            db.collection("users").doc(user.uid).collection("cart").doc(productId).update({
-                                quantity: newQuantity
-                            }).then(() => {
-                                alert("Quantity updated!");
-                                location.reload(); // Refresh the cart
-                            }).catch(error => {
-                                console.error("Error updating quantity:", error);
-                            });
-                        } else {
-                            alert("Invalid quantity!");
+                        
+                        try {
+                            const cartItemRef = db.collection("users").doc(user.uid).collection("cart").doc(productId);
+                            const cartItemDoc = await cartItemRef.get();
+                            
+                            if (cartItemDoc.exists) {
+                                const item = cartItemDoc.data();
+                                const oldQuantity = item.quantity;
+                                const quantityDiff = newQuantity - oldQuantity;
+                                
+                                if (newQuantity <= 0) {
+                                    alert("Quantity must be greater than 0!");
+                                    event.target.value = oldQuantity;
+                                    event.target.removeAttribute('processing');
+                                    return;
+                                }
+
+                                const productRef = db.collection("products").doc(actualProductId);
+                                const productDoc = await productRef.get();
+
+                                if (productDoc.exists) {
+                                    const product = productDoc.data();
+                                    const currentStock = product.stock;
+
+                                    if (quantityDiff > currentStock) {
+                                        alert("Not enough stock available!");
+                                        event.target.value = oldQuantity;
+                                        event.target.removeAttribute('processing');
+                                        return;
+                                    }
+
+                                    const batch = db.batch();
+                                    batch.update(productRef, {
+                                        stock: firebase.firestore.FieldValue.increment(-quantityDiff)
+                                    });
+                                    batch.update(cartItemRef, {
+                                        quantity: newQuantity
+                                    });
+
+                                    await batch.commit();
+                                    alert("Quantity updated!");
+                                    location.reload();
+                                }
+                            }
+                        } catch (error) {
+                            console.error("Error updating quantity:", error);
+                            alert("Error updating quantity. Please try again.");
+                            event.target.removeAttribute('processing');
                         }
                     });
-                });*/
+                });
+
+                // Handle checkout button
+                if (checkoutButton) {
+                    checkoutButton.addEventListener("click", () => {
+                        db.collection("users").doc(user.uid).collection("cart").get()
+                            .then(querySnapshot => {
+                                const batch = db.batch();
+
+                                querySnapshot.forEach(doc => {
+                                    const cartItemRef = db.collection("users").doc(user.uid).collection("cart").doc(doc.id);
+                                    batch.delete(cartItemRef);
+                                });
+
+                                return batch.commit();
+                            })
+                            .then(() => {
+                                alert("Checkout successful!");
+                                location.reload();
+                            })
+                            .catch(error => {
+                                console.error("Error during checkout:", error);
+                            });
+                    });
+                }
             })
             .catch(error => {
                 console.error("Error fetching cart:", error);
@@ -124,45 +228,7 @@ firebase.auth().onAuthStateChanged(user => {
             <a href="/products/product.html" id="shop_button">Go shopping</a>
             </div>
         `;
-        cartSummary.style.display = "none";
+                cartSummary.style.display = "none";
         checkoutButton.style.display = "none";
     }
-});
-
-// Handle checkout
-document.getElementById("checkout-button").addEventListener("click", () => {
-    firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-            db.collection("users").doc(user.uid).collection("cart").get()
-                .then(querySnapshot => {
-                    const batch = db.batch(); // Use a batch to perform multiple updates
-
-                    querySnapshot.forEach(doc => {
-                        const item = doc.data();
-
-                        // Deduct stock in the products collection
-                        const productRef = db.collection("products").doc(item.productId);
-                        batch.update(productRef, {
-                            stock: firebase.firestore.FieldValue.increment(-item.quantity)
-                        });
-
-                        // Remove the item from the user's cart
-                        const cartItemRef = db.collection("users").doc(user.uid).collection("cart").doc(doc.id);
-                        batch.delete(cartItemRef);
-                    });
-
-                    // Commit the batch
-                    return batch.commit();
-                })
-                .then(() => {
-                    alert("Checkout successful!");
-                    location.reload(); // Refresh the cart
-                })
-                .catch(error => {
-                    console.error("Error during checkout:", error);
-                });
-        } else {
-            alert("Please log in to checkout.");
-        }
-    });
 });
