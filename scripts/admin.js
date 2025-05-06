@@ -19,10 +19,12 @@ document.addEventListener('DOMContentLoaded', function () {
                });
        })
        .then(() => {
-        if (typeof loadProducts === "function") {
-            loadProducts(); // Call loadProducts if it exists
-        } else {
-            console.warn("loadProducts function is not defined.");
+        if (window.location.pathname.endsWith('admin-products.html')) {
+            if (typeof loadProducts === "function") {
+                loadProducts();
+            } else {
+                console.warn("loadProducts function is not defined.");
+            }
         }
     })
        .catch(error => {
