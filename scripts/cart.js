@@ -118,8 +118,8 @@ firebase.auth().onAuthStateChanged(user => {
     } else {
         console.log("No user is logged in.");
         cartContainer.innerHTML = `
-            <div class="form-content">
-            <img src="/cart/cart_images/shoping_bag.png" alt="Product Image" class="product-image">
+            <div class="empty-cart-content">
+            <img src="/cart/cart_images/shoping_bag.png" alt="Empty Cart" class="empty-cart-image">
             <p class="empty-text">Login to see your cart</p>
             <a href="/products/product.html" id="shop_button">Go shopping</a>
             </div>
