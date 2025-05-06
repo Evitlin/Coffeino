@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="admin.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
-    <script src="/scripts/firebaseInit.js" defer></script>
 </head>
 <body>
     <div id="header-placeholder"></div>
@@ -82,10 +81,7 @@
             <button id="save-changes">Save Changes</button>
         </div>
     </div>
-
     <script>
-        
-
         // Subcategories for each main category
         const subcategories = {
             "Coffee": ["Coffee beans", "Ground coffee", "Filter coffee", "Coffee pills"],
@@ -119,53 +115,50 @@
 
         // Add Product
         document.getElementById("add-product").addEventListener("click", () => {
-    const title = document.getElementById("title").value;
-    const description = document.getElementById("description").value;
-    const price = document.getElementById("price").value;
-    const stock = document.getElementById("stock").value;
-    const imageUrl = document.getElementById("imageUrl").value; // You need to get imageUrl value
-    const mainCategory = document.getElementById("main-category").value;
-    const subCategory = document.getElementById("sub-category").value;
+        const title = document.getElementById("title").value;
+        const description = document.getElementById("description").value;
+        const price = document.getElementById("price").value;
+        const stock = document.getElementById("stock").value;
+        const imageUrl = document.getElementById("imageUrl").value; // You need to get imageUrl value
+        const mainCategory = document.getElementById("main-category").value;
+        const subCategory = document.getElementById("sub-category").value;
 
-    // Validate that all fields are filled
-    if (!title || !description || !price || !imageUrl || !stock || !mainCategory || !subCategory) {
-        alert("Please fill in all fields before adding a product.");
-        return;
-    }
+        // Validate that all fields are filled
+        if (!title || !description || !price || !imageUrl || !stock || !mainCategory || !subCategory) {
+            alert("Please fill in all fields before adding a product.");
+            return;
+        }
 
-    // Validate price: Positive number with up to two decimal places
-    const priceRegex = /^\d+(\.\d{1,2})?$/;
-    if (!priceRegex.test(price) || parseFloat(price) <= 0) {
-        alert("Please enter a valid price (must be a positive number with up to two decimal places).");
-        return;
-    }
+        // Validate price: Positive number with up to two decimal places
+        const priceRegex = /^\d+(\.\d{1,2})?$/;
+        if (!priceRegex.test(price) || parseFloat(price) <= 0) {
+            alert("Please enter a valid price (must be a positive number with up to two decimal places).");
+            return;
+        }
 
-    // Validate stock: Must be a non-negative integer
-    if (!/^\d+$/.test(stock)) {
-        alert("Please enter a valid stock quantity (must be a non-negative integer, including 0).");
-        return;
-    }
-    // Validate image URL: Must be a valid URL with common image extensions (.jpg, .jpeg, .png, .gif, etc.)
-    const imageUrlRegex = /^(https?:\/\/)?([a-z0-9]+(\.[a-z0-9]+)+)(\/[\w\-\.]+)*\/?(\?[\w=&]*)?(\#[\w\-]*)?\.(jpg|jpeg|png|gif)$/i;
-    if (!imageUrlRegex.test(imageUrl)) {
-        alert("Please enter a valid image URL (must be a valid URL ending with .jpg, .jpeg, .png, or .gif).");
-        return;
-    }
+        // Validate stock: Must be a non-negative integer
+        if (!/^\d+$/.test(stock)) {
+            alert("Please enter a valid stock quantity (must be a non-negative integer, including 0).");
+            return;
+        }
+        // Validate image URL: Must be a valid URL with common image extensions (.jpg, .jpeg, .png, .gif, etc.)
+        const imageUrlRegex = /^(https?:\/\/)?([a-z0-9]+(\.[a-z0-9]+)+)(\/[\w\-\.]+)*\/?(\?[\w=&]*)?(\#[\w\-]*)?\.(jpg|jpeg|png|gif)$/i;
+        if (!imageUrlRegex.test(imageUrl)) {
+            alert("Please enter a valid image URL (must be a valid URL ending with .jpg, .jpeg, .png, or .gif).");
+            return;
+        }
 
-    // Now proceed with adding the product to Firebase
-    firebase.firestore().collection("products").add({
-        title,
-        description,
-        price: parseFloat(price),
-        imageUrl,
-        stock: parseInt(stock),
-        category: mainCategory,
-        subcategory: subCategory
-    }).then(() => {
-        alert("Product Added!");
-
-        
-
+        // Now proceed with adding the product to Firebase
+        window.db.collection("products").add({
+            title,
+            description,
+            price: parseFloat(price),
+            imageUrl,
+            stock: parseInt(stock),
+            category: mainCategory,
+            subcategory: subCategory
+        }).then(() => {
+            alert("Product Added!");
 
         // Clear all input fields and dropdowns
         document.getElementById("title").value = "";
@@ -246,7 +239,7 @@
                 return;
             }
 
-            firebase.firestore().collection("products").doc(productId).update({
+            db.collection("products").doc(productId).update({
                 title: newTitle,
                 description: newDescription,
                 price: newPrice,
@@ -264,18 +257,15 @@
         // Delete Product
         function deleteProduct(productId) {
             if (confirm("Are you sure you want to delete this product?")) {
-                firebase.firestore().collection("products").doc(productId).delete().then(() => {
+                db.collection("products").doc(productId).delete().then(() => {
                     alert("Product Removed!");
                     loadProducts(); // Refresh list
                 });
             }
         }
-
-        // Load products when page loads
-        document.addEventListener("DOMContentLoaded", loadProducts);
     </script>
     <link rel="stylesheet" href="/products/product_links.css">
+    <script src="/scripts/firebaseInit.js" defer></script>
     <script src="/scripts/admin.js"></script>
-    
 </body>
 </html>

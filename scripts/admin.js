@@ -18,6 +18,13 @@ document.addEventListener('DOMContentLoaded', function () {
                    initializeEventListeners();
                });
        })
+       .then(() => {
+        if (typeof loadProducts === "function") {
+            loadProducts(); // Call loadProducts if it exists
+        } else {
+            console.warn("loadProducts function is not defined.");
+        }
+    })
        .catch(error => {
            console.error("Error loading admin page:", error);
        });
