@@ -1,14 +1,9 @@
-.cart-container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 20px;
-  
-}
+
 
 /* Product row */
 .cart-item-row {
-  width: 800px;
+  width: 100%;
+  max-width: 800px;
   height: auto;
   display: flex;
   align-items: center;
@@ -24,7 +19,7 @@
 .cart-item {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* spacing between items */
+  gap: 15px; /* spacing between items */
 }
 
 /* Product image */
@@ -157,13 +152,120 @@
   }
 
   .cart-summary-box {
-    width: 95%;
+    width: 100%;
     margin-top: 20px;
   }
 
   .quantity-input {
     width: 40px;
     padding: 8px;
+  }
+
+  #checkout-button {
+    padding: 12px;
+    font-size: 1.1rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .cart-item-row {
+    width: 90%;
+    padding: 12px;
+  }
+
+  .product-image {
+    width: 60px;
+    height: 60px;
+  }
+
+  .cart-summary-box {
+    width: 100%;
+  }
+
+  #checkout-button {
+    padding: 11px;
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .cart-container {
+    padding: 5px;
+  }
+
+  .cart-item-row {
+    width: 100%;
+    padding: 10px;
+    gap: 8px;
+  }
+
+  .product-image {
+    width: 50px;
+    height: 50px;
+    align-self: center;
+  }
+
+  .cart-item-details {
+    font-size: 0.9rem;
+  }
+
+  .quantity-input {
+    width: 35px;
+    padding: 6px;
+  }
+
+  .cart-summary-box {
+    width: 100%;
+    padding: 8px;
+  }
+
+  #cart-summary {
+    font-size: 0.9rem;
+  }
+
+  #checkout-button {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .cart-item-row {
+    width: 85%;
+    padding: 15px;
+    gap: 12px;
+  }
+
+  .cart-item {
+    width: 100%;
+  }
+
+  .product-image {
+    width: 70px;
+    height: 70px;
+  }
+
+  .cart-item-details {
+    font-size: 1.1rem;
+  }
+
+  .cart-item-actions {
+    gap: 15px;
+  }
+
+  .quantity-input {
+    width: 38px;
+    padding: 6px;
+  }
+
+  .cart-summary-box {
+    width: 100%;
+    padding: 15px;
+    margin-top: 15px;
+  }
+
+  #cart-summary {
+    font-size: 1.1rem;
   }
 
   #checkout-button {

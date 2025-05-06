@@ -103,6 +103,44 @@ body {
     color: #003366;
   }
 
+  #section-submit {
+    display: block;
+    background: linear-gradient(to bottom right, #033076, #12456F);
+    color: #F7F6F6;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    max-width: 300px;
+    margin: 20px auto;
+    padding: 15px 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#section-submit:hover {
+    background: linear-gradient(to bottom right, #043c94, #165286);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+#section-submit:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#section-submit:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+
 @media screen and (max-width: 768px) {
     .container {
         width: 95%;
