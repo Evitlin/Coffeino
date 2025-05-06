@@ -57,7 +57,7 @@ firebase.auth().onAuthStateChanged(user => {
                             <img src="/products/${itemImage}" alt="${item.productName}" class="mini-image">
                             <div class="cart-item-details">
                                 <p>${item.productName}</p>
-                                 <p>Quantity: ${item.quantity}</p>
+                                 <input type="number" value="${item.quantity}" min="1" class="quantity-input" data-id="${doc.id}" style="width: 50px;">
                                 <p>${itemTotal.toFixed(2)}€</p>
                                 <button class="remove-item" data-id="${doc.id}">🗑️</button>
                             </div>
@@ -86,7 +86,7 @@ firebase.auth().onAuthStateChanged(user => {
                 });
 
                 // Add event listeners to quantity inputs
-                /*document.querySelectorAll(".quantity-input").forEach(input => {
+                document.querySelectorAll(".quantity-input").forEach(input => {
                     input.addEventListener("change", (event) => {
                         const productId = event.target.getAttribute("data-id");
                         const newQuantity = parseInt(event.target.value);
@@ -103,7 +103,7 @@ firebase.auth().onAuthStateChanged(user => {
                             alert("Invalid quantity!");
                         }
                     });
-                });*/
+                });
 
             })
             .catch(error => {

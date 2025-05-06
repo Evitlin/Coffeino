@@ -59,7 +59,7 @@ firebase.auth().onAuthStateChanged(user => {
                             <p>Total: <span class="item-total">${itemTotal.toFixed(2)}€</span></p>
                         </div>
                         <div class="cart-item-actions">
-                            <p>Quantity: ${item.quantity}</p>
+                            <input type="number" value="${item.quantity}" min="1" class="quantity-input" data-id="${doc.id}" style="width: 50px;">
                             <button class="remove-item" data-id="${doc.id}">🗑️</button>
                         </div>
                     `;
@@ -92,7 +92,7 @@ firebase.auth().onAuthStateChanged(user => {
                     });
                 });
 
-/*// Add event listeners to quantity inputs
+// Add event listeners to quantity inputs
                 document.querySelectorAll(".quantity-input").forEach(input => {
                     input.addEventListener("change", (event) => {
                         const productId = event.target.getAttribute("data-id");
@@ -110,7 +110,7 @@ firebase.auth().onAuthStateChanged(user => {
                             alert("Invalid quantity!");
                         }
                     });
-                });*/
+                });
             })
             .catch(error => {
                 console.error("Error fetching cart:", error);
