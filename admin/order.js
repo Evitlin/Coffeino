@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updateOrderStatus(orderId, status) {
         console.log(`Updating status for order ${orderId} to ${status}`); // Debug
-        db.collection("orders").doc(orderId).update({
+        firebase.firestore().collection("orders").doc(orderId).update({
             status: status
         }).then(() => {
             alert("Order status updated!");
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Initial load and real-time updates
-    let unsubscribe = db.collection("orders")
+    let unsubscribe = firebase.firestore().collection("orders")
         .orderBy("timestamp", "desc")
         .onSnapshot(snapshot => {
             console.log("Snapshot received:", snapshot.size, "orders"); // Debug
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const sortOrder = document.getElementById("sort-order");
 
     function applyFilters() {
-        let query = db.collection("orders");
+        let query = firebase.firestore().collection("orders");
 
         // Apply status filter
         if (statusFilter.value !== "All Orders") {
