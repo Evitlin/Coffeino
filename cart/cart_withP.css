@@ -2,7 +2,9 @@
 
 /* Product row */
 .cart-item-row {
-  width: 800px;
+  /*width: 800px;*/
+  width: 100%;
+  max-width: 800px;/*dvi eiles prisidekjo*/
   height: auto;
   display: flex;
   align-items: center;
