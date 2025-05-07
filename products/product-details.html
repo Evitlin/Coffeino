@@ -105,7 +105,6 @@
                                     })
                                     .then(() => {
                                         alert("Item added to cart!");
-                                        // Update stock in Firestore
                                         return db.collection("products").doc(productId).update({
                                             stock: data.stock - quantity
                                         });
@@ -117,30 +116,8 @@
                                         console.error("Error adding to cart:", error);
                                         alert("Error adding to cart");
                                     });
-                                } else {
-                                    // User is not logged in, save to localStorage
-                                    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-                                    // Check if the product is already in the cart
-                                    const existingProductIndex = cart.findIndex(item => item.productId === productId);
-
-                                    if (existingProductIndex !== -1) {
-                                        // Update the quantity of the existing product
-                                        cart[existingProductIndex].quantity += quantity;
-                                    } else {
-                                        // Add the new product to the cart
-                                        cart.push({
-                                            productId,
-                                            productName: data.title,
-                                            productPrice: data.price,
-                                            productImage: data.imageUrl, // Add the product image
-                                            quantity
-                                        });
-                                    }
-
-                                    // Save the updated cart back to localStorage
-                                    localStorage.setItem("cart", JSON.stringify(cart));
-                                    alert("Item added to cart!");
+                                } else { 
+                                    alert("Please signup or login to start shopping!");
                                 }
                             });
                         } else {
