@@ -1,88 +1,3 @@
-/*document.addEventListener('DOMContentLoaded', function () {
-    // Wait for Firebase to be ready
-    if (typeof auth === "undefined") {
-        window.addEventListener('firebase-ready', initializeProfilePage);
-    } else {
-        initializeProfilePage();
-    }
-});
-
-function initializeProfilePage() {
-    // Check if the user is authenticated
-    auth.onAuthStateChanged(user => {
-        if (!user) {
-            window.location.href = '/login.html';
-            return;
-        }
-
-        // Proceed with loading the profile page if the user is logged in
-        const links = document.querySelectorAll('.rectangle-B a');
-        const contentPlaceholder = document.getElementById('content-placeholder');
-        const logoutLink = document.getElementById('logout-link');
-        let currentPage = 'profile';
-
-        links.forEach(link => {
-            link.addEventListener('click', function (event) {
-                event.preventDefault();
-                const page = this.getAttribute('data-page'); // Get the page from data-page attribute
-
-                fetch(`/account/pages/${page}.html`)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status}`);
-                        }
-                        return response.text();
-                    })
-                    .then(data => {
-                        contentPlaceholder.innerHTML = data;
-                        currentPage = page;
-                    })
-                    .catch(error => {
-                        contentPlaceholder.innerHTML = `<h2>Error Loading Page</h2><p>${error.message}</p>`;
-                        console.error('Error loading page:', error);
-                    });
-            });
-        });
-
-        logoutLink.addEventListener('click', function (event) {
-            event.preventDefault(); // Prevent default link behavior
-            const confirmLogout = confirm('Are you sure you want to log out?'); // Show confirmation dialog
-            if (confirmLogout) {
-                auth.signOut() // Firebase sign-out
-                .then(() => {
-                    alert('You have been logged out.');
-                    window.location.href = '/login.html'; // Redirect to login page
-                })
-                .catch(error => {
-                    console.error('Error during logout:', error);
-                    alert('Failed to log out. Please try again.');
-                });
-            }
-        });
-
-        // Loads the default page
-        fetch(`/account/pages/profile.html`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.text();
-            })
-            .then(data => {
-                contentPlaceholder.innerHTML = data;
-            })
-            .catch(error => {
-                contentPlaceholder.innerHTML = `<h2>Error Loading Default Page</h2><p>${error.message}</p>`;
-                console.error('Error loading default page:', error);
-            });
-
-            .catch(error => {
-                contentPlaceholder.innerHTML = `<h2>Error Loading Page</h2><p>${error.message}</p>`;
-                console.error('Error loading page:', error);
-            });
-    });
-    
-}*/
 document.addEventListener('DOMContentLoaded', function () {
     // Wait for Firebase to be ready
     if (typeof auth === "undefined") {
@@ -103,14 +18,15 @@ function initializeProfilePage() {
         const links = document.querySelectorAll('.rectangle-B a');
         const contentPlaceholder = document.getElementById('content-placeholder');
         const logoutLink = document.getElementById('logout-link');
+
         let currentPage = 'profile';
 
+        
         links.forEach(link => {
             link.addEventListener('click', function (event) {
                 event.preventDefault();
                 const page = this.getAttribute('data-page'); // Get the page from the data-page attribute
 
-                // Dynamically fetch page content
                 fetch(`/account/pages/${page}.html`)
                     .then(response => {
                         if (!response.ok) {
@@ -121,10 +37,13 @@ function initializeProfilePage() {
                     .then(data => {
                         contentPlaceholder.innerHTML = data; // Update content
                         currentPage = page;
+                        
+                        if (currentPage === 'profile') {
+                            loadRecentOrders(user.uid);
+                        }
 
-                        // Call orders fetching function if it's the orders page
                         if (currentPage === "orders") {
-                            loadOrders(user.uid); // Load orders for the logged-in user
+                            loadOrders(user.uid);
                         }
                     })
                     .catch(error => {
@@ -160,6 +79,9 @@ function initializeProfilePage() {
             })
             .then(data => {
                 contentPlaceholder.innerHTML = data;
+                if (currentPage === 'profile') {
+                    loadRecentOrders(user.uid);
+                }
             })
             .catch(error => {
                 contentPlaceholder.innerHTML = `<h2>Error Loading Default Page</h2><p>${error.message}</p>`;
@@ -171,6 +93,7 @@ function initializeProfilePage() {
 function loadOrders(uid) {
     const ordersContainer = document.querySelector(".orders-list");
     const noOrdersMessage = document.querySelector(".no-orders-message");
+    const basePath = "/products/";
 
     // Fetch orders from Firebase Firestore
     db.collection("orders")
@@ -182,17 +105,31 @@ function loadOrders(uid) {
                     const order = doc.data();
                     const orderElement = document.createElement("div");
                     orderElement.classList.add("order-item");
+                    const orderDate = new Date(order.timestamp).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                    });
 
                     orderElement.innerHTML = `
-                        <h3>Order #${doc.id}</h3>
+                        <h3>Order ID: ${doc.id}</h3>
+                        <p><strong>Date:</strong> ${orderDate}</p>
+                        <p>Status: <span class="order-status">${order.status}</span></p>
                         <p>Payment Method: ${order.paymentMethod}</p>
-                        <p>Status: ${order.status}</p>
                         <p>Total: €${order.totalAmount.toFixed(2)}</p>
                         <p>Delivery: ${order.delivery.type}</p>
                         <div class="order-items">
                             <h4>Items:</h4>
                             <ul>
-                                ${order.items.map(item => `<li>${item.productName} x${item.quantity}</li>`).join('')}
+                                ${order.items.map(item => `
+                                    <li class="order-item-details">
+                                        <img src="${basePath}${item.productImage}" alt="${item.productName}" class="product-image">
+                                        <div class="product-info">
+                                            <p><strong>${item.productName}</strong></p>
+                                            <p>${item.quantity} x €${item.productPrice.toFixed(2)}</p>
+                                        </div>
+                                    </li>
+                                `).join('')}
                             </ul>
                         </div>
                     `;
@@ -209,4 +146,52 @@ function loadOrders(uid) {
         });
 }
 
+function loadRecentOrders(uid) {
+    const recentOrdersTableBody = document.querySelector(".orders-table tbody");
 
+    if (!recentOrdersTableBody) {
+        console.error("Error: .orders-table tbody element not found in the DOM.");
+        return;
+    }
+    // Fetch recent orders from Firebase Firestore
+    db.collection("orders")
+        .where("userId", "==", uid)
+        .limit(5) // Limit to the 5 most recent orders
+        .get()
+        .then(ordersSnapshot => {
+            if (!ordersSnapshot.empty) {
+                recentOrdersTableBody.innerHTML = ""; // Clear existing rows
+                ordersSnapshot.forEach(doc => {
+                    const order = doc.data();
+                    const orderDate = new Date(order.timestamp).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "2-digit",
+                        day: "2-digit",
+                    });
+
+                    // Create a table row for each order
+                    const row = `
+                        <tr>
+                            <td>${doc.id}</td>
+                            <td>${orderDate}</td>
+                            <td>${order.email}</td>
+                            <td>€${order.totalAmount.toFixed(2)}</td>
+                            <td>${order.status}</td>
+                        </tr>
+                    `;
+                    recentOrdersTableBody.innerHTML += row;
+                });
+            } else {
+                // If no orders, display a message
+                recentOrdersTableBody.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align: center;">No recent orders found.</td>
+                    </tr>
+                `;
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching recent orders:", error);
+            alert("There was an error fetching your recent orders.");
+        });
+}

@@ -41,7 +41,6 @@
     <div class="recent-orders">
         <div class="orders-header">
             <h2>Recent orders</h2>
-            <a href="#" class="view-all">View all</a>
         </div>
         <div class="table-container">
             <table class="orders-table">
@@ -49,29 +48,13 @@
                     <tr>
                         <th>Order ID</th>
                         <th>Order date</th>
-                        <th>Bill-to-name</th>
+                        <th>Email</th>
                         <th>Total</th>
                         <th>Shipping status</th>
-                        <th></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>000799</td>
-                        <td>2025/03/02</td>
-                        <td>Name Lastname</td>
-                        <td>23,78 €</td>
-                        <td>Pending</td>
-                        <td><a href="#" class="view-details">> View details</a></td>
-                    </tr>
-                    <tr>
-                        <td>000798</td>
-                        <td>2025/02/27</td>
-                        <td>Name Lastname</td>
-                        <td>43,78 €</td>
-                        <td>Shipped</td>
-                        <td><a href="#" class="view-details">> View details</a></td>
-                    </tr>
+                <tbody class="orders-table">
+                    <!-- Rows will be dynamically populated by JavaScript -->
                 </tbody>
             </table>
         </div>
