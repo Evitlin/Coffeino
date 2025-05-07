@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="admin.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+    <script src="/scripts/firebaseInit.js" defer></script>
     <style>
         body {
             font-family: 'Fredoka', sans-serif;
@@ -134,18 +133,7 @@
         No statistics available for the selected period
     </div>
 
-    <!-- Firebase (adjust version if needed) -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
-
     <script>
-        const firebaseConfig = {
-            // Your Firebase config here
-        };
-
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-
         function loadStats() {
             const startDate = document.getElementById('start-date').value;
             const endDate = document.getElementById('end-date').value;
@@ -166,7 +154,7 @@
             document.getElementById("avg-items").textContent = "0 pcs";
             document.getElementById("top-products").textContent = "0 pcs";
 
-            db.collection("orders")
+            firebase.firestore().collection("orders")
                 .where("date", ">=", new Date(startDate))
                 .where("date", "<=", new Date(endDate))
                 .get()

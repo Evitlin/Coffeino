@@ -5,9 +5,7 @@
     <link rel="stylesheet" href="admin-products.css ">
     <link rel="stylesheet" href="admin.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
 </head>
 <body>
     <div id="header-placeholder"></div>
@@ -83,53 +81,41 @@
             <button id="save-changes">Save Changes</button>
         </div>
     </div>
+</body>
+<script>
+    // Subcategories for each main category
+    const subcategories = {
+        "Coffee": ["Coffee beans", "Ground coffee", "Filter coffee", "Coffee pills"],
+        "Tea": ["Black tea", "Green tea", "Fruit-herbal tea", "Matcha"],
+        "Energy Drinks": ["Cans", "Bottle"],
+        "Accessories": ["Coffee grinders", "Moka pots", "Can lids", "Matcha accessories"]
+    };
 
-    <script>
-        // Firebase setup
-        const firebaseConfig = {
-            apiKey: "AIzaSyCgJ-IOeq76OCzmlUbGntMKmn550enir68",
-            authDomain: "coffeino-3157b.firebaseapp.com",
-            projectId: "coffeino-3157b",
-            storageBucket: "coffeino-3157b.appspot.com",
-            messagingSenderId: "739495575410",
-            appId: "1:739495575410:web:07e74233accd8d6443a7eb"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-
-        // Subcategories for each main category
-        const subcategories = {
-            "Coffee": ["Coffee beans", "Ground coffee", "Filter coffee", "Coffee pills"],
-            "Tea": ["Black tea", "Green tea", "Fruit-herbal tea", "Matcha"],
-            "Energy Drinks": ["Cans", "Bottle"],
-            "Accessories": ["Coffee grinders", "Moka pots", "Can lids", "Matcha accessories"]
-        };
-
-        // Populate subcategories based on selected main category
-        function populateSubcategories(mainCategorySelect, subCategorySelect) {
-            const mainCategory = mainCategorySelect.value;
-            subCategorySelect.innerHTML = '<option value="">Select Subcategory</option>';
-            if (subcategories[mainCategory]) {
-                subcategories[mainCategory].forEach(sub => {
-                    const option = document.createElement("option");
-                    option.value = sub;
-                    option.textContent = sub;
-                    subCategorySelect.appendChild(option);
-                });
-            }
+    // Populate subcategories based on selected main category
+    function populateSubcategories(mainCategorySelect, subCategorySelect) {
+        const mainCategory = mainCategorySelect.value;
+        subCategorySelect.innerHTML = '<option value="">Select Subcategory</option>';
+        if (subcategories[mainCategory]) {
+            subcategories[mainCategory].forEach(sub => {
+                const option = document.createElement("option");
+                option.value = sub;
+                option.textContent = sub;
+                subCategorySelect.appendChild(option);
+            });
         }
+    }
 
-        // Add event listeners for category selection
-        document.getElementById("main-category").addEventListener("change", function () {
-            populateSubcategories(this, document.getElementById("sub-category"));
-        });
+    // Add event listeners for category selection
+    document.getElementById("main-category").addEventListener("change", function () {
+        populateSubcategories(this, document.getElementById("sub-category"));
+    });
 
-        document.getElementById("edit-main-category").addEventListener("change", function () {
-            populateSubcategories(this, document.getElementById("edit-sub-category"));
-        });
+    document.getElementById("edit-main-category").addEventListener("change", function () {
+        populateSubcategories(this, document.getElementById("edit-sub-category"));
+    });
 
-        // Add Product
-        document.getElementById("add-product").addEventListener("click", () => {
+    // Add Product
+    document.getElementById("add-product").addEventListener("click", () => {
     const title = document.getElementById("title").value;
     const description = document.getElementById("description").value;
     const price = document.getElementById("price").value;
@@ -164,7 +150,7 @@
     }
 
     // Now proceed with adding the product to Firebase
-    db.collection("products").add({
+    window.db.collection("products").add({
         title,
         description,
         price: parseFloat(price),
@@ -175,117 +161,111 @@
     }).then(() => {
         alert("Product Added!");
 
-        
+    // Clear all input fields and dropdowns
+    document.getElementById("title").value = "";
+    document.getElementById("description").value = "";
+    document.getElementById("price").value = "";
+    document.getElementById("imageUrl").value = "";
+    document.getElementById("stock").value = "";
+    document.getElementById("main-category").value = "";
+    document.getElementById("sub-category").innerHTML = '<option value="">Select Subcategory</option>';
 
+    loadProducts(); // Refresh list
+}).catch(error => console.error("Error:", error));
+    });
 
-        // Clear all input fields and dropdowns
-        document.getElementById("title").value = "";
-        document.getElementById("description").value = "";
-        document.getElementById("price").value = "";
-        document.getElementById("imageUrl").value = "";
-        document.getElementById("stock").value = "";
-        document.getElementById("main-category").value = "";
-        document.getElementById("sub-category").innerHTML = '<option value="">Select Subcategory</option>';
+    // Load Products
+    function loadProducts() {
+        const productList = document.getElementById("product-list");
+        productList.innerHTML = "";
 
-        loadProducts(); // Refresh list
-    }).catch(error => console.error("Error:", error));
-        });
+        db.collection("products").get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                const product = doc.data();
+                const productId = doc.id;
 
-        // Load Products
-        function loadProducts() {
-            const productList = document.getElementById("product-list");
-            productList.innerHTML = "";
-
-            db.collection("products").get().then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    const product = doc.data();
-                    const productId = doc.id;
-
-                    const row = document.createElement("tr");
-                    row.innerHTML = `
-                        <td>${product.title}</td>
-                        <td>${product.price}€</td>
-                        <td>${product.stock}</td>
-                        <td>${product.category} - ${product.subcategory}</td>
-                        <td>
-                            <button class="edit-btn" onclick="openEditModal('${productId}', '${product.title}', '${product.description}', ${product.price}, '${product.imageUrl}', ${product.stock}, '${product.category}', '${product.subcategory}')">Edit</button>
-                            <button class="delete-btn" onclick="deleteProduct('${productId}')">Delete</button>
-                        </td>
-                    `;
-                    productList.appendChild(row);
-                });
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${product.title}</td>
+                    <td>${product.price}€</td>
+                    <td>${product.stock}</td>
+                    <td>${product.category} - ${product.subcategory}</td>
+                    <td>
+                        <button class="edit-btn" onclick="openEditModal('${productId}', '${product.title}', '${product.description}', ${product.price}, '${product.imageUrl}', ${product.stock}, '${product.category}', '${product.subcategory}')">Edit</button>
+                        <button class="delete-btn" onclick="deleteProduct('${productId}')">Delete</button>
+                    </td>
+                `;
+                productList.appendChild(row);
             });
-        }
-
-        // Open Edit Modal
-        function openEditModal(id, title, description, price, imageUrl, stock, category, subcategory) {
-            document.getElementById("edit-product-id").value = id;
-            document.getElementById("edit-title").value = title;
-            document.getElementById("edit-description").value = description;
-            document.getElementById("edit-price").value = price;
-            document.getElementById("edit-imageUrl").value = imageUrl;
-            document.getElementById("edit-stock").value = stock;
-
-            const mainCategorySelect = document.getElementById("edit-main-category");
-            const subCategorySelect = document.getElementById("edit-sub-category");
-
-            mainCategorySelect.value = category;
-            populateSubcategories(mainCategorySelect, subCategorySelect);
-            subCategorySelect.value = subcategory;
-
-            document.getElementById("edit-modal").style.display = "block";
-        }
-
-        // Close Modal
-        document.querySelector(".close").addEventListener("click", () => {
-            document.getElementById("edit-modal").style.display = "none";
         });
+    }
 
-        // Save Changes
-        document.getElementById("save-changes").addEventListener("click", () => {
-            const productId = document.getElementById("edit-product-id").value;
-            const newTitle = document.getElementById("edit-title").value;
-            const newDescription = document.getElementById("edit-description").value;
-            const newPrice = parseFloat(document.getElementById("edit-price").value);
-            const newImageUrl = document.getElementById("edit-imageUrl").value;
-            const newStock = parseInt(document.getElementById("edit-stock").value);
-            const newMainCategory = document.getElementById("edit-main-category").value;
-            const newSubCategory = document.getElementById("edit-sub-category").value;
+    // Open Edit Modal
+    function openEditModal(id, title, description, price, imageUrl, stock, category, subcategory) {
+        document.getElementById("edit-product-id").value = id;
+        document.getElementById("edit-title").value = title;
+        document.getElementById("edit-description").value = description;
+        document.getElementById("edit-price").value = price;
+        document.getElementById("edit-imageUrl").value = imageUrl;
+        document.getElementById("edit-stock").value = stock;
 
-            if (!newMainCategory || !newSubCategory) {
-                alert("Please select both a main category and a subcategory.");
-                return;
-            }
+        const mainCategorySelect = document.getElementById("edit-main-category");
+        const subCategorySelect = document.getElementById("edit-sub-category");
 
-            db.collection("products").doc(productId).update({
-                title: newTitle,
-                description: newDescription,
-                price: newPrice,
-                imageUrl: newImageUrl,
-                stock: newStock,
-                category: newMainCategory,
-                subcategory: newSubCategory
-            }).then(() => {
-                alert("Product Updated!");
-                document.getElementById("edit-modal").style.display = "none";
+        mainCategorySelect.value = category;
+        populateSubcategories(mainCategorySelect, subCategorySelect);
+        subCategorySelect.value = subcategory;
+
+        document.getElementById("edit-modal").style.display = "block";
+    }
+
+    // Close Modal
+    document.querySelector(".close").addEventListener("click", () => {
+        document.getElementById("edit-modal").style.display = "none";
+    });
+
+    // Save Changes
+    document.getElementById("save-changes").addEventListener("click", () => {
+        const productId = document.getElementById("edit-product-id").value;
+        const newTitle = document.getElementById("edit-title").value;
+        const newDescription = document.getElementById("edit-description").value;
+        const newPrice = parseFloat(document.getElementById("edit-price").value);
+        const newImageUrl = document.getElementById("edit-imageUrl").value;
+        const newStock = parseInt(document.getElementById("edit-stock").value);
+        const newMainCategory = document.getElementById("edit-main-category").value;
+        const newSubCategory = document.getElementById("edit-sub-category").value;
+
+        if (!newMainCategory || !newSubCategory) {
+            alert("Please select both a main category and a subcategory.");
+            return;
+        }
+
+        db.collection("products").doc(productId).update({
+            title: newTitle,
+            description: newDescription,
+            price: newPrice,
+            imageUrl: newImageUrl,
+            stock: newStock,
+            category: newMainCategory,
+            subcategory: newSubCategory
+        }).then(() => {
+            alert("Product Updated!");
+            document.getElementById("edit-modal").style.display = "none";
+            loadProducts(); // Refresh list
+        });
+    });
+
+    // Delete Product
+    function deleteProduct(productId) {
+        if (confirm("Are you sure you want to delete this product?")) {
+            db.collection("products").doc(productId).delete().then(() => {
+                alert("Product Removed!");
                 loadProducts(); // Refresh list
             });
-        });
-
-        // Delete Product
-        function deleteProduct(productId) {
-            if (confirm("Are you sure you want to delete this product?")) {
-                db.collection("products").doc(productId).delete().then(() => {
-                    alert("Product Removed!");
-                    loadProducts(); // Refresh list
-                });
-            }
         }
-
-        // Load products when page loads
-        document.addEventListener("DOMContentLoaded", loadProducts);
-    </script>
-    <link rel="stylesheet" href="/products/product_links.css">
-    <script src="/scripts/admin.js"></script>
-</body>
+    }
+</script>
+<link rel="stylesheet" href="/products/product_links.css">
+<script src="/scripts/firebaseInit.js" defer></script>
+<script src="/scripts/admin.js"></script>
 </html>

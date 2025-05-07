@@ -1,33 +1,41 @@
 // Handle Login
 document.getElementById("login-button").addEventListener("click", (event) => {
-    event.preventDefault(); // Prevent form submission
+    event.preventDefault();
 
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
 
-    // Validate email and password
     if (!email || !password) {
         alert("Please enter both email and password.");
         return;
     }
 
     auth.signInWithEmailAndPassword(email, password)
-        .then((userCredential) => {
+        .then(async (userCredential) => {
             const user = userCredential.user;
 
-            // Check if the email is verified
             if (!user.emailVerified) {
                 alert("Please verify your email address before logging in.");
-                auth.signOut(); // Log the user out
+                auth.signOut();
                 return;
             }
 
-            alert(`Welcome back, ${user.displayName || "User"}!`);
-            window.location.href = "/"; // Redirect to the homepage
+            const userDoc = await db.collection("users").doc(user.uid).get();
+            const userData = userDoc.data();
+    
+            if (userData && userData.role === "admin") {
+                // Redirect to admin-reports.html if the user is an admin
+                alert(`Welcome back, Admin ${user.displayName || "User"}!`);
+                window.location.href = "/admin/admin-reports.html";
+            } else {
+                // Redirect to the homepage for regular users
+                alert(`Welcome back, ${user.displayName || "User"}!`);
+                window.location.href = "/";
+            }
         })
         .catch((error) => {
             console.error("Login error:", error);
-            let errorMessage = "An error occurred. Please try again later."; // Default error message
+            let errorMessage = "An error occurred. Please try again later.";
 
             switch (error.code) {
                 case "auth/invalid-email":
@@ -38,25 +46,24 @@ document.getElementById("login-button").addEventListener("click", (event) => {
                     break;
                 case "auth/user-not-found":
                 case "auth/wrong-password":
-                case "auth/invalid-credential": // Treat invalid credentials as wrong password
+                case "auth/invalid-credential":
                     errorMessage = "Incorrect email or password. Please try again.";
                     break;
                 default:
-                    errorMessage = error.message; // Use Firebase's error message as a fallback
+                    errorMessage = error.message;
             }
 
-            alert(errorMessage); // Display the user-friendly error message
+            alert(errorMessage);
         });
 });
 
 // Handle Resend Verification Email
 document.getElementById("resend-verification-button").addEventListener("click", (event) => {
-    event.preventDefault(); // Prevent default behavior
+    event.preventDefault();
 
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
 
-    // Validate email and password
     if (!email || !password) {
         alert("Please enter both email and password to resend the verification email.");
         return;
@@ -67,7 +74,6 @@ document.getElementById("resend-verification-button").addEventListener("click", 
         .then((userCredential) => {
             const user = userCredential.user;
 
-            // Check if the email is already verified
             if (user.emailVerified) {
                 alert("Your email is already verified. You can log in.");
                 return;

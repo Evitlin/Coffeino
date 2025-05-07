@@ -4,16 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Details</title>
-
-    <link rel="stylesheet" href="../main_page/style.css">
+    <link rel="stylesheet" href="/main_page/style.css">
     <link rel="stylesheet" href="product-details.css">
     <link rel="stylesheet" href="product_links.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-    
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
+    <script src="/scripts/main.js"></script>
+    <script src="/scripts/firebaseInit.js" defer></script>
 </head>
 <body style="background-color:#D0D9DA;">
     <div id="header-placeholder"></div>
@@ -21,46 +18,31 @@
         <img id="product-image" src="" alt="">
         <div class="box-info">
             <h1 id="product-title"></h1>
-                    <div class="info-row">
-                        <div class="price-info">
-                            <span class="price">Price:</span>
-                            <span id="product-price"></span>
-                            <span class="index">€</span>
-                        </div>
-                        <div class="stock">
-                            Stock: <span id="product-stock"></span>
-                        </div>
+                <div class="info-row">
+                    <div class="price-info">
+                        <span class="price">Price:</span>
+                        <span id="product-price"></span>
+                        <span class="index">€</span>
                     </div>
-    
-    
-        <p class="what">Quantity:</p>
-        <input type="number" id="quantity" min="1" value="1">
-        <button id="add-to-cart">Add to Cart</button>
-        <div class="line"></div>
-        <p class="description">Description:</p>
-        <p id="product-description"></p>
+                    <div class="stock">
+                        Stock: <span id="product-stock"></span>
+                    </div>
+                </div>
+            <p class="what">Quantity:</p>
+            <input type="number" id="quantity" min="1" value="1">
+            <button id="add-to-cart">Add to Cart</button>
+            <div class="line"></div>
+            <p class="description">Description:</p>
+            <p id="product-description"></p>
         </div>
-        
     </div>
-
     <script >
-        const firebaseConfig = {
-            apiKey: "AIzaSyCgJ-IOeq76OCzmlUbGntMKmn550enir68",
-            authDomain: "coffeino-3157b.firebaseapp.com",
-            projectId: "coffeino-3157b",
-            storageBucket: "coffeino-3157b.appspot.com",
-            messagingSenderId: "739495575410",
-            appId: "1:739495575410:web:07e74233accd8d6443a7eb"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-        const auth = firebase.auth();
-
         // Get product ID from URL
         const params = new URLSearchParams(window.location.search);
         const productId = params.get("id");
 
-        if (productId) {
+        window.addEventListener('firebase-ready', () => {
+            if (productId) {
             db.collection("products").doc(productId).get().then(doc => {
                 if (doc.exists) {
                     const data = doc.data();
@@ -105,7 +87,6 @@
                                     })
                                     .then(() => {
                                         alert("Item added to cart!");
-                                        // Update stock in Firestore
                                         return db.collection("products").doc(productId).update({
                                             stock: data.stock - quantity
                                         });
@@ -117,30 +98,8 @@
                                         console.error("Error adding to cart:", error);
                                         alert("Error adding to cart");
                                     });
-                                } else {
-                                    // User is not logged in, save to localStorage
-                                    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-                                    // Check if the product is already in the cart
-                                    const existingProductIndex = cart.findIndex(item => item.productId === productId);
-
-                                    if (existingProductIndex !== -1) {
-                                        // Update the quantity of the existing product
-                                        cart[existingProductIndex].quantity += quantity;
-                                    } else {
-                                        // Add the new product to the cart
-                                        cart.push({
-                                            productId,
-                                            productName: data.title,
-                                            productPrice: data.price,
-                                            productImage: data.imageUrl, // Add the product image
-                                            quantity
-                                        });
-                                    }
-
-                                    // Save the updated cart back to localStorage
-                                    localStorage.setItem("cart", JSON.stringify(cart));
-                                    alert("Item added to cart!");
+                                } else { 
+                                    alert("Please signup or login to start shopping!");
                                 }
                             });
                         } else {
@@ -154,8 +113,8 @@
                 console.error("Error fetching product:", error);
             });
         }
+    });
     </script>
-    <script src="../scripts/main.js"></script>
     <div id="footer-placeholder"></div> 
 </body>
 </html>

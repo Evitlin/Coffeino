@@ -7,21 +7,7 @@
     <link rel="stylesheet" href="admin.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
     <style>
-        body {
-            font-family: 'Fredoka', sans-serif;
-            background-color: #D0D9DA;
-            padding: 1rem 2rem;
-        }
-
-        h1 {
-            color: #003865;
-            margin-top:100px ;
-        }
-
         .filters {
             margin-top: 50px;
             display: flex;
@@ -143,23 +129,9 @@
             <button onclick="window.print()">Print</button>
         </div>
     </div>
-
-    <link rel="stylesheet" href="/products/product_links.css">
-
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyCgJ-IOeq76OCzmlUbGntMKmn550enir68",
-            authDomain: "coffeino-3157b.firebaseapp.com",
-            projectId: "coffeino-3157b",
-            storageBucket: "coffeino-3157b.appspot.com",
-            messagingSenderId: "739495575410",
-            appId: "1:739495575410:web:07e74233accd8d6443a7eb"
-        };
-
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-    </script>
-    <script src="/scripts/admin.js" defer></script>
-    <script src="order.js"></script>
 </body>
+<link rel="stylesheet" href="/products/product_links.css">
+<script src="/scripts/admin.js" defer></script>
+<script src="/admin/order.js"></script>
+<script src="/scripts/firebaseInit.js" defer></script>
 </html>
